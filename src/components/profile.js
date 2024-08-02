@@ -2,6 +2,7 @@ import React from 'react';
 import {auth } from './firebase'; // Make sure the path to your firebase config file is correct
 
 import { useLocation } from 'react-router-dom';
+import "./styles.css"
 
 
 const Profile = () => {
@@ -36,8 +37,8 @@ const Profile = () => {
   return (
     <div>
       <h1>User Data</h1>
-      <h3>{displayName||cacheDatat.displayName}</h3>
-      <h3>{email || cacheDatat.email}</h3>
+      <h3>{cacheDatat.displayName}</h3>
+      <h3>{ cacheDatat.email}</h3>
 
       <button onClick={handleLogout}>Logout</button>
       

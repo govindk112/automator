@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { auth } from "./firebase";
 import { toast } from "react-toastify";
 import SignInwithGoogle from "./signInWIthGoogle";
+import "./styles.css"
 
 
 
@@ -39,6 +40,7 @@ function Login() {
 
      if(isEmailVerified===true){
       alert("login successfull")
+      // window.location.href = `/gemini`;
       window.location.href = `/profile?${queryParams}`;
       toast.success("User logged in Successfully", {
         position: "top-center",

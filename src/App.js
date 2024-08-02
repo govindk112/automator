@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +17,8 @@ import PasswordReset from "./components/passwordReset";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./components/About";
+import Gemini from "./components/gemini";
+import Payment from "./components/payment";
 
 function App() {
   const [user, setUser] = useState();
@@ -29,29 +29,36 @@ function App() {
   });
 
   return (
+
     <div>
-    
-    <Router>
-      <div className="App">
-            <Header/>
-        
       
-            <Routes>
-              <Route
-                path="/"
-                element={user!=null ?<Navigate to="/Profile" state={user}/> : <Login/>}
-              />
-              <Route path="/Login" element={<Login />} />
-              <Route path="/PasswordReset" element={<PasswordReset/>}/>
-              <Route path="/Register" element={<Register />} />
-              <Route path="/Profile" element={<Profile/>} />
-              <Route path="/about" element={<About/>}/>
-            </Routes>
-            <ToastContainer />
-       
-      </div>
-    </Router>
-    <Footer/>
+
+      <div className="ellipse ellipse-1"></div>
+      <div className="ellipse ellipse-2"></div>
+
+
+      
+      <Router>
+      <Header/>
+        <Routes>
+         
+          <Route
+            path="/"
+            element={user != null ? <Profile/> : <Login />}
+          />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/PasswordReset" element={<PasswordReset />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/gemini" element={<Gemini/>}/>
+          <Route path="/about" element={<About />} />
+          <Route path="/payment" element={<Payment/>}/>
+        </Routes>
+        <ToastContainer />
+
+        <Footer />
+      </Router>
+      
     </div>
   );
 }

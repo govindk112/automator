@@ -2,6 +2,8 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app, { auth } from "./firebase";
 import { toast } from "react-toastify";
 import { getDatabase,ref,set,push, } from "firebase/database";
+import google from "./image/google.svg"
+import "./styles.css"
 function SignInwithGoogle() {
   function googleLogin() {
     const provider = new GoogleAuthProvider();
@@ -31,7 +33,8 @@ function SignInwithGoogle() {
             email:user.email,
           };
           localStorage.setItem('user', JSON.stringify(userData));
-          const queryParams = new URLSearchParams(userData).toString();     
+          const queryParams = new URLSearchParams(userData).toString();  
+          // window.location.href = "/gemini"   
     
           window.location.href = `/profile?${queryParams}`;
 
@@ -43,17 +46,16 @@ function SignInwithGoogle() {
     });
   }
   return (
-    <div>
-      <p className="continue-p">--Or continue with--</p>
-      <div
-        style={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
-        onClick={googleLogin}
-      >
-        <img className="google" src={require("../google.png")}   alt="google"/>
-        {/* <h4 style={{backgroundColor:"blue"}}>SignInwithGoogle</h4> */}
     
-      </div>
-  
+ 
+    <div>
+    <button type="button" className="btn-google" onClick={googleLogin} >
+        <img src={google} alt="Google icon"
+            style={{ width: '20px',
+              height: '20px',
+              marginRight: '10px'}}/>
+        Sign in with Google
+    </button>
     </div>
   );
 }

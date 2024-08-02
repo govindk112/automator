@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import app from "./firebase";
 import { getDatabase,ref,set,push } from "firebase/database";
+import "./styles.css"
 
 
 function Register() {
@@ -16,10 +17,6 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    // const actionCodeSettings = {
-    //   url: 'htt://localhost:3000/login', // Update this URL to your redirect URL
-    //   handleCodeInApp: true,
-    // };
     const sendVerificationEmail = async () => {
       try {
         const user = auth.currentUser;
@@ -108,11 +105,7 @@ function Register() {
                     <input type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} required/>
                     <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
                     <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required/>
-                    <div className="form-options">
-                
-                        <a href="#" className="forgot-password">Forgot password</a>
-                        
-                    </div>
+                 
                     <button type="submit">Sign Up</button><br/>
                     Already registered <a href="/login" className="forgot-password">Login</a>
                     
