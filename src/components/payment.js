@@ -11,9 +11,11 @@ const Payment = function () {
     const receiptId = "qwsaq1";
 
     const paymentHandler = async (e) => {
+        
         e.preventDefault();
-        if(coupon==coupon_code){
+        if(coupon===coupon_code){
             amount = amount-10000
+        
         }
         const response = await fetch("http://localhost:5000/order", {
             method: "POST",
@@ -94,6 +96,7 @@ const Payment = function () {
             <button type="button"  onClick={paymentHandler}>Pay</button> */}
             <form onSubmit={paymentHandler} >
                 <input type="text" placeholder="Enter Coupon"  onChange={(e) => setCoupon(e.target.value)} />
+                
                 <button type="submit">Pay</button>
             </form>
         </div>

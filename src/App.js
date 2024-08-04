@@ -19,6 +19,8 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Gemini from "./components/gemini";
 import Payment from "./components/payment";
+import Resume from "./components/resume";
+import Policy from "./components/policy";
 
 function App() {
   const [user, setUser] = useState();
@@ -32,10 +34,11 @@ function App() {
 
     <div>
       
-
+ 
       <div className="ellipse ellipse-1"></div>
       <div className="ellipse ellipse-2"></div>
-
+      <div className="ellipse ellipse-3"></div>
+      <div className="ellipse ellipse-4"></div> 
 
       
       <Router>
@@ -53,6 +56,8 @@ function App() {
           <Route path="/gemini" element={<Gemini/>}/>
           <Route path="/about" element={<About />} />
           <Route path="/payment" element={<Payment/>}/>
+          <Route path="/resume" element = {<Resume/>} />
+          <Route path="/policy" element={<Policy/>}/>
         </Routes>
         <ToastContainer />
 
