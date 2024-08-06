@@ -40,8 +40,8 @@ function Login() {
 
      if(isEmailVerified===true){
       alert("login successfull")
-      // window.location.href = `/gemini`;
-      window.location.href = `/profile?${queryParams}`;
+      window.location.href = `/gemini`;
+      // window.location.href = `/profile?${queryParams}`;
       toast.success("User logged in Successfully", {
         position: "top-center",
       });

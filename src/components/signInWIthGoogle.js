@@ -34,9 +34,9 @@ function SignInwithGoogle() {
           };
           localStorage.setItem('user', JSON.stringify(userData));
           const queryParams = new URLSearchParams(userData).toString();  
-          // window.location.href = "/gemini"   
+          window.location.href = "/gemini"   
     
-          window.location.href = `/profile?${queryParams}`;
+          // window.location.href = `/profile?${queryParams}`;
 
         }).catch((err)=>{
           toast.error(err.message)
