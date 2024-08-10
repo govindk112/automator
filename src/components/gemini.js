@@ -1,19 +1,65 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
+import { auth } from "./firebase";
+import app from "./firebase";
+import { toast } from "react-toastify";
+import { getDatabase, ref, set, push, get, update } from "firebase/database";
+
+
 
 const Gemini = function () {
-    const[gemini_key,setGeminikey] = useState("")
 
-  const sumbitHandler = async(e)=>{
-    e.preventDefault();
-    console.log(gemini_key)
+    let [user, setUser] = useState();
+    const [api, setApi] = useState("")
+    const [gemini_key, setGeminikey] = useState("")
+    const db = getDatabase(app)
 
-  }
+    useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            setUser(user);
+        });
+        
+        const getApi = ref(db, "Users/" + user?.uid + "/API");
+
+        get(getApi).then((snapshot) => {
+
+            if (snapshot.exists()) {
+                window.location.href = `/resume`;
+
+            }
+            
+
+
+
+
+
+        })
+    })
+    const sumbitHandler = async (e) => {
+        e.preventDefault();
+        const db = getDatabase(app)
+        const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
+        await update(newDocRef, {
+            "API": {
+                "apikey": gemini_key
+
+            }
+        }).then(() => {
+            window.location.href = `/resume`;
+            toast.success("Api Key Submit Successfully")
+        }).catch((err) => {
+            toast.success(err)
+        })
+
+    }
+
+
+
 
     return (
         <div>
             <main>
 
-              
+
 
                 <h1>Enter Free Gemini Key</h1>
                 <div class="contact-container">
@@ -27,12 +73,12 @@ const Gemini = function () {
                     </div>
                     <div class="form-section">
                         <form onSubmit={sumbitHandler}>
-                            <input type="text" placeholder="Enter Your Gemini Key" required onChange={(e)=>setGeminikey(e.target.value)}/>
-                                <div class="form-options">
+                            <input type="text" placeholder="Enter Your Gemini Key" required onChange={(e) => setGeminikey(e.target.value)} />
+                            <div class="form-options">
 
-                                    <a href="#" class="forgot-password">Get Gemini key Here</a>
-                                </div>
-                                <button type="submit">Submit</button>
+                                <a href="#" class="forgot-password">Get Gemini key Here</a>
+                            </div>
+                            <button type="submit">Submit</button>
 
                         </form>
                     </div>

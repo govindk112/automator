@@ -67,7 +67,6 @@ function Register() {
             lname:lname,
             email:email,
             password:password,
-            isEmailVerified:user.emailVerified
 
           }).then(()=>{
             console.log("User Registered Successfully!!");

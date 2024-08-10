@@ -6,6 +6,9 @@ import rupay from "./image/rupay.svg";
 import mastercard from "./image/mastercard.svg"
 import upi from "./image/upi.svg";
 import visa from "./image/visa.svg"
+import { get, ref, getDatabase } from "firebase/database";
+import app from "./firebase";
+import { toast } from "react-toastify";
 
 
 const Payment = function () {
@@ -13,7 +16,6 @@ const Payment = function () {
     const [amount, setAmount] = useState(currency === 'INR' ? 999 : 20);
     const [promocode, setPromocode] = useState('');
     const [discount, setDiscount] = useState(0);
-    // console.log(window.location)
     const [coupon, setCoupon] = useState("");
     const coupon_code = "AIKING50"
     // let amount = "80000";
@@ -21,14 +23,11 @@ const Payment = function () {
     const receiptId = "qwsaq1";
     const handlePayment = async (e) => {
         e.preventDefault();
-        // const isScriptLoaded = await loadRazorpayScript();
-        // if (!isScriptLoaded) {
-        //     alert('Razorpay SDK failed to load. Are you online?');
-        //     return;
-        // }
 
-        const finalAmount = (amount - discount)*100;
-        
+        console.log(discount)
+
+        const finalAmount = (amount - discount) * 100;
+
 
         // const orderResponse = await axios.post('http://localhost:3000/create-order', {
         //     amount: finalAmount,
@@ -37,7 +36,7 @@ const Payment = function () {
         const response = await fetch("http://localhost:5000/order", {
             method: "POST",
             body: JSON.stringify({
-                amount:finalAmount,
+                amount: finalAmount,
                 currency,
                 receipt: receiptId,
             }),
@@ -100,126 +99,114 @@ const Payment = function () {
         rzp1.open();
         e.preventDefault();
     }
+    const subtotal = ((amount - discount) * 100)/100;
     const applyPromocode = async (e) => {
-        // const promoRef = firebase.database().ref('promocodes').child(promocode);
-        // const snapshot = await promoRef.once('value');
-        // const promoData = snapshot.val();
+        e.preventDefault()
+        
+        document.getElementById('promocode').value = '';
+        let db = getDatabase(app);
+        const userRef = ref(db, "promo_codes/" + promocode);
+        get(userRef).then((snapshot) => {
+            if (snapshot.val() === null) {
+                toast.error("Invalid promocode!")
+            }
+            if (snapshot.val().discount_type === "fixed") {
+                setCoupon(promocode)
+                setDiscount(snapshot.val().discount_value);
+            }
+            if (snapshot.val().discount_type === "percentage") {
+                setCoupon(promocode)
+                let finalValue = Math.floor([amount * (snapshot.val().discount_value / 100)])
+                console.log(finalValue)
+                setDiscount(finalValue)
+            }
+        }).catch((err) => {
+            toast.error(err)
+        })
+
         console.log(promocode)
-        const promoData = {
-            "discount": 100,
-            "active": true
-        }
-        if (promoData && promoData.active) {
-            setDiscount(promoData.discount);
-        } else {
-            alert('Invalid or inactive promocode');
-        }
+        console.log("promocode -apply")
+
+        // if (promoData && promoData.active) {
+        //     console.log(promoData.discount+"DISCOUNT")
+        // setDiscount(promoData.discount);
+
+        // } else {
+        //     alert('Invalid or inactive promocode');
+        // }
     };
+    // console.log(discount,"suman")
 
-    // const paymentHandler = async (e) => {
+    const handleInputChange = (e) => {
+        e.preventDefault();
+        setPromocode(e.target.value)
+        console.log(promocode)
+    }
 
-    //     e.preventDefault();
-    //     if (coupon === coupon_code) {
-    //         amount = amount - 10000
+    const deleteCoupon = async (e) => {
+        setCoupon("")
 
-    //     }
-    //     const response = await fetch("http://localhost:5000/order", {
-    //         method: "POST",
-    //         body: JSON.stringify({
-    //             amount,
-    //             currency,
-    //             receipt: receiptId,
-    //         }),
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     });
-    //     const order = await response.json();
-    //     console.log(order);
 
-    //     var options = {
-    //         key: "rzp_test_fuInk3cztCaRqm", // Enter the Key ID generated from the Dashboard
-    //         amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    //         currency,
-    //         name: "JobForm Automator", //your business name
-    //         description: "Subscription",
-    //         image: Img,
-    //         order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    //         handler: async function (response) {
-    //             const body = {
-    //                 ...response,
-    //             };
+    }
 
-    //             const validateRes = await fetch(
-    //                 "http://localhost:5000/order/validate",
-    //                 {
-    //                     method: "POST",
-    //                     body: JSON.stringify(body),
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                     },
-    //                 }
-    //             );
-    //             const jsonRes = await validateRes.json();
-    //             console.log(jsonRes);
-    //         },
-    //         prefill: {
-    //             //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-    //             name: "", //your customer's name
-    //             email: "",
-    //             contact: "8768814455", //Provide the customer's phone number for better conversion rates
-    //         },
-    //         notes: {
-    //             address: "Razorpay Corporate Office",
-    //         },
-    //         theme: {
-    //             color: "#3399cc",
-    //         },
-    //     };
-    //     var rzp1 = new window.Razorpay(options);
-    //     rzp1.on("payment.failed", function (response) {
-    //         alert(response.error.code);
-    //         alert(response.error.description);
-    //         alert(response.error.source);
-    //         alert(response.error.step);
-    //         alert(response.error.reason);
-    //         alert(response.error.metadata.order_id);
-    //         alert(response.error.metadata.payment_id);
-    //     });
-    //     rzp1.open();
-    //     e.preventDefault();
-    // };
 
     return (
         <div>
-            <h1>Razorpay Payment Integration</h1>
-            <div>
-                <label>
-                    Currency:
-                    <select value={currency} onChange={(e) => {
-                        setCurrency(e.target.value);
-                        setAmount(e.target.value === 'INR' ? 999 : 20);
-                    }}>
-                        <option value="INR">INR</option>
-                        <option value="USD">USD</option>
-                    </select>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Amount: {currency === 'INR' ? '₹' : '$'} {amount - discount}
-                </label>
-            </div>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Enter Promocode"
-                    value={promocode}
-                    onChange={(e) => setPromocode(e.target.value)}
-                />
-                <button onClick={applyPromocode}>Apply Promocode</button>
-            </div>
-            <button onClick={handlePayment}>Pay Now</button>
+            <main>
+
+
+
+                <h1>Contact</h1>
+                <div className="contact-container">
+                    <div className="message-section">
+                        <h2>Why Choose Us?</h2>
+                        <p>- Time-Saving: Focus on what matters while we handle the job applications.</p>
+                        <p>- 24/7 Customer Support: We are here to assist you anytime.</p>
+                        <p>- Money-Back Guarantee: Not satisfied with our service? Get your money back.</p>
+                    </div>
+                    <div className="form-section">
+                        <h2>Order Summary</h2>
+                        <p className="item-count">1 item</p>
+                        <p className="subtotal">Subtotal (INR) <span>{coupon?`₹${subtotal}`:amount}</span></p>
+                        <form >
+                            <input type="text" id="promocode" placeholder="Promo Code" onChange={handleInputChange} required />
+                            <button className="apply-button" onClick={applyPromocode}>Apply</button>
+                        </form>
+                        {coupon ? (
+                            <div>
+                                <div className="promo-code">
+                                    Promo Code: <span>{coupon}</span>
+                                    <span className="remove" onClick={deleteCoupon} style={{ cursor: "pointer" }}>🗑</span>
+                                </div>
+                                <div className="savings">
+                                    <p>✔️ You qualify for multiple money-saving orders. We've applied the best one to give you the lowest price.</p>
+                                    <p>{`😃 Nice! You saved ₹${discount} on your order.`}</p>
+                                </div>
+                            </div>
+
+
+                        )
+
+                            : (<div></div>)
+                        }
+
+                        {/* <div className="savings">
+                            <p>✔️ You qualify for multiple money-saving orders. We've applied the best one to give you the lowest price.</p>
+                            <p>{`😃 Nice! You saved ₹${discount} on your order.`}</p>
+                        </div> */}
+                        <button onClick={handlePayment}>I'm Ready to Pay</button>
+                        <div className="secure-payment">
+                            <p>Secure Payment</p>
+                            <img src={visa} alt="Visa" />
+                            <img src={mastercard} alt="MasterCard" />
+                            <img src="amex.svg" alt="Amex" />
+                            <img src={rupay} alt="RuPay" />
+                            <img src={upi} alt="UPI" />
+                        </div>
+                    </div>
+                </div>
+            </main>
+
         </div>
     );
 }
