@@ -31,7 +31,7 @@ const Resume = function () {
       get(getSubscription).then((snapshot) => {
 
           if (snapshot.val()!=null || snapshot.val()!=undefined) {
-              window.location.href = `/profile`;
+              window.location.href = `/demo`;
 
           }
           

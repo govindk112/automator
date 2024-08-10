@@ -24,6 +24,7 @@ import Policy from "./components/policy";
 import { getDatabase, ref, set, push, get } from "firebase/database";
 import app from "./components/firebase";
 import Promocode from "./components/promocode";
+import Demo from "./components/demo";
 
 
 
@@ -84,7 +85,7 @@ function App() {
 
           <Route
             path="/"
-            element={user != null ? api!=null? payment!=null? <Profile/>:<Resume/>:<Gemini/> : <Login />}
+            element={user != null ? api!=null? payment!=null? <Demo/>:<Resume/>:<Gemini/> : <Login />}
           />
           <Route path="/Login" element={<Login />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
@@ -96,6 +97,7 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode/>}/>
+          <Route path="/demo" element={<Demo/>}/>
         </Routes>
         <ToastContainer />
 
