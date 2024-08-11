@@ -1,98 +1,316 @@
+// import { signInWithEmailAndPassword } from "firebase/auth";
+// import React, { useState,useEffect } from "react";
+// import { auth } from "./firebase";
+// import { toast } from "react-toastify";
+// import SignInwithGoogle from "./signInWIthGoogle";
+// import app from "./firebase";
+// import { getDatabase,get,ref } from "firebase/database";
+// import "./styles.css"
+
+
+
+// let currentUser;
+
+
+// function Login() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   let db = getDatabase(app);
+
+//   useEffect(()=>{
+
+//     let getApi = ref(db,"Users/"+auth?.currentUser?.uid+"/API")
+//     get(getApi).then((snapsort)=>{
+//       if(snapsort.val()){
+//       let getForm = ref(db,"Users/"+auth?.currentUser?.uid+"/Form")
+//       get(getForm).then((snap1)=>{
+//         if(snap1.val()){
+//           window.location.href="/demo"
+//         }
+//         else{
+//           window.location.href="/resume"
+//         }
+
+//       })
+//     }
+//     else{
+//       window.location.href="/gemini"
+//     }
+//     }).catch((err)=>{
+
+//     })
+
+//   })
+
+
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+
+//       await signInWithEmailAndPassword(auth, email, password);
+//       console.log("User logged in Successfully");
+//       let user = auth.currentUser;
+//       currentUser = user.uid
+//       const isEmailVerified = user.emailVerified;
+//       console.log(user.email,user.displayName)
+
+
+
+//       const userData = {
+//         displayName: user.displayName,
+//         email:user.email,
+//       };
+
+//       localStorage.setItem('user', JSON.stringify(userData));
+
+//       const queryParams = new URLSearchParams(userData).toString();  
+
+
+
+//      if(isEmailVerified===true){
+//       alert("login successfull")
+//       window.location.href = `/gemini`;
+//       // window.location.href = `/profile?${queryParams}`;
+//       toast.success("User logged in Successfully", {
+//         position: "top-center",
+//       });
+
+//      }
+//      else{
+//       toast.error("Email is not verified")
+//      }
+
+//     } catch (error) {
+//       console.log(error.message);
+
+//       toast.error(error.message, {
+//         position: "bottom-center",
+//       });
+//     }
+//   };
+
+
+//   return (
+//     <main>
+//     {/* <div className="ellipse ellipse-1"></div>
+//     <div className="ellipse ellipse-2"></div> */}
+
+//     <h1>Sign In</h1>
+//     <div className="contact-container">
+//       <div className="message-section">
+//         <h2>Get your Dream Job with Us</h2>
+//         <p>Land your perfect job with ease! Try Job Form Automator today!</p>
+//       </div>
+//       <div className="form-section">
+//         <form onSubmit={handleSubmit}>
+//           <input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+//           <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
+//           <div className="form-options">
+//             <a href="/passwordReset" className="forgot-password">Forgot password</a>
+//           </div>
+//           <button type="submit">Sign in</button>
+
+//           <SignInwithGoogle/>
+//         </form>
+//         <p>
+//           Don't have an account? <a className="forgot-password" href="/register">Sign up</a>
+//         </p>
+//       </div>
+//     </div>
+//   </main>
+
+
+//   );
+// }
+
+// export{currentUser}
+// export default Login;
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth } from "./firebase";
 import { toast } from "react-toastify";
 import SignInwithGoogle from "./signInWIthGoogle";
-import "./styles.css"
-
-
-
-let currentUser;
-
+import app from "./firebase";
+import { getDatabase, get, ref } from "firebase/database";
+import "./styles.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const db = getDatabase(app);
+
+  useEffect(() => {
+    const redirectUser = async () => {
+      try {
+        const user = auth.currentUser;
+
+        if (user) {
+          const userId = user.uid;
+
+          // Reference for Subscription status and Form status
+          const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+          const subscriptionSnapshot = await get(getSubscription)
+          const getForm = ref(db, `Users/${auth?.currentUser?.uid}/Form`);
+          const formSnapshot = await get(getForm)
+
+          // Fetch Subscription and Form data
+          // const [subscriptionSnapshot, formSnapshot] = await Promise.all([
+          //   get(getSubscription),
+          //   get(getForm)
+          // ]);
+
+          const subscriptionType = subscriptionSnapshot.val();
+
+
+          console.log(subscriptionType+"Hello")
+          console.log(formSnapshot.val(),"form")
+
+
+          if (!subscriptionType) {
+            // If Subscriptiontype is undefined, redirect to Gemini page
+            window.location.href = "/gemini";
+          } else if (!formSnapshot.exists()) {
+            // Redirect to Resume page if resume is not uploaded
+            window.location.href = "/resume";
+          } else if (subscriptionType === "GetResume") {
+            // Redirect to Resume page if the subscription type is "GetResume"
+            window.location.href = "/resume";
+          } else if (subscriptionType === "FreeTrialStarted" || subscriptionType === "Premium") {
+            // Redirect to Demo page if the user has a FreeTrial or Premium subscription
+            window.location.href = "/demo";
+          } else {
+            // Fallback to Gemini if the subscription type is not recognized
+            window.location.href = "/gemini";
+          }
+        }
+      } catch (error) {
+        console.error("Redirection error:", error);
+        toast.error("An error occurred during redirection. Please try again.");
+      }
+    };
+
+    redirectUser();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("User logged in Successfully");
-      let user = auth.currentUser;
-      currentUser = user.uid
-      const isEmailVerified = user.emailVerified;
-      console.log(user.email,user.displayName)
-
-
-      
-      const userData = {
-        displayName: user.displayName,
-        email:user.email,
-      };
-
-      localStorage.setItem('user', JSON.stringify(userData));
-      
-      const queryParams = new URLSearchParams(userData).toString();     
+    setLoading(true);
 
     
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      // const user = auth.currentUser;
+      if (user && user.emailVerified) {
+        toast.success("User logged in Successfully", { position: "top-center" });
+        // window.location.href = "/gemini";
+      } else {
+        toast.error("Email is not verified", { position: "bottom-center" });
+        return;
+      }
 
-     if(isEmailVerified===true){
-      alert("login successfull")
-      window.location.href = `/gemini`;
-      // window.location.href = `/profile?${queryParams}`;
-      toast.success("User logged in Successfully", {
-        position: "top-center",
-      });
+        if (user) {
+          const userId = user.uid;
 
-     }
-     else{
-      toast.error("Email is not verified")
-     }
-   
+          // Reference for Subscription status and Form status
+          const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+          const subscriptionSnapshot = await get(getSubscription)
+          const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
+          const formSnapshot = await get(getForm)
+
+          // Fetch Subscription and Form data
+          // const [subscriptionSnapshot, formSnapshot] = await Promise.all([
+          //   get(getSubscription),
+          //   get(getForm)
+          // ]);
+
+          const subscriptionType = subscriptionSnapshot.val();
+
+
+          console.log(subscriptionType+"Hello")
+          console.log(formSnapshot.val(),"form")
+
+
+          if (!subscriptionType) {
+            // If Subscriptiontype is undefined, redirect to Gemini page
+            window.location.href = "/gemini";
+          } else if (!formSnapshot.exists()) {
+            // Redirect to Resume page if resume is not uploaded
+            window.location.href = "/resume";
+          } else if (subscriptionType === "GetResume") {
+            // Redirect to Resume page if the subscription type is "GetResume"
+            window.location.href = "/resume";
+          } else if (subscriptionType === "Free" || subscriptionType === "Premium") {
+            // Redirect to Demo page if the user has a FreeTrial or Premium subscription
+            window.location.href = "/demo";
+          } else {
+            // Fallback to Gemini if the subscription type is not recognized
+            window.location.href = "/gemini";
+          }
+        }
+          
+
+
+      // if (user && user.emailVerified) {
+      //   toast.success("User logged in Successfully", { position: "top-center" });
+      //   // window.location.href = "/gemini";
+      // } else {
+      //   toast.error("Email is not verified", { position: "bottom-center" });
+      // }
+
     } catch (error) {
-      console.log(error.message);
-
-      toast.error(error.message, {
-        position: "bottom-center",
-      });
+      console.error("Login error:", error.message);
+      toast.error(error.message, { position: "bottom-center" });
+    } finally {
+      setLoading(false);
     }
-  };
-  
+  }
+
 
   return (
     <main>
-    {/* <div className="ellipse ellipse-1"></div>
-    <div className="ellipse ellipse-2"></div> */}
-
-    <h1>Sign In</h1>
-    <div className="contact-container">
-      <div className="message-section">
-        <h2>Get your Dream Job with Us</h2>
-        <p>Land your perfect job with ease! Try Job Form Automator today!</p>
+      <h1>Sign In</h1>
+      <div className="contact-container">
+        <div className="message-section">
+          <h2>Get your Dream Job with Us</h2>
+          <p>Land your perfect job with ease! Try Job Form Automator today!</p>
+        </div>
+        <div className="form-section">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={loading}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+            />
+            <div className="form-options">
+              <a href="/passwordReset" className="forgot-password">Forgot password</a>
+            </div>
+            <button type="submit" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
+            </button>
+            <SignInwithGoogle />
+          </form>
+          <p>
+            Don't have an account? <a className="forgot-password" href="/register">Sign up</a>
+          </p>
+        </div>
       </div>
-      <div className="form-section">
-        <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <div className="form-options">
-            <a href="/passwordReset" className="forgot-password">Forgot password</a>
-          </div>
-          <button type="submit">Sign in</button>
-
-          <SignInwithGoogle/>
-        </form>
-        <p>
-          Don't have an account? <a className="forgot-password" href="/register">Sign up</a>
-        </p>
-      </div>
-    </div>
-  </main>
-
-    
+    </main>
   );
 }
 
-export{currentUser}
+
 export default Login;

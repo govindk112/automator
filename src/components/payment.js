@@ -145,6 +145,8 @@ const Payment = function () {
 
     const deleteCoupon = async (e) => {
         setCoupon("")
+        setDiscount(0)
+        
 
 
     }
@@ -167,7 +169,7 @@ const Payment = function () {
                     <div className="form-section">
                         <h2>Order Summary</h2>
                         <p className="item-count">1 item</p>
-                        <p className="subtotal">Subtotal (INR) <span>{coupon?`₹${subtotal}`:amount}</span></p>
+                        <p className="subtotal">Subtotal (INR) <span>{coupon? `₹${subtotal}`:amount}</span></p>
                         <form >
                             <input type="text" id="promocode" placeholder="Promo Code" onChange={handleInputChange} required />
                             <button className="apply-button" onClick={applyPromocode}>Apply</button>

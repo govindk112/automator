@@ -2,6 +2,8 @@ import React from "react";
 import { auth } from "./firebase";
 
 const Demo = function () {
+    let user = auth.currentUser;
+    console.log(user)
     async function handleLogout() {
         try {
           await auth.signOut();
