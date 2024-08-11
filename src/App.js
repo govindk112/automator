@@ -20,11 +20,11 @@ import { getDatabase, ref, get } from "firebase/database";
 import app from "./components/firebase";
 import Promocode from "./components/promocode";
 import Demo from "./components/demo";
-import DelayedComponent from "./components/delay";
+
 
 function App() {
-  const [api, setApi] = useState("");
-  const [payment, setPayment] = useState("");
+  // const [api, setApi] = useState("");
+  // const [payment, setPayment] = useState("");
   const [user, setUser] = useState(null);
   const [component, setComponent] = useState("");
 
@@ -41,12 +41,12 @@ function App() {
         // Get API data
         const getApi = ref(db, `Users/${auth?.currentUser?.uid}/API`);
         const apiSnapshot = await get(getApi)
-        setApi(apiSnapshot.exists() ? "exist" : "");
+        // setApi(apiSnapshot.exists() ? "exist" : "");
 
         // Get Payment/Subscriptiontype data
         const getPaymentInformation = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
         const paymentSnapshot = await get(getPaymentInformation)
-        setPayment(paymentSnapshot.exists() ? paymentSnapshot.val() : "");
+        // setPayment(paymentSnapshot.exists() ? paymentSnapshot.val() : "");
 
 
         const getForm = ref(db,`Users/${auth?.currentUser?.uid}/forms`);
