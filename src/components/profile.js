@@ -1,5 +1,5 @@
 import React from 'react';
-import {auth } from './firebase'; // Make sure the path to your firebase config file is correct
+import {auth } from './firebase';
 
 
 import "./styles.css"

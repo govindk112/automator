@@ -10,7 +10,6 @@ const Promocode = function () {
     const [promocode, setPromocode] = useState("")
     const [discount_type, setDiscount_type] = useState("");
     const [discount_value, setDiscount_value] = useState(0);
-    // count[expiration_date,setExpiration_date] = useState()
     let db = getDatabase(app)
     const onSubmitHandler = async (e) => {
         e.preventDefault();

@@ -23,9 +23,7 @@ import Demo from "./components/demo";
 
 
 function App() {
-  // const [api, setApi] = useState("");
-  // const [payment, setPayment] = useState("");
-  // const [user, setUser] = useState(null);
+
   const [component, setComponent] = useState("");
 
   useEffect(() => {
@@ -36,17 +34,13 @@ function App() {
 
 
       if (user) {
-        // const userId = user.uid;
 
-        // Get API data
         const getApi = ref(db, `Users/${auth?.currentUser?.uid}/API`);
          await get(getApi)
-        // setApi(apiSnapshot.exists() ? "exist" : "");
 
-        // Get Payment/Subscriptiontype data
         const getPaymentInformation = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
         const paymentSnapshot = await get(getPaymentInformation)
-        // setPayment(paymentSnapshot.exists() ? paymentSnapshot.val() : "");
+        
 
 
         const getForm = ref(db,`Users/${auth?.currentUser?.uid}/forms`);

@@ -123,7 +123,7 @@ const Resume = function () {
               <input type="text" placeholder="Notice Period" required onChange={(e) => setNoticePeriod(e.target.value)} />
               <p>your All preferred locations for jobs?</p>
               <input type="text" placeholder="Preferred Locations" required onChange={(e) => setLocation(e.target.value)} />
-              <label for="file-upload" className="custom-file-upload">
+              <label htmlFor="file-upload" className="custom-file-upload">
                 Upload Resume
               </label>
               <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />

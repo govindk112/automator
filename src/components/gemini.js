@@ -65,7 +65,7 @@ const Gemini = function () {
             return;
         }
 
- 
+
     };
 
     return (
