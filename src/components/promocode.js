@@ -6,11 +6,7 @@ import { toast } from "react-toastify";
 
 
 const Promocode = function () {
-    let ODE1 = {
-        "discount_type": "percentage",
-        "discount_value": 10,
-        "expiration_date": "2024-12-31T23:59:59Z"
-    }
+
     const [promocode, setPromocode] = useState("")
     const [discount_type, setDiscount_type] = useState("");
     const [discount_value, setDiscount_value] = useState(0);

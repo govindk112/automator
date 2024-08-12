@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword,getAuth,sendEmailVerification,updateProf
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import app from "./firebase";
-import { getDatabase,ref,set,push } from "firebase/database";
+import { getDatabase,ref,set } from "firebase/database";
 import "./styles.css"
 
 
@@ -88,8 +88,7 @@ function Register() {
   return (
     <main>
 
-        {/* <div className="ellipse ellipse-1"></div>
-        <div className="ellipse ellipse-2"></div> */}
+
 
         <h1>Sign Up</h1>
         <div className="contact-container">

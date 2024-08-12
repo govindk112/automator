@@ -12,12 +12,11 @@ import { toast } from "react-toastify";
 
 
 const Payment = function () {
-    const [currency, setCurrency] = useState('INR');
-    const [amount, setAmount] = useState(currency === 'INR' ? 999 : 20);
+    const [currency] = useState('INR');
+    const [amount] = useState(currency === 'INR' ? 999 : 20);
     const [promocode, setPromocode] = useState('');
     const [discount, setDiscount] = useState(0);
     const [coupon, setCoupon] = useState("");
-    const coupon_code = "AIKING50"
     // let amount = "80000";
     // const currency = "INR";
     const receiptId = "qwsaq1";
@@ -127,13 +126,7 @@ const Payment = function () {
         console.log(promocode)
         console.log("promocode -apply")
 
-        // if (promoData && promoData.active) {
-        //     console.log(promoData.discount+"DISCOUNT")
-        // setDiscount(promoData.discount);
 
-        // } else {
-        //     alert('Invalid or inactive promocode');
-        // }
     };
     // console.log(discount,"suman")
 

@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth } from "./firebase";
 import app from "./firebase";
 import { toast } from "react-toastify";
-import { getDatabase, ref, set, push, get, update } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const Gemini = function () {
-    let [user, setUser] = useState();
-    const [api, setApi] = useState("");
+
     const [gemini_key, setGeminikey] = useState("");
-    const [isValid, setIsValid] = useState(null);
     const db = getDatabase(app);
 
     const sumbitHandler = async (e) => {
@@ -23,7 +21,7 @@ const Gemini = function () {
             // Initiate the content generation
             const result = await model.generateContent(prompt);
             const response = result.response;
-            const text = response.text();
+
 
 
 
@@ -67,23 +65,7 @@ const Gemini = function () {
             return;
         }
 
-        // // Update payment details
-        // const currentDate = new Date();
-        // const formattedDateTime = currentDate.toISOString().replace("T", " ").split(".")[0];
-
-        // try {
-        //   const newPaymentRef = ref(db, "Users/" + auth.currentUser.uid);
-        //   await update(newPaymentRef, {
-        //     Payment: {
-        //       Status: "Free",
-        //       Start_Date: formattedDateTime,
-        //       Subscriptiontype: "Free",
-        //     },
-        //   });
-        //   console.log("Payment details updated successfully");
-        // } catch (err) {
-        //   console.error(err);
-        // }
+ 
     };
 
     return (
@@ -110,9 +92,9 @@ const Gemini = function () {
                                 onChange={(e) => setGeminikey(e.target.value)}
                             />
                             <div className="form-options">
-                                <a href="#" className="forgot-password">
+                                {/* <a href="#" className="forgot-password">
                                     Get Gemini key Here
-                                </a>
+                                </a> */}
                             </div>
                             <button type="submit">Submit</button>
                         </form>

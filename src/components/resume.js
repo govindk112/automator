@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ref, get, getDatabase, set, update } from "firebase/database";
+import { ref, get, getDatabase,  update } from "firebase/database";
 import app from "./firebase";
 import { auth } from "./firebase";
-import { Document, Page, pdfjs } from 'react-pdf';
+import {  pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdfjs/pdf.worker.min.js`
 
 
@@ -17,7 +17,7 @@ const Resume = function () {
   const [pdfText, setPdfText] = useState('');
   const [Location, setLocation] = useState([]);
   const [user, setUser] = useState("")
-  const db = getDatabase(app)
+  // const db = getDatabase(app)
 
 
   useEffect(() => {
@@ -25,25 +25,7 @@ const Resume = function () {
       setUser(user);
     });
 
-  //   const getSubscription = ref(db, "Users/" + auth?.currentUser?.uid + "/Payment/Subscriptiontype");
-  //   const getForm = ref(db,"Users/"+user?.uid+"/Form")
 
-  //  console.log(getSubscription)
-  //   get(getSubscription).then((snapshot) => {
-  //     get(getForm).then((snapshotForm)=>{
-    
-
-  //     if ((snapshot.val() === "Free" || snapshot.val() === "Premium")&& snapshotForm) {
-  //       window.location.href = `/demo`;
-
-  //     }
-
-
-
-
-
-
-  //   })})
   })
 
 
@@ -79,7 +61,7 @@ const Resume = function () {
 
     const uid = auth.currentUser.uid;
     const userRef = ref(db, 'Users/' + uid);
-    const snapshot = await update(userRef, {
+     await update(userRef, {
       "forms": {
         "keyvalues": {
 
@@ -111,11 +93,7 @@ const Resume = function () {
     }
     )
 
-    // if (snapshot) {
-    //   console.log(snapshot.val())
-    // } else {
-    //   console.log('No data available');
-    // }
+
 
 
 

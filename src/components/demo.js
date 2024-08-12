@@ -37,7 +37,7 @@ const Demo = function () {
                             <button type="submit">Auto Apply</button>
                         </form>
                     </div>
-                    {/* <button onClick={handleLogout}>Logout</button> */}
+                    
                 </div>
                 <button onClick={handleLogout}>Logout</button>
             </main>

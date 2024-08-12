@@ -5,10 +5,7 @@ const Policy = function () {
         <div>
             <main>
 
-                {/* <div class="ellipse ellipse-1"></div>
-                <div class="ellipse ellipse-2"></div>
-                <div class="ellipse ellipse-3"></div>
-                <div class="ellipse ellipse-4"></div> */}
+          
 
                 <h1>Our Policy</h1>
                 <div class="contact-container">

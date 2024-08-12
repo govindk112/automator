@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app, { auth } from "./firebase";
 import { toast } from "react-toastify";
-import { getDatabase, ref, set, push, get } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 import google from "./image/google.svg"
 import "./styles.css"
 function SignInwithGoogle() {
@@ -29,14 +29,14 @@ function SignInwithGoogle() {
             email: user.email,
           };
           localStorage.setItem('user', JSON.stringify(userData));
-          const queryParams = new URLSearchParams(userData).toString();
+          // const queryParams = new URLSearchParams(userData).toString();
           try {
 
             const user = auth.currentUser;
             
     
             if (user) {
-              const userId = user.uid;
+              
     
               // Reference for Subscription status and Form status
               const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
@@ -102,14 +102,14 @@ function SignInwithGoogle() {
               email: user.email,
             };
             localStorage.setItem('user', JSON.stringify(userData));
-            const queryParams = new URLSearchParams(userData).toString();
+            // const queryParams = new URLSearchParams(userData).toString();
             try {
 
               const user = auth.currentUser;
               // const user = auth.currentUser;
       
               if (user) {
-                const userId = user.uid;
+                
       
                 // Reference for Subscription status and Form status
                 const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
@@ -172,35 +172,7 @@ function SignInwithGoogle() {
         }
       })
 
-      // if (result.user) {
-      //   const newDocRef = push(ref(db,"Users"))
-      //   set(newDocRef,{
-      //     name:name,
-      //     email:email,
-      //     profilePhoto:profilePhoto
 
-
-      //   }).then(()=>{
-      //     toast.success("User logged in Successfully", {
-      //       position: "top-center",
-
-      //     });
-      //     const user = result.user;
-      //     const userData = {
-      //       displayName: user.displayName,
-      //       email:user.email,
-      //     };
-      //     localStorage.setItem('user', JSON.stringify(userData));
-      //     const queryParams = new URLSearchParams(userData).toString();  
-      //     window.location.href = "/gemini"   
-
-      //     // window.location.href = `/profile?${queryParams}`;
-
-      //   }).catch((err)=>{
-      //     toast.error(err.message)
-
-      //   })
-      // }
     });
   }
   return (
