@@ -25,22 +25,22 @@ import Demo from "./components/demo";
 function App() {
   // const [api, setApi] = useState("");
   // const [payment, setPayment] = useState("");
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [component, setComponent] = useState("");
 
   useEffect(() => {
     const db = getDatabase(app);
 
     auth.onAuthStateChanged(async (user) => {
-      setUser(user);
+      // setUser(user);
 
 
       if (user) {
-        const userId = user.uid;
+        // const userId = user.uid;
 
         // Get API data
         const getApi = ref(db, `Users/${auth?.currentUser?.uid}/API`);
-        const apiSnapshot = await get(getApi)
+         await get(getApi)
         // setApi(apiSnapshot.exists() ? "exist" : "");
 
         // Get Payment/Subscriptiontype data
