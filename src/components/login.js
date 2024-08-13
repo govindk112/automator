@@ -19,6 +19,30 @@ function Login() {
         const user = auth.currentUser;
 
         if (user) {
+
+          let key = localStorage.getItem("api_key");
+          let resume = localStorage.getItem("resume");
+
+          console.log(key,resume , "Testing")
+
+          if(key){
+             if(resume){
+              console.log("hii")
+              window.location.href = "/demo";
+             }
+             else{
+              window.location.href="/resume"
+             }
+
+          }
+          else{
+            if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
+
+            }
+            else{
+            window.location.href = "/gemini"
+            }
+          }
           
 
           // Reference for Subscription status and Form status
@@ -27,20 +51,23 @@ function Login() {
           const getForm = ref(db, `Users/${auth?.currentUser?.uid}/Form`);
           const formSnapshot = await get(getForm)
 
-          // Fetch Subscription and Form data
-          // const [subscriptionSnapshot, formSnapshot] = await Promise.all([
-          //   get(getSubscription),
-          //   get(getForm)
-          // ]);
+        
 
           const subscriptionType = subscriptionSnapshot.val();
 
 
           console.log(subscriptionType+"Hello")
           console.log(formSnapshot.val(),"form")
+          console.log(auth.currentUser.emailVerified,auth.currentUser.uid,"Hello")
 
+          // if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
+          //   window.location.href="/Login"
+          // }
 
-          if (!subscriptionType) {
+          if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
+            
+          }
+          else if (!subscriptionType && auth.currentUser.emailVerified===true && auth.currentUser.uid) {
             // If Subscriptiontype is undefined, redirect to Gemini page
             window.location.href = "/gemini";
           } else if (!formSnapshot.exists()) {
@@ -74,6 +101,8 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
+      localStorage.setItem('user',auth.currentUser.uid);
+      
       // const user = auth.currentUser;
       if (user && user.emailVerified) {
         toast.success("User logged in Successfully", { position: "top-center" });
@@ -100,8 +129,14 @@ function Login() {
           console.log(subscriptionType+"Hello")
           console.log(formSnapshot.val(),"form")
 
+          // console.log(auth.currentUser.emailVerified,auth.currentUser.uid,"Hello")
 
-          if (!subscriptionType) {
+          if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
+            
+          }
+
+
+          else if (!subscriptionType) {
             // If Subscriptiontype is undefined, redirect to Gemini page
             window.location.href = "/gemini";
           } else if (!formSnapshot.exists()) {

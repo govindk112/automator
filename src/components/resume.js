@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ref, get, getDatabase,  update } from "firebase/database";
+import { ref, getDatabase,  update } from "firebase/database";
 import app from "./firebase";
 import { auth } from "./firebase";
 import {  pdfjs } from 'react-pdf';
+import { toast } from "react-toastify";
 pdfjs.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdfjs/pdf.worker.min.js`
 
 
@@ -70,28 +71,24 @@ const Resume = function () {
         }
       }
 
-    }).then(() => {
-      const getSubscription = ref(db, "Users/" + user?.uid + "/Payment/Subscriptiontype");
-      console.log(getSubscription)
-
-      get(getSubscription).then((snapshot) => {
-
-        if (snapshot.val() === "Free" || snapshot.val() === "Premium") {
-          window.location.href = `/demo`;
-
-        }
-
-
-
-
-
-
+    }).then(async() => {
+      toast.success("Document Upload Successfully!");
+      localStorage.setItem("Subscriptiontype","FreeTrialStarted");
+      const getSubscription = ref(db, "Users/" + user?.uid + "/Payment");
+      await update(getSubscription,{
+        Subscriptiontype:"FreeTrialStarted",
+        
       })
+      console.log("Resume")
+      window.location.href = "/demo"
+      
 
+  
     }).catch((err)=>{
-    console.log(err)
-    }
-    )
+      toast.error(err)
+    })
+
+
 
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, sendPasswordResetEmail,  } from "firebase/auth";
+import { toast } from 'react-toastify';
 
 const PasswordReset = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const PasswordReset = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('Password reset email sent!');
+      toast.success("Password Resate Mail Send Successfully")
     } catch (error) {
       setMessage(`Error: ${error.message}`);
     }

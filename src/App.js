@@ -34,6 +34,7 @@ function App() {
 
 
       if (user) {
+        
 
         const getApi = ref(db, `Users/${auth?.currentUser?.uid}/API`);
          await get(getApi)
@@ -48,13 +49,16 @@ function App() {
         
 
         // Determine the component to render
-        if (!paymentSnapshot.exists()) {
+        if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
+          setComponent(<Login/>)
+        }
+        else if (!paymentSnapshot.exists()) {
           // If Subscriptiontype is undefined, redirect to Gemini page
           setComponent(<Gemini />);
         } else if (paymentSnapshot.val() === "GetResume") {
           // Redirect to Resume page if the subscription type is "GetResume"
           setComponent(<Resume />);
-        } else if ((paymentSnapshot.val() === "Free" || paymentSnapshot.val() === "Premium")&& formSnapshort.exists()) {
+        } else if ((paymentSnapshot.val() === "FreeTrialStarted" || paymentSnapshot.val() === "Premium")&& formSnapshort.exists()) {
           // Redirect to Demo page if the user has a FreeTrial or Premium subscription
           setComponent(<Demo />);
         } else {

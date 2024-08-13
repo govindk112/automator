@@ -28,6 +28,8 @@ const Gemini = function () {
             // Update the database with API key
             if (response) {
                 toast.success("API Key Submitted Successfully");
+                localStorage.setItem("api_key",gemini_key);
+                
                 const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
                 await update(newDocRef, {
                     API: {
@@ -44,7 +46,7 @@ const Gemini = function () {
                         Payment: {
                             Status: "Free",
                             Start_Date: formattedDateTime,
-                            Subscriptiontype: "Free",
+                            Subscriptiontype: "GetResume",
                         },
                     });
                     console.log("Payment details updated successfully");
