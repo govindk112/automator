@@ -4,16 +4,27 @@ import { auth } from "./firebase";
 const Demo = function () {
     let user = auth.currentUser;
     console.log(user)
+
     async function handleLogout() {
         try {
-          await auth.signOut();
-          localStorage.clear()
-          window.location.href = "/login";
-          console.log("User logged out successfully!");
+            await auth.signOut();
+            localStorage.clear()
+            window.location.href = "/login";
+            console.log("User logged out successfully!");
+            //Event Listner
+            function notifyExtensionOnLogout(key) {
+                const event = new CustomEvent('onLogout');
+                document.dispatchEvent(event);
+            }
+
+            // Call this function after successful login
+            notifyExtensionOnLogout();  // userUID is the UID of the logged-in user
+
+
         } catch (error) {
-          console.error("Error logging out:", error.message);
+            console.error("Error logging out:", error.message);
         }
-      }
+    }
     return (
         <div>
             <main>
@@ -38,7 +49,7 @@ const Demo = function () {
                             <button type="submit">Auto Apply</button>
                         </form>
                     </div>
-                    
+
                 </div>
                 <button onClick={handleLogout}>Logout</button>
             </main>

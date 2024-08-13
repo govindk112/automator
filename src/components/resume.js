@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ref, getDatabase,  update } from "firebase/database";
+import { ref, getDatabase, update } from "firebase/database";
 import app from "./firebase";
 import { auth } from "./firebase";
-import {  pdfjs } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
 import { toast } from "react-toastify";
 pdfjs.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdfjs/pdf.worker.min.js`
 
@@ -60,9 +60,18 @@ const Resume = function () {
     e.preventDefault();
     console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
+    //Event Listner
+    function notifyExtensionOnResumeSubmit() {
+      const event = new CustomEvent('resumeSubmitted');
+      document.dispatchEvent(event);
+    }
+
+    // Call this function after successful login
+    notifyExtensionOnResumeSubmit();  // userUID is the UID of the logged-in user
+
     const uid = auth.currentUser.uid;
     const userRef = ref(db, 'Users/' + uid);
-     await update(userRef, {
+    await update(userRef, {
       "forms": {
         "keyvalues": {
 
@@ -71,20 +80,20 @@ const Resume = function () {
         }
       }
 
-    }).then(async() => {
+    }).then(async () => {
       toast.success("Document Upload Successfully!");
-      localStorage.setItem("Subscriptiontype","FreeTrialStarted");
+      localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
       const getSubscription = ref(db, "Users/" + user?.uid + "/Payment");
-      await update(getSubscription,{
-        Subscriptiontype:"FreeTrialStarted",
-        
+      await update(getSubscription, {
+        Subscriptiontype: "FreeTrialStarted",
+
       })
       console.log("Resume")
       window.location.href = "/demo"
-      
 
-  
-    }).catch((err)=>{
+
+
+    }).catch((err) => {
       toast.error(err)
     })
 

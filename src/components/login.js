@@ -20,8 +20,8 @@
 
 //         if (user) {
 
-          
-          
+
+
 
 //           // Reference for Subscription status and Form status
 //           const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
@@ -29,7 +29,7 @@
 //           const getForm = ref(db, `Users/${auth?.currentUser?.uid}/Form`);
 //           const formSnapshot = await get(getForm)
 
-        
+
 
 //           const subscriptionType = subscriptionSnapshot.val();
 
@@ -43,7 +43,7 @@
 //           // }
 
 //           if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
-            
+
 //           }
 //           else if (!subscriptionType && auth.currentUser.emailVerified===true && auth.currentUser.uid) {
 //             // If Subscriptiontype is undefined, redirect to Gemini page
@@ -75,13 +75,13 @@
 //     e.preventDefault();
 //     setLoading(true);
 
-    
+
 //     try {
 //       await signInWithEmailAndPassword(auth, email, password);
 //       const user = auth.currentUser;
 //       localStorage.setItem('user',auth.currentUser.uid);
 //       localStorage.setItem("Logout",false)
-      
+
 //       // const user = auth.currentUser;
 //       if (user && user.emailVerified) {
 //         toast.success("User logged in Successfully", { position: "top-center" });
@@ -92,7 +92,7 @@
 //       }
 
 //         if (user) {
-          
+
 
 //           // Reference for Subscription status and Form status
 //           const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
@@ -100,7 +100,7 @@
 //           const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
 //           const formSnapshot = await get(getForm)
 
-     
+
 
 //           const subscriptionType = subscriptionSnapshot.val();
 
@@ -111,7 +111,7 @@
 //           // console.log(auth.currentUser.emailVerified,auth.currentUser.uid,"Hello")
 
 //           if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
-            
+
 //           }
 
 
@@ -132,7 +132,7 @@
 //             window.location.href = "/gemini";
 //           }
 //         }
-          
+
 
 
 
@@ -256,6 +256,15 @@ function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
+
+      // website-login.js (on your website)
+      function notifyExtensionOnLogin(uid) {
+        const event = new CustomEvent('userLoggedIn', { detail: { uid } });
+        document.dispatchEvent(event);
+      }
+
+      // Call this function after successful login
+      notifyExtensionOnLogin(user.uid);  // userUID is the UID of the logged-in user
 
       if (user && user.emailVerified) {
         localStorage.setItem("user", user.uid);

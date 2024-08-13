@@ -28,8 +28,17 @@ const Gemini = function () {
             // Update the database with API key
             if (response) {
                 toast.success("API Key Submitted Successfully");
-                localStorage.setItem("api_key",gemini_key);
-                
+                localStorage.setItem("api_key", gemini_key);
+                //Event Listner
+                // website-login.js (on your website)
+                function notifyExtensionOnGeminiKey(key) {
+                    const event = new CustomEvent('geminiKeySubmitted', { detail: { key } });
+                    document.dispatchEvent(event);
+                }
+
+                // Call this function after successful login
+                notifyExtensionOnGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
+
                 const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
                 await update(newDocRef, {
                     API: {
