@@ -7,8 +7,7 @@ const Demo = function () {
     async function handleLogout() {
         try {
           await auth.signOut();
-          localStorage.clear();
-          localStorage.setItem("Logout",true)
+          localStorage.clear()
           window.location.href = "/login";
           console.log("User logged out successfully!");
         } catch (error) {
