@@ -73,9 +73,13 @@ function Register() {
             toast.success("User Registered Successfully!!", {
               position: "top-center",
             });
+            toast.success("Email Verification Link Send Successfully : Please check your email!", {
+              position: "top-center",
+            });
             
 
           })
+          
       }
     } catch (error) {
       console.log(error.message);

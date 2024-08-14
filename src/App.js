@@ -128,6 +128,7 @@ import { getDatabase, ref, get } from "firebase/database";
 import app from "./components/firebase";
 import Promocode from "./components/promocode";
 import Demo from "./components/demo";
+import Index from "./components";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -214,7 +215,8 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={component} />
+          <Route path="/" element={<Index/>}/>
+          <Route path="/User" element={component} />
           <Route path="/Login" element={<Login />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
           <Route path="/Register" element={<Register />} />

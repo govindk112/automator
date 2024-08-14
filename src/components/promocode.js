@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 
 const Promocode = function () {
 
-    const [promocode, setPromocode] = useState("")
+    const [promocode, setPromocode] = useState("");
+    const [currencyType,setCurrencyType] = useState("")
     const [discount_type, setDiscount_type] = useState("");
     const [discount_value, setDiscount_value] = useState(0);
     let db = getDatabase(app)
@@ -16,6 +17,7 @@ const Promocode = function () {
         console.log("Hii")
         const newDocRef = ref(db, "promo_codes/" + promocode);
         set(newDocRef, {
+            currency_type:currencyType,
             discount_type: discount_type,
             discount_value: Number(discount_value)
 
@@ -35,6 +37,7 @@ const Promocode = function () {
         <div>
             <form onSubmit={onSubmitHandler}>
                 <input type="text" onChange={(e) => setPromocode(e.target.value)} required />
+                <input type="text" onChange={(e)=>setCurrencyType(e.target.value)} required/>
                 <input type="text" onChange={(e) => setDiscount_type(e.target.value)} required />
                 <input type="number" onChange={(e) => setDiscount_value(e.target.value)} required />
                 <button type="submit">Submit</button>

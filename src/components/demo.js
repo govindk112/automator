@@ -32,17 +32,17 @@ const Demo = function () {
 
 
                 <h1>Guide</h1>
-                <div class="contact-container">
-                    <div class="message-section">
+                <div className="contact-container">
+                    <div className="message-section">
 
-                        <div class="video-container">
+                        <div className="video-container">
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/f8MXg2ML6sQ?si=CelXj6CG_XysvMJO"
-                                title="YouTube video player" frameborder="0"
+                                title="YouTube video player" frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                         </div>
                     </div>
-                    <div class="form-section">
+                    <div className="form-section">
                         <form>
                             <h2>Welcome! Let's Get Started 🎉</h2>
                             <p>Auto-Apply jobs with our Chrome Extension</p>
