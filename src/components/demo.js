@@ -25,12 +25,22 @@ const Demo = function () {
             console.error("Error logging out:", error.message);
         }
     }
+    async function handleUpdateResume() {
+        window.location.href = "/updategemini"
+        
+    }
+    async function handleUpdateResume() {
+        window.location.href = "/updateresume"
+        
+    }
     return (
         <div>
             <main>
 
 
 
+                <div class="ellipse ellipse-1"></div>
+                <div class="ellipse ellipse-2"></div>
                 <h1>Guide</h1>
                 <div className="contact-container">
                     <div className="message-section">
@@ -51,6 +61,8 @@ const Demo = function () {
                     </div>
 
                 </div>
+                <button onClick={handleUpdateResume}>Update API Key</button><br></br>
+                <button onClick={handleUpdateResume}>Update Resume</button><br></br>
                 <button onClick={handleLogout}>Logout</button>
             </main>
         </div>

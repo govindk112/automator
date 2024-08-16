@@ -247,7 +247,7 @@ function Login() {
 
       redirectUser();
     }
-  }, [db]);
+  }, );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -279,9 +279,10 @@ function Login() {
         const apiSnapshot = await get(apiRef);
         const apiKey = apiSnapshot.val();
         localStorage.setItem("api_key", apiKey);
+        console.log(subscriptionType,apiKey)
 
         if (apiKey) {
-          if (subscriptionType === "FreeTrialStarted") {
+          if (subscriptionType === "FreeTrialStarted" || subscriptionType==="Premium") {
             window.location.href = "/demo";
           } else {
             window.location.href = "/resume";
@@ -302,6 +303,8 @@ function Login() {
 
   return (
     <main>
+      <div class="ellipse ellipse-1"></div>
+      <div class="ellipse ellipse-2"></div>
       <h1>Sign In</h1>
       <div className="contact-container">
         <div className="message-section">

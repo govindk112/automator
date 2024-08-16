@@ -62,7 +62,7 @@ function SignInwithGoogle() {
               } else if (subscriptionType === "GetResume") {
                 // Redirect to Resume page if the subscription type is "GetResume"
                 window.location.href = "/resume";
-              } else if (subscriptionType === "Free" || subscriptionType === "Premium") {
+              } else if (subscriptionType === "FreeTrialStarted" || subscriptionType === "Premium") {
                 // Redirect to Demo page if the user has a FreeTrial or Premium subscription
                 window.location.href = "/demo";
               } else {

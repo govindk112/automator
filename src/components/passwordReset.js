@@ -23,8 +23,8 @@ const PasswordReset = () => {
   return (
     <main>
 
-        {/* <div className="ellipse ellipse-1"></div>
-        <div className="ellipse ellipse-2"></div> */}
+        <div className="ellipse ellipse-1"></div>
+        <div className="ellipse ellipse-2"></div>
 
         <h1>Password Reset</h1>
         <div className="contact-container">

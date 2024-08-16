@@ -34,19 +34,19 @@
 
 
 //       if (user) {
-        
+
 
 //         const getApi = ref(db, `Users/${auth?.currentUser?.uid}/API`);
 //          await get(getApi)
 
 //         const getPaymentInformation = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
 //         const paymentSnapshot = await get(getPaymentInformation)
-        
+
 
 
 //         const getForm = ref(db,`Users/${auth?.currentUser?.uid}/forms`);
 //         const formSnapshort = await get(getForm);
-        
+
 
 //         // Determine the component to render
 //         if(auth.currentUser.emailVerified===false || !auth.currentUser.uid){
@@ -69,11 +69,11 @@
 //         // If the user is not authenticated, render the Login component
 //         setComponent(<Login />);
 //       }
-    
-    
+
+
 //     });
-  
-       
+
+
 
 //   },[]);
 
@@ -129,6 +129,8 @@ import app from "./components/firebase";
 import Promocode from "./components/promocode";
 import Demo from "./components/demo";
 import Index from "./components";
+import UpdateGemini from "./components/updateGemini";
+import UpdateResume from "./components/updateResume";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -147,15 +149,19 @@ function App() {
     const storedUid = readLocalStorage("user");
     const storedApi = readLocalStorage("api_key");
     const storedSubscriptionType = readLocalStorage("Subscriptiontype");
-    console.log(storedUid,storedSubscriptionType,"Data T")
-  
+    console.log(storedUid, storedSubscriptionType, "Data T")
 
+    console.log(storedUid, storedApi, storedSubscriptionType)
     // Check local storage first
-    if (!storedUid ) {
+    if (!storedUid) {
       // User is not authenticated but UID is present
       setComponent(<Login />);
       return;
-    } else if (storedUid && storedApi && storedSubscriptionType==="GetResume") {
+    }
+    else if (storedUid && !storedApi) {
+      setComponent(<Gemini />)
+    }
+    else if (storedUid && storedApi && storedSubscriptionType === "GetResume") {
       // UID and API key are present
       setComponent(<Resume />);
       return;
@@ -207,24 +213,23 @@ function App() {
 
   return (
     <div>
-      <div className="ellipse ellipse-1"></div>
-      <div className="ellipse ellipse-2"></div>
-      <div className="ellipse ellipse-3"></div>
-      <div className="ellipse ellipse-4"></div>
+
 
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Index/>}/>
+          <Route path="/" element={<Index />} />
           <Route path="/User" element={component} />
           <Route path="/Login" element={<Login />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/gemini" element={<Gemini />} />
+          <Route path="/updategemini" element={<UpdateGemini />} />
           <Route path="/about" element={<About />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/updateresume" element={<UpdateResume/>}/>
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Demo />} />

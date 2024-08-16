@@ -250,7 +250,7 @@ const Payment = function () {
         e.preventDefault();
         const finalAmount = (amount - discount) * 100;
 
-        const response = await fetch("http://localhost:5000/order", {
+        const response = await fetch("https://us-central1-browser-extension-01.cloudfunctions.net/app/order", {
             method: "POST",
             body: JSON.stringify({
                 amount: finalAmount,
@@ -269,7 +269,7 @@ const Payment = function () {
         e.preventDefault();
         const finalAmount = (amount - discount) * 100;
 
-        const response = await fetch("http://localhost:5000/order", {
+        const response = await fetch("https://us-central1-browser-extension-01.cloudfunctions.net/app/order", {
             method: "POST",
             body: JSON.stringify({
                 amount: finalAmount,
@@ -286,7 +286,7 @@ const Payment = function () {
 
     const initiateRazorpay = (order, currency) => {
         var options = {
-            key: "rzp_test_fuInk3cztCaRqm",
+            key: "rzp_live_NC0OXfqR7fgqni",
             amount: order.amount,
             currency,
             name: "JobForm Automator",
@@ -298,7 +298,7 @@ const Payment = function () {
                     ...response,
                 };
                 const validateRes = await fetch(
-                    "http://localhost:5000/order/validate",
+                    "https://us-central1-browser-extension-01.cloudfunctions.net/app/order/validate",
                     {
                         method: "POST",
                         body: JSON.stringify(body),
@@ -417,6 +417,8 @@ const Payment = function () {
     return (
         <div>
             <main>
+            <div class="ellipse ellipse-1"></div>
+            <div class="ellipse ellipse-2"></div>
                 <h1>Contact</h1>
                 <div className="contact-container">
                     <div className="message-section">
@@ -450,7 +452,6 @@ const Payment = function () {
                             <p>Secure Payment</p>
                             <img src={visa} alt="Visa" />
                             <img src={mastercard} alt="MasterCard" />
-                            <img src="amex.svg" alt="Amex" />
                             <img src={rupay} alt="RuPay" />
                             <img src={upi} alt="UPI" />
                         </div>

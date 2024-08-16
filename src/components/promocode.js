@@ -36,10 +36,10 @@ const Promocode = function () {
     return (
         <div>
             <form onSubmit={onSubmitHandler}>
-                <input type="text" onChange={(e) => setPromocode(e.target.value)} required />
-                <input type="text" onChange={(e)=>setCurrencyType(e.target.value)} required/>
-                <input type="text" onChange={(e) => setDiscount_type(e.target.value)} required />
-                <input type="number" onChange={(e) => setDiscount_value(e.target.value)} required />
+                <input type="text" placeholder="promocde" onChange={(e) => setPromocode(e.target.value)} required />
+                <input type="text" placeholder="currency_type" onChange={(e)=>setCurrencyType(e.target.value)} required/>
+                <input type="text" placeholder="discount_type" onChange={(e) => setDiscount_type(e.target.value)} required />
+                <input type="number" placeholder="discount_value" onChange={(e) => setDiscount_value(e.target.value)} required />
                 <button type="submit">Submit</button>
             </form>
 

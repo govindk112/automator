@@ -24,7 +24,7 @@ const Header = () => {
       <nav id="navMenu" className={menuActive ? 'active' : ''}>
         <span id="closeMenu" onClick={closeMenu}>&times;</span>
         <Link to="/" onClick={closeMenu}>Home</Link>
-        <Link to="/pricing" onClick={closeMenu}>Pricing</Link>
+        <Link to="/policy" onClick={closeMenu}>Policy</Link>
         <Link to="/guide" onClick={closeMenu}>Guide</Link>
         <Link to="/about" onClick={closeMenu}>About</Link>
       </nav>

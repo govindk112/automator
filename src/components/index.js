@@ -3,17 +3,17 @@ import chrome from "./image/chrome.svg"
 
 const Index = function () {
     const buttonSubmit = function () {
-        window.location.href = "/Login"
+        window.location.href = "/User"
     }
     return (
         <main>
             <div class="background">
-                {/* <div class="ellipse ellipse-1"></div>
-            <div class="ellipse ellipse-2"></div>
-            <div class="ellipse ellipse-3"></div>
-            <div class="ellipse ellipse-4"></div>
-            <div class="ellipse ellipse-5"></div>
-            <div class="ellipse ellipse-6"></div> */}
+                <div class="ellipse ellipse-1"></div>
+                <div class="ellipse ellipse-2"></div>
+                <div class="ellipse ellipse-3"></div>
+                <div class="ellipse ellipse-4"></div>
+                <div class="ellipse ellipse-5"></div>
+                <div class="ellipse ellipse-6"></div>
                 <div class="content">
 
                     <h1 class="heading">Apply Smarter Not Harder with JobForm Automator</h1>

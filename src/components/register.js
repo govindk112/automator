@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword,getAuth,sendEmailVerification,updateProfile} from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import app from "./firebase";
-import { getDatabase,ref,set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import "./styles.css"
 
 
@@ -11,7 +11,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  
+
 
 
   const handleRegister = async (e) => {
@@ -30,8 +30,8 @@ function Register() {
         console.error('Error sending verification email:', error);
       }
     };
-  
-    let displayName = fname + " "+lname
+
+    let displayName = fname + " " + lname
     console.log(displayName)
     const setDisplayName = (user, displayName) => {
       updateProfile(user, {
@@ -50,36 +50,36 @@ function Register() {
       }
     });
     try {
-      console.log(email,password)
-    
-       await createUserWithEmailAndPassword(auth, email, password);
+      console.log(email, password)
+
+      await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
       console.log(user);
       await sendVerificationEmail()
-    
 
-      
+
+
       const db = getDatabase(app)
       if (user) {
-          const newDocRef = ref(db,"Users/"+ auth.currentUser.uid);
-          set(newDocRef,{
-            fname:fname,
-            lname:lname,
-            email:email,
-            password:password,
+        const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
+        set(newDocRef, {
+          fname: fname,
+          lname: lname,
+          email: email,
+          password: password,
 
-          }).then(()=>{
-            console.log("User Registered Successfully!!");
-            toast.success("User Registered Successfully!!", {
-              position: "top-center",
-            });
-            toast.success("Email Verification Link Send Successfully : Please check your email!", {
-              position: "top-center",
-            });
-            
+        }).then(() => {
+          console.log("User Registered Successfully!!");
+          toast.success("User Registered Successfully!!", {
+            position: "top-center",
+          });
+          toast.success("Email Verification Link Send Successfully : Please check your email!", {
+            position: "top-center",
+          });
 
-          })
-          
+
+        })
+
       }
     } catch (error) {
       console.log(error.message);
@@ -92,29 +92,30 @@ function Register() {
   return (
     <main>
 
+      <div class="ellipse ellipse-1"></div>
+      <div class="ellipse ellipse-2"></div>
 
-
-        <h1>Sign Up</h1>
-        <div className="contact-container">
-            <div className="message-section">
-                    <h2>Start Auto-applying now!</h2>
-                    <p>
-                        Achieve career success with Job Form Automator! Start Auto-applying now!</p>
-            </div>
-            <div className="form-section">
-                <form onSubmit={handleRegister}>
-                    <input type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} required/>
-                    <input type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} required/>
-                    <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
-                    <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required/>
-                 
-                    <button type="submit">Sign Up</button><br/>
-                    Already registered <a href="/login" className="forgot-password">Login</a>
-                    
-                    
-                </form>
-            </div>
+      <h1>Sign Up</h1>
+      <div className="contact-container">
+        <div className="message-section">
+          <h2>Start Auto-applying now!</h2>
+          <p>
+            Achieve career success with Job Form Automator! Start Auto-applying now!</p>
         </div>
+        <div className="form-section">
+          <form onSubmit={handleRegister}>
+            <input type="text" placeholder="First Name" onChange={(e) => setFname(e.target.value)} required />
+            <input type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} required />
+            <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+
+            <button type="submit">Sign Up</button><br />
+            Already registered <a href="/login" className="forgot-password">Login</a>
+
+
+          </form>
+        </div>
+      </div>
     </main>
 
   );
