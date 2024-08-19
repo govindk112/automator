@@ -61,13 +61,13 @@ const UpdateResume = function () {
     console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
     //Event Listner
-    function notifyExtensionOnResumeSubmit() {
-      const event = new CustomEvent('resumeSubmitted');
+    function notifyExtensionOnResumeUpdated() {
+      const event = new CustomEvent('resumeUpdated');
       document.dispatchEvent(event);
     }
 
     // Call this function after successful login
-    notifyExtensionOnResumeSubmit();  // userUID is the UID of the logged-in user
+    notifyExtensionOnResumeUpdated();  // userUID is the UID of the logged-in user
 
     const uid = auth.currentUser.uid;
     const userRef = ref(db, 'Users/' + uid);

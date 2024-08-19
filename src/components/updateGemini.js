@@ -29,13 +29,13 @@ const UpdateGemini = function () {
                 toast.success("API Key Updated Successfully!");
                 //Event Listner
                 // website-login.js (on your website)
-                function notifyExtensionOnGeminiKey(key) {
-                    const event = new CustomEvent('geminiKeySubmitted', { detail: { key } });
+                function notifyExtensionOnUpdateGeminiKey(key) {
+                    const event = new CustomEvent('geminiKeyUpdated', { detail: { key } });
                     document.dispatchEvent(event);
                 }
 
                 // Call this function after successful login
-                notifyExtensionOnGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
+                notifyExtensionOnUpdateGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
                 console.log(auth?.currentUser?.uid,"Hii")
 
                 const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
