@@ -131,6 +131,7 @@ import Demo from "./components/demo";
 import Index from "./components";
 import UpdateGemini from "./components/updateGemini";
 import UpdateResume from "./components/updateResume";
+import Blog from "./components/blog";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -233,6 +234,7 @@ function App() {
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Demo />} />
+          <Route path="/blog_list" element={<Blog />} />
         </Routes>
         <ToastContainer />
         <Footer />
