@@ -61,13 +61,15 @@ const UpdateResume = function () {
     console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
     //Event Listner
-    function notifyExtensionOnResumeUpdated() {
-      const event = new CustomEvent('resumeUpdated');
+    function notifyExtensionOnResumeUpdated(urd) {
+      const event = new CustomEvent('resumeUpdated', { detail: { urd } });
       document.dispatchEvent(event);
     }
 
-    // Call this function after successful login
-    notifyExtensionOnResumeUpdated();  // userUID is the UID of the logged-in user
+
+    // Example usage after the resume data is updated
+    const urdData = pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location}`;
+    notifyExtensionOnResumeUpdated(urdData);
 
     const uid = auth.currentUser.uid;
     const userRef = ref(db, 'Users/' + uid);
@@ -88,7 +90,7 @@ const UpdateResume = function () {
         Subscriptiontype: "FreeTrialStarted",
 
       })
-    //   console.log("Resume")
+      //   console.log("Resume")
       window.location.href = "/User"
 
 

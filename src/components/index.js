@@ -26,7 +26,7 @@ const Index = function () {
                         <p class="free-trial">Streamline your job application process and save time with the JobForm Automator
                             Chrome Extension.</p>
                         <div class="buttons">
-                            <button class="add-to-chrome">
+                            <button class="add-to-chrome" onClick={buttonSubmit}>
                                 <img src={chrome} alt="Chrome Icon"/>
                                     Add to Chrome
                             </button>
@@ -142,7 +142,7 @@ const Index = function () {
                             <div class="testimonial">
                                 <p>"This is the best service I have ever received. Highly recommend!"</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client Photo"/>
+                                    <img src={user} alt="Client-Photo"/>
                                         <div>
                                             <strong>John Doe</strong>
                                             <span>CEO, Company Name</span>

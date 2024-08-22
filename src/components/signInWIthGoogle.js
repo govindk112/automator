@@ -14,10 +14,10 @@ function SignInwithGoogle() {
       let email = user.email;
       let profilePhoto = user.photoURL
       const db = getDatabase(app)
-     
+
 
       const userRef = ref(db, "Users/" + user.uid);
-      get(userRef).then(async(snapshot) => {
+      get(userRef).then(async (snapshot) => {
 
         if (snapshot.exists()) {
           toast.success("User logged in Successfully", {
@@ -29,30 +29,33 @@ function SignInwithGoogle() {
             email: user.email,
           };
           localStorage.setItem('user', JSON.stringify(userData));
-          // const queryParams = new URLSearchParams(userData).toString();
           try {
 
             const user = auth.currentUser;
-            
-    
+
+
             if (user) {
-              
-    
+
+
               // Reference for Subscription status and Form status
               const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
               const subscriptionSnapshot = await get(getSubscription)
               const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
               const formSnapshot = await get(getForm)
-    
-          
-    
               const subscriptionType = subscriptionSnapshot.val();
-    
-    
+
+
               console.log(subscriptionType + "Hello")
               console.log(formSnapshot.val(), "form")
-    
-    
+
+              // website-login.js (on your website)
+              function notifyExtensionOnLogin(uid) {
+                const event = new CustomEvent('userLoggedIn', { detail: { uid } });
+                document.dispatchEvent(event);
+              }
+              notifyExtensionOnLogin(auth?.currentUser?.uid)
+
+
               if (!subscriptionType) {
                 // If Subscriptiontype is undefined, redirect to Gemini page
                 window.location.href = "/gemini";
@@ -70,11 +73,8 @@ function SignInwithGoogle() {
                 window.location.href = "/gemini";
               }
             }
-    
-    
-    
-         
-    
+
+
           } catch (error) {
             console.error("Login error:", error.message);
             toast.error(error.message, { position: "bottom-center" });
@@ -91,7 +91,7 @@ function SignInwithGoogle() {
             profilePhoto: profilePhoto
 
 
-          }).then(async() => {
+          }).then(async () => {
             toast.success("User logged in Successfully", {
               position: "top-center",
 
@@ -107,24 +107,24 @@ function SignInwithGoogle() {
 
               const user = auth.currentUser;
               // const user = auth.currentUser;
-      
+
               if (user) {
-                
-      
+
+
                 // Reference for Subscription status and Form status
                 const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
                 const subscriptionSnapshot = await get(getSubscription)
                 const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
                 const formSnapshot = await get(getForm)
-      
-      
+
+
                 const subscriptionType = subscriptionSnapshot.val();
-      
-      
+
+
                 console.log(subscriptionType + "Hello")
                 console.log(formSnapshot.val(), "form")
-      
-      
+
+
                 if (!subscriptionType) {
                   // If Subscriptiontype is undefined, redirect to Gemini page
                   window.location.href = "/gemini";
@@ -142,33 +142,16 @@ function SignInwithGoogle() {
                   window.location.href = "/gemini";
                 }
               }
-      
-      
-      
 
-      
             } catch (error) {
               console.error("Login error:", error.message);
               toast.error(error.message, { position: "bottom-center" });
             }
 
-
-
           }).catch((err) => {
             toast.error(err.message)
 
           })
-
-
-
-
-
-
-
-
-
-
-          //hi
         }
       })
 

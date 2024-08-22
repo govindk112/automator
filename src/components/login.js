@@ -70,10 +70,11 @@ function Login() {
       }
 
       // Call this function after successful login
-      notifyExtensionOnLogin(user.uid);  // userUID is the UID of the logged-in user
+       // userUID is the UID of the logged-in user
 
       if (user && user.emailVerified) {
-        localStorage.setItem("user", user.uid);
+        localStorage.setItem("UID", user.uid);
+        notifyExtensionOnLogin(user.uid); 
         toast.success("User logged in Successfully", { position: "top-center" });
 
         const subscriptionRef = ref(db, `Users/${user.uid}/Payment/Subscriptiontype`);
@@ -109,8 +110,8 @@ function Login() {
 
   return (
     <main>
-      <div class="ellipse ellipse-1"></div>
-      <div class="ellipse ellipse-2"></div>
+      <div className="ellipse ellipse-1"></div>
+      <div className="ellipse ellipse-2"></div>
       <h1>Sign In</h1>
       <div className="contact-container">
         <div className="message-section">

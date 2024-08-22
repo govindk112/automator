@@ -61,13 +61,17 @@ const Resume = function () {
     console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
     //Event Listner
-    function notifyExtensionOnResumeSubmit() {
-      const event = new CustomEvent('resumeSubmitted');
+    function notifyExtensionOnResumeSubmit(urdData) {
+      const event = new CustomEvent('resumeSubmitted', {
+        detail: {
+          urdData: urdData,
+          subscriptionType: "FreeTrialStarted"
+        }
+      });
       document.dispatchEvent(event);
     }
 
     // Call this function after successful login
-    notifyExtensionOnResumeSubmit();  // userUID is the UID of the logged-in user
 
     const uid = auth.currentUser.uid;
     const userRef = ref(db, 'Users/' + uid);
@@ -82,6 +86,10 @@ const Resume = function () {
 
     }).then(async () => {
       toast.success("Document Upload Successfully!");
+      const urdData = pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location}`;
+
+      // Notify the extension
+      notifyExtensionOnResumeSubmit(urdData);
       localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
       const getSubscription = ref(db, "Users/" + user?.uid + "/Payment");
       await update(getSubscription, {
@@ -96,14 +104,6 @@ const Resume = function () {
     }).catch((err) => {
       toast.error(err)
     })
-
-
-
-
-
-
-
-
   }
 
   return (
