@@ -10,6 +10,7 @@ import { get, ref, getDatabase } from "firebase/database";
 import app, { auth } from "./firebase";
 import { toast } from "react-toastify";
 
+
 const Payment = function () {
     const [currency, setCurrency] = useState('INR');
     const [amount, setAmount] = useState(999);
@@ -40,6 +41,7 @@ const Payment = function () {
 
     const handlePaymentINR = async (e) => {
         e.preventDefault();
+        console.log(process.env.REACT_APP_API_KEY,"key")
         const finalAmount = (amount - discount) * 100;
 
         const response = await fetch("https://us-central1-browser-extension-01.cloudfunctions.net/app/order", {
@@ -77,8 +79,9 @@ const Payment = function () {
     }
 
     const initiateRazorpay = (order, currency) => {
+        
         var options = {
-            key: "rzp_live_NC0OXfqR7fgqni",
+            key: process.env.REACT_APP_API_KEY,
             amount: order.amount,
             currency,
             name: "JobForm Automator",

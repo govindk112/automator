@@ -75,6 +75,9 @@ function App() {
         const formSnapshot = await get(getForm);
 
         // Store data in local storage
+        // Disable console.log
+
+
         writeLocalStorage("user", uid);
         if (apiSnapshot.exists()) {
           writeLocalStorage("api_key", apiSnapshot.val());
@@ -121,7 +124,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="/updateresume" element={<UpdateResume/>}/>
+          <Route path="/updateresume" element={<UpdateResume />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Demo />} />
