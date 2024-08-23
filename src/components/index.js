@@ -8,7 +8,7 @@ import user from "./image/user.svg"
 
 const Index = function () {
     const buttonSubmit = function () {
-        window.location.href = "/User"
+        window.location.href = "https://chromewebstore.google.com/detail/jobform-automator/lknamgjmcmbfhcjjeicdndokedcmpbaa?pli=1"
     }
     return (
         <div>

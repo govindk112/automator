@@ -17,7 +17,7 @@ const Payment = function () {
     const [discount, setDiscount] = useState(0);
     const [coupon, setCoupon] = useState("");
     const [country, setCountry] = useState("")
-    const [country_name,setCountryname] = useState("")
+    const [country_name, setCountryname] = useState("")
     const receiptId = "qwsaq1";
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const Payment = function () {
             .then((data) => {
                 setCountry(data.country)
                 setCountryname(data.country_name)
-                
+
                 if (data.country === "IN") {
                     setCurrency('INR');
                     setAmount(1);
@@ -86,16 +86,16 @@ const Payment = function () {
             image: Img,
             order_id: order.id,
             handler: async function (response) {
-                console.log(response,"response")
-       
+                console.log(response, "response")
+
                 const validateRes = await fetch(
                     "https://us-central1-browser-extension-01.cloudfunctions.net/app/order/validate",
                     {
                         method: "POST",
                         body: JSON.stringify({
-                            razorpayorderId:response.razorpay_order_id,
-                            razorpaySignature:response.razorpay_signature,
-                            razorpaypaymentId:response.razorpay_payment_id
+                            razorpayorderId: response.razorpay_order_id,
+                            razorpaySignature: response.razorpay_signature,
+                            razorpaypaymentId: response.razorpay_payment_id
 
                         }),
                         headers: {
@@ -103,17 +103,17 @@ const Payment = function () {
                         },
                     }
                 );
-                    await validateRes.json().then((status)=>{
-                    if(status.msg === "success"){
+                await validateRes.json().then((status) => {
+                    if (status.msg === "success") {
                         function notifyExtensionOnPayment(uid) {
                             console.log("payment successfull")
                             const event = new CustomEvent('paymentSuccessfull', { detail: { uid } });
                             document.dispatchEvent(event);
-                          }
-                          notifyExtensionOnPayment(auth?.currentUser?.uid)
-                }
-            })
-                
+                        }
+                        notifyExtensionOnPayment(auth?.currentUser?.uid)
+                    }
+                })
+
             },
             prefill: {
                 name: "",
@@ -146,12 +146,12 @@ const Payment = function () {
         document.getElementById('promocode').value = '';
         let db = getDatabase(app);
         const userRef = ref(db, "promo_codes/" + promocode);
-        get(userRef).then(async(snapshot) => {
+        get(userRef).then(async (snapshot) => {
             if (snapshot.val() === null) {
                 toast.error("Invalid promocode!")
                 return;
             }
-            if((country==="IND" && snapshot.val().currency_type==="INR") || (country!=="IND" && snapshot.val().currency_type==="USD")){
+            if ((country === "IND" && snapshot.val().currency_type === "INR") || (country !== "IND" && snapshot.val().currency_type === "USD")) {
 
 
                 if (snapshot.val().discount_type === "fixed") {
@@ -163,15 +163,15 @@ const Payment = function () {
                     setDiscount(finalValue);
                 }
             }
-            else{
-                toast.error(`Invalid Promocode :This promocode is not applicable for  ${country_name}` )
+            else {
+                toast.error(`Invalid Promocode :This promocode is not applicable for  ${country_name}`)
             }
         }).catch((err) => {
             toast.error(err);
         });
     };
-   
-    
+
+
     const handleInputChange = (e) => {
         e.preventDefault();
         setPromocode(e.target.value);
@@ -188,8 +188,8 @@ const Payment = function () {
     return (
         <div>
             <main>
-            <div className="ellipse ellipse-1"></div>
-            <div className="ellipse ellipse-2"></div>
+                <div className="ellipse ellipse-1"></div>
+                <div className="ellipse ellipse-2"></div>
                 <h1>Contact</h1>
                 <div className="contact-container">
                     <div className="message-section">
