@@ -13,17 +13,24 @@ function Login() {
   const db = getDatabase();
 
   useEffect(() => {
-    const uid = localStorage.getItem("user");
+    const uid = localStorage.getItem("UID");
     const apiKey = localStorage.getItem("api_key");
+
+
     const subscriptionType = localStorage.getItem("Subscriptiontype");
+    console.log(subscriptionType, 'type')
+    console.log(typeof(apiKey),apiKey,null)
+    console.log(apiKey !== 'null')
 
     if (uid) {
       const redirectUser = async () => {
         try {
           const user = auth.currentUser;
+          console.log(user, uid)
 
-          if (user && user.uid === uid) {
-            if (!user.emailVerified) {
+          if (uid) {
+            console.log("hi")
+            if (user && !user.emailVerified) {
               toast.error("Please verify your email first.", {
                 position: "bottom-center",
               });
@@ -31,8 +38,10 @@ function Login() {
               return;
             }
 
-            if (apiKey) {
-              if (subscriptionType === "FreeTrialStarted") {
+
+
+            if (apiKey !== 'null' && apiKey !== null) {
+              if (subscriptionType && subscriptionType === "FreeTrialStarted") {
                 window.location.href = "/demo";
               } else {
                 window.location.href = "/resume";
@@ -53,7 +62,7 @@ function Login() {
 
       redirectUser();
     }
-  }, );
+  },);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,11 +79,11 @@ function Login() {
       }
 
       // Call this function after successful login
-       // userUID is the UID of the logged-in user
+      // userUID is the UID of the logged-in user
 
       if (user && user.emailVerified) {
         localStorage.setItem("UID", user.uid);
-        notifyExtensionOnLogin(user.uid); 
+        notifyExtensionOnLogin(user.uid);
         toast.success("User logged in Successfully", { position: "top-center" });
 
         const subscriptionRef = ref(db, `Users/${user.uid}/Payment/Subscriptiontype`);
@@ -86,10 +95,10 @@ function Login() {
         const apiSnapshot = await get(apiRef);
         const apiKey = apiSnapshot.val();
         localStorage.setItem("api_key", apiKey);
-        console.log(subscriptionType,apiKey)
+        console.log(subscriptionType, apiKey)
 
         if (apiKey) {
-          if (subscriptionType === "FreeTrialStarted" || subscriptionType==="Premium") {
+          if (subscriptionType === "FreeTrialStarted" || subscriptionType === "Premium") {
             window.location.href = "/demo";
           } else {
             window.location.href = "/resume";

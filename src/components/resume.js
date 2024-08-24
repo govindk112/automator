@@ -18,6 +18,8 @@ const Resume = function () {
   const [pdfText, setPdfText] = useState('');
   const [Location, setLocation] = useState([]);
   const [user, setUser] = useState("")
+  const [pdfName,setPdfName] =  useState("");
+
   // const db = getDatabase(app)
 
 
@@ -33,6 +35,7 @@ const Resume = function () {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
+    setPdfName(file.name)
     if (file && file.type === 'application/pdf') {
       const reader = new FileReader();
       reader.onload = async (e) => {
@@ -134,7 +137,7 @@ const Resume = function () {
               </label>
               <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
               <span className="file-name"></span>
-              <p></p>
+              <p>{pdfName?pdfName:""}</p>
               <button type="submit">Submit</button>
 
             </form>

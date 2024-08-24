@@ -38,10 +38,9 @@ function App() {
   useEffect(() => {
     const db = getDatabase(app);
 
-    const storedUid = readLocalStorage("user");
+    const storedUid = readLocalStorage("UID");
     const storedApi = readLocalStorage("api_key");
     const storedSubscriptionType = readLocalStorage("Subscriptiontype");
-    console.log(storedUid, storedSubscriptionType, "Data T")
 
     console.log(storedUid, storedApi, storedSubscriptionType)
     // Check local storage first
@@ -50,10 +49,12 @@ function App() {
       setComponent(<Login />);
       return;
     }
-    else if (storedUid && !storedApi) {
+    else if (storedUid && storedApi==='null') {
       setComponent(<Gemini />)
+      return;
+      
     }
-    else if (storedUid && storedApi && storedSubscriptionType === "GetResume") {
+    else if (storedUid && storedApi!=='null' && storedSubscriptionType === "GetResume") {
       // UID and API key are present
       setComponent(<Resume />);
       return;
@@ -78,7 +79,7 @@ function App() {
         // Disable console.log
 
 
-        writeLocalStorage("user", uid);
+        writeLocalStorage("UID", uid);
         if (apiSnapshot.exists()) {
           writeLocalStorage("api_key", apiSnapshot.val());
         }
@@ -115,7 +116,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/User" element={component} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />

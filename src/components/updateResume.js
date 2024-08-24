@@ -18,6 +18,7 @@ const UpdateResume = function () {
   const [pdfText, setPdfText] = useState('');
   const [Location, setLocation] = useState([]);
   const [user, setUser] = useState("")
+  const [pdfName,setPdfName] = useState("")
   // const db = getDatabase(app)
 
 
@@ -33,6 +34,9 @@ const UpdateResume = function () {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
+    console.log(file.name)
+    setPdfName(file.name)
+    // toast.success("Resume Uploaded!")
     if (file && file.type === 'application/pdf') {
       const reader = new FileReader();
       reader.onload = async (e) => {
@@ -53,7 +57,11 @@ const UpdateResume = function () {
       reader.readAsArrayBuffer(file);
     }
   };
+const OnSubmit = async(e)=>{
+  e.preventDefault()
+  toast.success("Resume Uploaded!")
 
+}
 
   const handleSubmit = async (e) => {
     const db = getDatabase(app)
@@ -134,9 +142,9 @@ const UpdateResume = function () {
               <label htmlFor="file-upload" className="custom-file-upload">
                 Upload Resume
               </label>
-              <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
+              <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload}  required />
               <span className="file-name"></span>
-              <p></p>
+              <p>{pdfName?pdfName :""}</p>
               <button type="submit">Submit</button>
 
             </form>

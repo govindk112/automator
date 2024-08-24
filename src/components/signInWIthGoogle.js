@@ -23,12 +23,12 @@ function SignInwithGoogle() {
           toast.success("User logged in Successfully", {
             position: "top-center",
           });
-
+         
           const userData = {
             displayName: user.displayName,
             email: user.email,
           };
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem('UID', user?.uid);
           try {
 
             const user = auth.currentUser;
@@ -101,7 +101,7 @@ function SignInwithGoogle() {
               displayName: user.displayName,
               email: user.email,
             };
-            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('UID', user?.uid);
             // const queryParams = new URLSearchParams(userData).toString();
             try {
 
