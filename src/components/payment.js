@@ -81,7 +81,7 @@ const Payment = function () {
     const initiateRazorpay = (order, currency) => {
         
         var options = {
-            key: process.env.REACT_APP_API_KEY,
+            key: "rzp_live_NC0OXfqR7fgqni",
             amount: order.amount,
             currency,
             name: "JobForm Automator",
