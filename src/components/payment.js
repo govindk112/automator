@@ -131,6 +131,12 @@ const Payment = function () {
                         }
                         notifyExtensionOnPayment(auth?.currentUser?.uid)
                     }
+                    else{
+                        console.error("Payment validation failed:", status);
+                    }
+                }).catch((err)=>{
+                   console.log("Error during payment validation:", err) 
+
                 })
 
             },
@@ -149,13 +155,8 @@ const Payment = function () {
         var rzp1 = new window.Razorpay(options);
         // console.log(rzp1,"payment")
         rzp1.on("payment.failed", function (response) {
-            alert(response.error.code);
-            alert(response.error.description);
-            alert(response.error.source);
-            alert(response.error.step);
-            alert(response.error.reason);
-            alert(response.error.metadata.order_id);
-            alert(response.error.metadata.payment_id);
+            alert("Payment failed. Please try again.");
+            console.error("Payment failed:", response);
         });
         rzp1.open();
     }
