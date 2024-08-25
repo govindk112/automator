@@ -315,6 +315,14 @@ const Payment = function () {
             description: "Subscription",
             image: Img,
             order_id: order.id,
+            method: {
+                // Enable/Disable specific payment methods
+                netbanking: true,
+                card: true,
+                wallet: true,
+                upi: true,
+                qr: false, // Disable QR code payment
+            },
             handler: async function (response) {
                 console.log("Razorpay response:", response);
                 try {
