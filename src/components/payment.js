@@ -356,7 +356,7 @@ const Payment = function () {
             prefill: {
                 name: "",
                 email: "",
-                contact: "8768814455",
+                contact: "",
             },
             notes: {
                 address: "Razorpay Corporate Office",
