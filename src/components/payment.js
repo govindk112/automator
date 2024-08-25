@@ -55,6 +55,9 @@ const Payment = function () {
                 "Content-Type": "application/json",
             },
         });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const order = await response.json();
         initiateRazorpay(order, 'INR');
     }
@@ -73,7 +76,12 @@ const Payment = function () {
             headers: {
                 "Content-Type": "application/json",
             },
+            
+            
         });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const order = await response.json();
         initiateRazorpay(order, 'USD');
     }
@@ -304,9 +312,9 @@ export default Payment;
 //                 },
 //             });
 
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! status: ${response.status}`);
-//             }
+            // if (!response.ok) {
+            //     throw new Error(`HTTP error! status: ${response.status}`);
+            // }
 
 //             const order = await response.json();
 //             initiateRazorpay(order);
