@@ -321,7 +321,7 @@ const Payment = function () {
                 card: true,
                 wallet: true,
                 upi: true,
-                qr: false, // Disable QR code payment
+                qr: true, // Disable QR code payment
             },
             handler: async function (response) {
                 console.log("Razorpay response:", response);
