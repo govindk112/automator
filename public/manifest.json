@@ -1,14 +1,14 @@
 {
-    "name": "My React App",
-    "short_name": "ReactApp",
+    "name": "Auto Apply Job Extension : Jobform Automator",
+    "short_name": "Jobform Automator",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
       {
-        "src": "favicon.ico",
-        "type": "image/x-icon",
+        "src": "./src/components/image/logo.svg",
+        "type": "image/svg",
         "sizes": "64x64 32x32 24x24 16x16"
       }
     ]

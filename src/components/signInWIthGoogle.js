@@ -24,10 +24,7 @@ function SignInwithGoogle() {
             position: "top-center",
           });
          
-          const userData = {
-            displayName: user.displayName,
-            email: user.email,
-          };
+
           localStorage.setItem('UID', user?.uid);
           try {
 
@@ -97,12 +94,8 @@ function SignInwithGoogle() {
 
             });
             const user = result.user;
-            const userData = {
-              displayName: user.displayName,
-              email: user.email,
-            };
+
             localStorage.setItem('UID', user?.uid);
-            // const queryParams = new URLSearchParams(userData).toString();
             try {
 
               const user = auth.currentUser;

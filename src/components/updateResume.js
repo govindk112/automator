@@ -57,11 +57,7 @@ const UpdateResume = function () {
       reader.readAsArrayBuffer(file);
     }
   };
-const OnSubmit = async(e)=>{
-  e.preventDefault()
-  toast.success("Resume Uploaded!")
 
-}
 
   const handleSubmit = async (e) => {
     const db = getDatabase(app)

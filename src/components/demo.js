@@ -25,13 +25,13 @@ const Demo = function () {
             console.error("Error logging out:", error.message);
         }
     }
-    async function handleUpdateResume() {
+    async function handleUpdateGemini() {
         window.location.href = "/updategemini"
-        
+
     }
     async function handleUpdateResume() {
         window.location.href = "/updateresume"
-        
+
     }
     return (
         <div>
@@ -41,7 +41,7 @@ const Demo = function () {
 
                 <div class="ellipse ellipse-1"></div>
                 <div class="ellipse ellipse-2"></div>
-                <h1>Guide</h1>
+                <h1>Get Started </h1>
                 <div className="contact-container">
                     <div className="message-section">
 
@@ -57,12 +57,18 @@ const Demo = function () {
                             <h2>Welcome! Let's Get Started 🎉</h2>
                             <p>Auto-Apply jobs with our Chrome Extension</p>
                             <button type="submit">Auto Apply</button>
+
                         </form>
+
+                        
+                            <button onClick={handleUpdateGemini}>Update API Key</button>
+                            <p></p>
+                            <button onClick={handleUpdateResume}>Update Resume</button>
                     </div>
 
                 </div>
-                <button onClick={handleUpdateResume}>Update API Key</button><br></br>
-                <button onClick={handleUpdateResume}>Update Resume</button><br></br>
+
+                <p></p>
                 <button onClick={handleLogout}>Logout</button>
             </main>
         </div>

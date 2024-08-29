@@ -5,6 +5,7 @@ import instagram from './image/instagram.svg';
 import linkedin from './image/linkedin.svg';
 import youtube from './image/youtube.svg';
 import './styles.css';
+import facebook from "./image/facebook.svg"
 
 const Footer = () => {
   return (
@@ -21,10 +22,11 @@ const Footer = () => {
           <p>&copy; 2022 Aiking Software Solutions Pvt Ltd</p>
         </div>
         <div className="social-icons">
-          <a href="#"><img src={telegram} alt="Telegram" /></a>
-          <a href="#"><img src={instagram} alt="Instagram" /></a>
-          <a href="#"><img src={linkedin} alt="LinkedIn" /></a>
-          <a href="#"><img src={youtube} alt="YouTube" /></a>
+          <a href="https://t.me/JobformAutomator"  target="_blank" rel="noreferrer"><img src={telegram} alt="Telegram"   /></a>
+          <a href="https://www.instagram.com/jobtipsofficial?igsh=MWk4MDdsNjFreDE4dg=="  target="_blank" rel="noreferrer"><img src={instagram} alt="Instagram" /></a>
+          <a href="https://www.facebook.com/profile.php?id=61556365446390" target="_blank" rel="noreferrer"><img src={facebook} alt="Facebook"/></a>
+          <a href="https://www.linkedin.com/showcase/jobform-automator/?viewAsMember=true"  target="_blank" rel="noreferrer"><img src={linkedin} alt="LinkedIn" /></a>
+          <a href="https://www.youtube.com/@JobFormAutomator"  target="_blank" rel="noreferrer"><img src={youtube} alt="YouTube" /></a>
         </div>
       </div>
     </footer>

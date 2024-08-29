@@ -31,7 +31,7 @@ function Login() {
           if (uid) {
             console.log("hi")
             if (user && !user.emailVerified) {
-              toast.error("Please verify your email first.", {
+              toast.error("Email is not verified.Please Verify your email, then try to login again!", {
                 position: "bottom-center",
               });
               // window.location.href = "/login";
@@ -107,7 +107,7 @@ function Login() {
           window.location.href = "/gemini";
         }
       } else {
-        toast.error("Email is not verified", { position: "bottom-center" });
+        toast.error("Email is not verified.Please Verify your email, then try to login again!", { position: "bottom-center" });
       }
     } catch (error) {
       console.error("Login error:", error.message);

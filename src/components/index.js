@@ -22,16 +22,17 @@ const Index = function () {
                     <div class="ellipse ellipse-6"></div>
                     <div class="content">
 
-                        <h1 class="heading">Apply Smarter Not Harder with JobForm Automator</h1>
-                        <p class="free-trial">Streamline your job application process and save time with the JobForm Automator
-                            Chrome Extension.</p>
+                        <h1 class="heading">AI Powered Job Application Automation Tool</h1>
+                        <p class="free-trial">Automate your job application on LinkedIn, Indeed, & Monster
+                             with our AI bot which applies to job application on behalf of you, with universal
+                              Auto-Fill technology, architecture based on advanced AI Compatible with 90% 
+                              company websites globally.</p>
                         <div class="buttons">
                             <button class="add-to-chrome" onClick={buttonSubmit}>
-                                <img src={chrome} alt="Chrome Icon"/>
+                                <img id="chrome" src={chrome} alt="Chrome Icon"/>
                                     Add to Chrome
                             </button>
                         </div>
-                        <p class="free-trial">Auto-Apply upto 10 jobs Daily free</p>
                     </div>
 
                 </div>
@@ -61,24 +62,22 @@ const Index = function () {
                         <div class="benefit-item">
                             <img src={time} alt="Be First Icon"/>
                                 <h3>SAVE TIME</h3>
-                                <p>Applying late means missed opportunities. Our shortcut keeps you ahead.</p>
+                                <p>Our service speeds up your job hunt process, automating form-filling.</p>
                         </div>
                         <div class="benefit-item">
                             <img src={more} alt="Save Time Icon"/>
                                 <h3>APPLY 10X</h3>
-                                <p>Manually filling forms slows you down. Our service speeds up your job hunt.</p>
+                                <p>Without it, you miss out on hundreds of jobs on LinkedIn and Indeed.</p>
                         </div>
                         <div class="benefit-item">
                             <img src={interview} alt="Apply More Icon"/>
                                 <h3>MORE INTERVIEW</h3>
-                                <p>Without it, you miss out on hundreds of jobs on LinkedIn and Indeed.</p>
+                                <p>Being first to apply increases your chances of securing interviews.</p>
                         </div>
                         <div class="benefit-item">
                             <img src={offer} alt="Quality Applications Icon"/>
                                 <h3>MORE OFFERS</h3>
-                                <p>Manual work leads to burnout. Use our tool for better results, faster. Don't fall behind—get
-                                    JobForm
-                                    Automator today.</p>
+                                <p>With more job applications and interviews, you'll naturally receive more job offers.</p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +90,7 @@ const Index = function () {
                     <div class="pricing-cards">
                         <div class="pricing-card starter">
                             <h3>Starter</h3>
-                            <p class="description">Perfect for side or hobby projects</p>
+                            <p class="description">Perfect To Get Started</p>
                             <p class="price">$0</p>
                             <ul>
                                 <li>Limited offer: Free access</li>
@@ -105,7 +104,7 @@ const Index = function () {
                         <div class="pricing-card premium">
                             <h3>Premium</h3>
                             <span class="popular">Popular</span>
-                            <p class="description">Perfect for small teams</p>
+                            <p class="description">Perfect To Apply more Jobs</p>
                             <p class="price">$10 <span class="price-subtitle">for limited time</span></p>
                             <ul>
                                 <li>All in Beginner plan</li>
@@ -118,7 +117,7 @@ const Index = function () {
 
                         <div class="pricing-card diamond">
                             <h3>Diamond</h3>
-                            <p class="description">Perfect for organizations</p>
+                            <p class="description">Perfect To Get Personalized Assistance</p>
                             <p class="price">$30</p>
                             <ul>
                                 <li>All in Premium Plan</li>
@@ -137,47 +136,47 @@ const Index = function () {
 
                 <div class="container">
                     <div class="background">
-                        <h1>What Our Clients Say</h1>
+                        <h1>Real User Stories</h1>
                         <div class="testimonial-row">
                             <div class="testimonial">
-                                <p>"This is the best service I have ever received. Highly recommend!"</p>
+                                <p>"This extension has revolutionized the way I approach job hunting."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client-Photo"/>
+                                    <img src={user} alt="Client"/>
                                         <div>
-                                            <strong>John Doe</strong>
-                                            <span>CEO, Company Name</span>
+                                            <strong>Godchoice Bright</strong>
+                                            <span>Human Resources Manager</span>
                                         </div>
                                 </div>
                             </div>
                             <div class="testimonial">
-                                <p>"The team was incredibly professional and the results were amazing."</p>
+                                <p>"Thanks to JobFrom Automator, I've seen a significant increase in my job application efficiency."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client Photo"/>
+                                    <img src={user} alt="Client"/>
                                         <div>
-                                            <strong>Jane Smith</strong>
-                                            <span>Marketing Manager, Company Name</span>
+                                            <strong>Adão</strong>
+                                            <span>Job Seeker</span>
                                         </div>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-row">
                             <div class="testimonial">
-                                <p>"I am extremely satisfied with the work done. Will definitely use their services again."</p>
+                                <p>"JobForm Automator is an excellent tool for streamlining the job application process, offering significant time savings."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client Photo"/>
+                                    <img src={user} alt="Client"/>
                                         <div>
-                                            <strong>Emily Johnson</strong>
-                                            <span>CTO, Tech Company</span>
+                                            <strong>Aditya Verma</strong>
+                                            <span>Software Engineer</span>
                                         </div>
                                 </div>
                             </div>
                             <div class="testimonial">
-                                <p>"The quality of their work is outstanding. I highly recommend them to anyone."</p>
+                                <p>"The Job From Automator is very useful extension tool for filling the job application , offering significant time savings in India Job Market"</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client Photo"/>
+                                    <img src={user} alt="Client"/>
                                         <div>
-                                            <strong>Michael Brown</strong>
-                                            <span>Director, Finance Firm</span>
+                                            <strong>Arun Kumar</strong>
+                                            <span>Software Testing Engineer</span>
                                         </div>
                                 </div>
                             </div>
