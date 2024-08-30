@@ -5,13 +5,18 @@ import { toast } from "react-toastify";
 import { getDatabase, ref, update } from "firebase/database";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+
 const Gemini = function () {
 
+    const [loading, setLoading] = useState(false);
     const [gemini_key, setGeminikey] = useState("");
     const db = getDatabase(app);
 
     const sumbitHandler = async (e) => {
         e.preventDefault();
+
+        setLoading(true);
+        
 
         const genAI = new GoogleGenerativeAI(gemini_key);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -75,6 +80,9 @@ const Gemini = function () {
             console.error(error);
             return;
         }
+        finally{
+            setLoading(false);
+        }
 
 
     };
@@ -104,13 +112,14 @@ const Gemini = function () {
                                 placeholder="Enter Your Gemini Key"
                                 required
                                 onChange={(e) => setGeminikey(e.target.value)}
+                                disabled={loading}
                             />
                             <div className="form-options">
                                 {/* <a href="#" className="forgot-password">
                                     Get Gemini key Here
                                 </a> */}
                             </div>
-                            <button type="submit">Submit</button>
+                            <button type="submit" disabled={loading}>{loading?"Submitted..." : "Submitted"}</button>
                         </form>
                     </div>
                 </div>
