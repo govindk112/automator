@@ -14,7 +14,7 @@ const Promocode = function () {
     let db = getDatabase(app)
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log("Hii")
+        // console.log("Hii")
         const newDocRef = ref(db, "promo_codes/" + promocode);
         set(newDocRef, {
             currency_type:currencyType,

@@ -36,7 +36,7 @@ const SaveUrlComponent = () => {
                 throw new Error('POST request was not ok');
             }
 
-            console.log('URL added successfully with a unique ID.');
+            // console.log('URL added successfully with a unique ID.');
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         }

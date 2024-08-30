@@ -3,14 +3,14 @@ import { auth } from "./firebase";
 
 const Demo = function () {
     let user = auth.currentUser;
-    console.log(user)
+    // console.log(user)
 
     async function handleLogout() {
         try {
             await auth.signOut();
             localStorage.clear()
             window.location.href = "/login";
-            console.log("User logged out successfully!");
+            // console.log("User logged out successfully!");
             //Event Listner
             function notifyExtensionOnLogout(key) {
                 const event = new CustomEvent('onLogout');

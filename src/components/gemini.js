@@ -63,7 +63,7 @@ const Gemini = function () {
                             Subscriptiontype: "GetResume",
                         },
                     });
-                    console.log("Payment details updated successfully");
+                    // console.log("Payment details updated successfully");
                 } catch (err) {
                     console.error(err);
                 }

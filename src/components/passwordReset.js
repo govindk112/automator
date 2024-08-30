@@ -9,7 +9,7 @@ const PasswordReset = () => {
   const handlePasswordReset = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    console.log(auth)
+    // console.log(auth)
     
     try {
       await sendPasswordResetEmail(auth, email);

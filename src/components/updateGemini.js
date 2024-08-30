@@ -36,7 +36,7 @@ const UpdateGemini = function () {
 
                 // Call this function after successful login
                 notifyExtensionOnUpdateGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
-                console.log(auth?.currentUser?.uid,"Hii")
+                // console.log(auth?.currentUser?.uid,"Hii")
 
                 const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
                 await update(newDocRef, {

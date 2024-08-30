@@ -41,7 +41,7 @@ const Payment = function () {
 
     const handlePaymentINR = async (e) => {
         e.preventDefault();
-        console.log(process.env.REACT_APP_API_KEY,"key")
+        // console.log(process.env.REACT_APP_API_KEY,"key")
         const finalAmount = (amount - discount) * 100;
 
         const response = await fetch("https://us-central1-browser-extension-01.cloudfunctions.net/app/order", {
@@ -105,7 +105,7 @@ const Payment = function () {
                 qr: true, // Disable QR code payment
             },
             handler: async function (response) {
-                console.log(response, "response")
+                // console.log(response, "response")
 
                 const validateRes = await fetch(
                     "https://us-central1-browser-extension-01.cloudfunctions.net/app/order/validate",
@@ -125,7 +125,7 @@ const Payment = function () {
                 await validateRes.json().then((status) => {
                     if (status.msg === "success") {
                         function notifyExtensionOnPayment(uid) {
-                            console.log("payment successfull")
+                            // console.log("payment successfull")
                             const event = new CustomEvent('paymentSuccessfull', { detail: { uid } });
                             document.dispatchEvent(event);
                         }
@@ -171,7 +171,7 @@ const Payment = function () {
                 toast.error("Invalid promocode!")
                 return;
             }
-            console.log(country,snapshot.val().currency_type , 'SUMAN')
+            // console.log(country,snapshot.val().currency_type , 'SUMAN')
             if ((country === "IN" && snapshot.val().currency_type === "INR") || (country !== "IN" && snapshot.val().currency_type === "USD")) {
 
 

@@ -49,7 +49,7 @@ const Resume = function () {
           const pageText = textContent.items.map(item => item.str).join(' ');
           fullText += pageText + '\n';
         }
-        console.log(fullText)
+        // console.log(fullText)
         setPdfText(fullText);
         setResume(file.name); // Set the file name in the Resume state
       };
@@ -61,7 +61,7 @@ const Resume = function () {
   const handleSubmit = async (e) => {
     const db = getDatabase(app)
     e.preventDefault();
-    console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
+    // console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
     //Event Listner
     function notifyExtensionOnResumeSubmit(urdData) {
@@ -99,7 +99,7 @@ const Resume = function () {
         Subscriptiontype: "FreeTrialStarted",
 
       })
-      console.log("Resume")
+      // console.log("Resume")
       window.location.href = "/demo"
 
 

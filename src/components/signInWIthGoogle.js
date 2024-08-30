@@ -8,7 +8,7 @@ function SignInwithGoogle() {
   function googleLogin() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then(async (result) => {
-      console.log(result);
+      // console.log(result);
       const user = result.user;
       let name = user.displayName;
       let email = user.email;
@@ -42,8 +42,8 @@ function SignInwithGoogle() {
               const subscriptionType = subscriptionSnapshot.val();
 
 
-              console.log(subscriptionType + "Hello")
-              console.log(formSnapshot.val(), "form")
+              // console.log(subscriptionType + "Hello")
+              // console.log(formSnapshot.val(), "form")
 
               // website-login.js (on your website)
               function notifyExtensionOnLogin(uid) {
@@ -114,8 +114,8 @@ function SignInwithGoogle() {
                 const subscriptionType = subscriptionSnapshot.val();
 
 
-                console.log(subscriptionType + "Hello")
-                console.log(formSnapshot.val(), "form")
+                // console.log(subscriptionType + "Hello")
+                // console.log(formSnapshot.val(), "form")
 
 
                 if (!subscriptionType) {

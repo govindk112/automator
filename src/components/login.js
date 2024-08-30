@@ -18,18 +18,18 @@ function Login() {
 
 
     const subscriptionType = localStorage.getItem("Subscriptiontype");
-    console.log(subscriptionType, 'type')
-    console.log(typeof(apiKey),apiKey,null)
-    console.log(apiKey !== 'null')
+    // console.log(subscriptionType, 'type')
+    // console.log(typeof(apiKey),apiKey,null)
+    // console.log(apiKey !== 'null')
 
     if (uid) {
       const redirectUser = async () => {
         try {
           const user = auth.currentUser;
-          console.log(user, uid)
+          // console.log(user, uid)
 
           if (uid) {
-            console.log("hi")
+            // console.log("hi")
             if (user && !user.emailVerified) {
               toast.error("Email is not verified.Please Verify your email, then try to login again!", {
                 position: "bottom-center",
@@ -95,7 +95,7 @@ function Login() {
         const apiSnapshot = await get(apiRef);
         const apiKey = apiSnapshot.val();
         localStorage.setItem("api_key", apiKey);
-        console.log(subscriptionType, apiKey)
+        // console.log(subscriptionType, apiKey)
 
         if (apiKey) {
           if (subscriptionType === "FreeTrialStarted" || subscriptionType === "Premium") {

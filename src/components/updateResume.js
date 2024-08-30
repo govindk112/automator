@@ -34,7 +34,7 @@ const UpdateResume = function () {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    console.log(file.name)
+    // console.log(file.name)
     setPdfName(file.name)
     // toast.success("Resume Uploaded!")
     if (file && file.type === 'application/pdf') {
@@ -50,7 +50,7 @@ const UpdateResume = function () {
           const pageText = textContent.items.map(item => item.str).join(' ');
           fullText += pageText + '\n';
         }
-        console.log(fullText)
+        // console.log(fullText)
         setPdfText(fullText);
         setResume(file.name); // Set the file name in the Resume state
       };
@@ -62,7 +62,7 @@ const UpdateResume = function () {
   const handleSubmit = async (e) => {
     const db = getDatabase(app)
     e.preventDefault();
-    console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
+    // console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
 
     //Event Listner
     function notifyExtensionOnResumeUpdated(urd) {

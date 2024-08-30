@@ -32,16 +32,16 @@ function Register() {
     };
 
     let displayName = fname + " " + lname
-    console.log(displayName)
+    // console.log(displayName)
     const setDisplayName = (user, displayName) => {
       updateProfile(user, {
         displayName: displayName
       }).then(() => {
         // Profile updated successfully!
-        console.log("Display name updated successfully!");
+        // console.log("Display name updated successfully!");
       }).catch((error) => {
         // An error occurred
-        console.error("Error updating display name:", error);
+        toast.error("Error updating display name:", error);
       });
     };
     auth.onAuthStateChanged((user) => {
@@ -50,11 +50,11 @@ function Register() {
       }
     });
     try {
-      console.log(email, password)
+      // console.log(email, password)
 
       await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
-      console.log(user);
+      // console.log(user);
       await sendVerificationEmail()
 
 
@@ -69,7 +69,7 @@ function Register() {
           password: password,
 
         }).then(() => {
-          console.log("User Registered Successfully!!");
+          // console.log("User Registered Successfully!!");
           toast.success("User Registered Successfully!!", {
             position: "top-center",
           });
@@ -82,7 +82,7 @@ function Register() {
 
       }
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       toast.error(error.message, {
         position: "bottom-center",
       });

@@ -5,7 +5,7 @@ const DelayedComponent = ({ delay, children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    console.log("delay")
+    // console.log("delay")
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, delay);
