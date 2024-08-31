@@ -23,6 +23,7 @@ import Index from "./components";
 import UpdateGemini from "./components/updateGemini";
 import UpdateResume from "./components/updateResume";
 import Blog from "./components/blog";
+import Protected from "./components/protected";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -115,20 +116,22 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/User" element={component} />
+         
           <Route path="/login" element={<Login />} />
-          <Route path="/PasswordReset" element={<PasswordReset />} />
+          <Route path="/User" element={component} />
+          
+          <Route path="/PasswordReset" element={<Protected Component = {PasswordReset}/>} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/gemini" element={<Gemini />} />
-          <Route path="/updategemini" element={<UpdateGemini />} />
+          <Route path="/Profile" element={<Protected Component = {Profile}/>} />
+          <Route path="/gemini" element={<Protected Component = {Gemini}/>} />
+          <Route path="/updategemini" element={<Protected Component = {UpdateGemini}/>} />
           <Route path="/about" element={<About />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/updateresume" element={<UpdateResume />} />
+          <Route path="/payment" element={<Protected Component = {Payment}/>} />
+          <Route path="/resume" element={<Protected Component = {Resume}/>} />
+          <Route path="/updateresume" element={<Protected Component = {UpdateResume}/>} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode />} />
-          <Route path="/demo" element={<Demo />} />
+          <Route path="/demo" element={<Protected Component = {Demo}/>} />
           <Route path="/blog_list" element={<Blog />} />
         </Routes>
         <ToastContainer />
