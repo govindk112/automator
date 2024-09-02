@@ -24,6 +24,7 @@ import UpdateGemini from "./components/updateGemini";
 import UpdateResume from "./components/updateResume";
 import Blog from "./components/blog";
 import Protected from "./components/protected";
+import ContactUs from "./components/contactUs";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -133,6 +134,7 @@ function App() {
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Protected Component = {Demo}/>} />
           <Route path="/blog_list" element={<Blog />} />
+          <Route path="/contactus" element={<Protected Component = {ContactUs}/>}/>
         </Routes>
         <ToastContainer />
         <Footer />
