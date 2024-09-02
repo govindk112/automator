@@ -4,11 +4,27 @@ import time from "./image/time.svg";
 import more from "./image/more.svg";
 import interview from "./image/interview.svg";
 import offer from "./image/offer.svg";
-import user from "./image/user.svg"
+import user from "./image/user.svg";
+import { logEvent } from 'firebase/analytics';
+import  { analytics } from './firebase';
+
+
+
+logEvent(analytics, 'page_view', { page_title: 'Home Page' });
 
 const Index = function () {
     const buttonSubmit = function () {
+        logEvent(analytics, 'button_click', {
+            button_name: 'Go_To_Extension', // Add custom parameters as needed
+          });
         window.location.href = "https://chromewebstore.google.com/detail/jobform-automator/lknamgjmcmbfhcjjeicdndokedcmpbaa?pli=1"
+    }
+
+    const youtube = function(){
+        logEvent(analytics, 'button_click', {
+            button_name: 'Youtube_Video', // Add custom parameters as needed
+          });
+
     }
     return (
         <div>
@@ -43,7 +59,7 @@ const Index = function () {
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/f8MXg2ML6sQ?si=CelXj6CG_XysvMJO"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                referrerpolicy="strict-origin-when-cross-origin" onClick={youtube} allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -98,7 +114,7 @@ const Index = function () {
                                 <li>AI-powered Auto-Fills</li>
                                 <li>Delete your data anytime</li>
                             </ul>
-                            <button class="sign-up">Start Now</button>
+                            <button class="sign-up" onClick={buttonSubmit}>Start Now</button>
                         </div>
 
                         <div class="pricing-card premium">
@@ -112,7 +128,7 @@ const Index = function () {
                                 <li>Auto-Apply 100 jobs Daily</li>
                                 <li>Personalized Interview Tips</li>
                             </ul>
-                            <button class="sign-up">Start Now</button>
+                            <button class="sign-up" onClick={buttonSubmit}>Start Now</button>
                         </div>
 
                         <div class="pricing-card diamond">
@@ -125,7 +141,7 @@ const Index = function () {
                                 <li>LinkedIn Profile Optimization</li>
                                 <li>Skill Gap Analysis</li>
                             </ul>
-                            <button class="sign-up">Start Now</button>
+                            <button class="sign-up" onClick={buttonSubmit}>Start Now</button>
                         </div>
                     </div>
 
