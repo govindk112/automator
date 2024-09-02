@@ -4,13 +4,15 @@ import {getAuth} from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB7mEabVhmyybLx5Bvik8adukbJzau_V44",
-    databaseUrl:"https://demo1-134d6-default-rtdb.firebaseio.com/",
-    authDomain: "demo1-134d6.firebaseapp.com",
-    projectId: "demo1-134d6",
-    storageBucket: "demo1-134d6.appspot.com",
-    messagingSenderId: "592161953378",
-    appId: "1:592161953378:web:f372bb8eba68b57bfc633b",
+    apiKey: "AIzaSyDDrfKs64q7t2bZibGgjnylPDbZxf5hoig",
+    authDomain: "jobform-automator-website.firebaseapp.com",
+    projectId: "jobform-automator-website",
+    storageBucket: "jobform-automator-website.appspot.com",
+    messagingSenderId: "741162222470",
+    appId: "1:741162222470:web:debef6d2d8e2befaca2207",
+    measurementId: "G-X9649YYRVT"
+  
+  
     
 };
 

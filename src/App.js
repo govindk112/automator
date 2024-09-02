@@ -69,11 +69,11 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const uid = user.uid;
-        const getApi = ref(db, `Users/${uid}/API`);
+        const getApi = ref(db, `user/${uid}/API`);
         const apiSnapshot = await get(getApi);
-        const getPaymentInformation = ref(db, `Users/${uid}/Payment/Subscriptiontype`);
+        const getPaymentInformation = ref(db, `user/${uid}/Payment/Subscriptiontype`);
         const paymentSnapshot = await get(getPaymentInformation);
-        const getForm = ref(db, `Users/${uid}/forms`);
+        const getForm = ref(db, `user/${uid}/forms`);
         const formSnapshot = await get(getForm);
 
         // Store data in local storage

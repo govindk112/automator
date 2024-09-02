@@ -16,7 +16,7 @@ function SignInwithGoogle() {
       const db = getDatabase(app)
 
 
-      const userRef = ref(db, "Users/" + user.uid);
+      const userRef = ref(db, "user/" + user.uid);
       get(userRef).then(async (snapshot) => {
 
         if (snapshot.exists()) {
@@ -35,9 +35,9 @@ function SignInwithGoogle() {
 
 
               // Reference for Subscription status and Form status
-              const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+              const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
               const subscriptionSnapshot = await get(getSubscription)
-              const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
+              const getForm = ref(db, `user/${auth?.currentUser?.uid}/forms`);
               const formSnapshot = await get(getForm)
               const subscriptionType = subscriptionSnapshot.val();
 
@@ -81,7 +81,7 @@ function SignInwithGoogle() {
 
         }
         else {
-          const newDocRef = ref(db, "Users/" + auth.currentUser.uid)
+          const newDocRef = ref(db, "user/" + auth.currentUser.uid)
           set(newDocRef, {
             name: name,
             email: email,
@@ -105,9 +105,9 @@ function SignInwithGoogle() {
 
 
                 // Reference for Subscription status and Form status
-                const getSubscription = ref(db, `Users/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+                const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
                 const subscriptionSnapshot = await get(getSubscription)
-                const getForm = ref(db, `Users/${auth?.currentUser?.uid}/forms`);
+                const getForm = ref(db, `user/${auth?.currentUser?.uid}/forms`);
                 const formSnapshot = await get(getForm)
 
 

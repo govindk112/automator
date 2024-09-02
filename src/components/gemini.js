@@ -44,7 +44,7 @@ const Gemini = function () {
                 // Call this function after successful login
                 notifyExtensionOnGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
 
-                const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
+                const newDocRef = ref(db, "user/" + auth.currentUser.uid);
                 await update(newDocRef, {
                     API: {
                         apikey: gemini_key,
@@ -55,7 +55,7 @@ const Gemini = function () {
                 const formattedDateTime = currentDate.toISOString().replace("T", " ").split(".")[0];
 
                 try {
-                    const newPaymentRef = ref(db, "Users/" + auth.currentUser.uid);
+                    const newPaymentRef = ref(db, "user/" + auth.currentUser.uid);
                     await update(newPaymentRef, {
                         Payment: {
                             Status: "Free",

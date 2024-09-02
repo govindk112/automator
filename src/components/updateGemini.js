@@ -38,7 +38,7 @@ const UpdateGemini = function () {
                 notifyExtensionOnUpdateGeminiKey(gemini_key);  // userUID is the UID of the logged-in user
                 // console.log(auth?.currentUser?.uid,"Hii")
 
-                const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
+                const newDocRef = ref(db, "user/" + auth.currentUser.uid);
                 await update(newDocRef, {
                     API: {
                         apikey: gemini_key,

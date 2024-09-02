@@ -77,7 +77,7 @@ const Resume = function () {
     // Call this function after successful login
 
     const uid = auth.currentUser.uid;
-    const userRef = ref(db, 'Users/' + uid);
+    const userRef = ref(db, 'user/' + uid);
     await update(userRef, {
       "forms": {
         "keyvalues": {
@@ -94,7 +94,7 @@ const Resume = function () {
       // Notify the extension
       notifyExtensionOnResumeSubmit(urdData);
       localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
-      const getSubscription = ref(db, "Users/" + user?.uid + "/Payment");
+      const getSubscription = ref(db, "user/" + user?.uid + "/Payment");
       await update(getSubscription, {
         Subscriptiontype: "FreeTrialStarted",
 

@@ -76,7 +76,7 @@ const UpdateResume = function () {
     notifyExtensionOnResumeUpdated(urdData);
 
     const uid = auth.currentUser.uid;
-    const userRef = ref(db, 'Users/' + uid);
+    const userRef = ref(db, 'user/' + uid);
     await update(userRef, {
       "forms": {
         "keyvalues": {
@@ -89,7 +89,7 @@ const UpdateResume = function () {
     }).then(async () => {
       toast.success("Document Updated Successfully!");
       localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
-      const getSubscription = ref(db, "Users/" + user?.uid + "/Payment");
+      const getSubscription = ref(db, "user/" + user?.uid + "/Payment");
       await update(getSubscription, {
         Subscriptiontype: "FreeTrialStarted",
 

@@ -61,7 +61,7 @@ function Register() {
 
       const db = getDatabase(app)
       if (user) {
-        const newDocRef = ref(db, "Users/" + auth.currentUser.uid);
+        const newDocRef = ref(db, "user/" + auth.currentUser.uid);
         set(newDocRef, {
           fname: fname,
           lname: lname,

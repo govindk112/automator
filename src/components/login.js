@@ -11,6 +11,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const db = getDatabase();
+  function notifyExtensionOnLogin(uid) {
+    const event = new CustomEvent('userLoggedIn', { detail: { uid } });
+    document.dispatchEvent(event);
+  }
 
   useEffect(() => {
     const uid = localStorage.getItem("UID");
@@ -23,6 +27,7 @@ function Login() {
     // console.log(apiKey !== 'null')
 
     if (uid) {
+      notifyExtensionOnLogin(uid);
       const redirectUser = async () => {
         try {
           const user = auth.currentUser;
@@ -73,10 +78,7 @@ function Login() {
       const user = auth.currentUser;
 
       // website-login.js (on your website)
-      function notifyExtensionOnLogin(uid) {
-        const event = new CustomEvent('userLoggedIn', { detail: { uid } });
-        document.dispatchEvent(event);
-      }
+    
 
       // Call this function after successful login
       // userUID is the UID of the logged-in user
@@ -86,12 +88,12 @@ function Login() {
         notifyExtensionOnLogin(user.uid);
         toast.success("User logged in Successfully", { position: "top-center" });
 
-        const subscriptionRef = ref(db, `Users/${user.uid}/Payment/Subscriptiontype`);
+        const subscriptionRef = ref(db, `user/${user.uid}/Payment/Subscriptiontype`);
         const subscriptionSnapshot = await get(subscriptionRef);
         const subscriptionType = subscriptionSnapshot.val();
         localStorage.setItem("Subscriptiontype", subscriptionType);
 
-        const apiRef = ref(db, `Users/${user.uid}/API/apikey`);
+        const apiRef = ref(db, `user/${user.uid}/API/apikey`);
         const apiSnapshot = await get(apiRef);
         const apiKey = apiSnapshot.val();
         localStorage.setItem("api_key", apiKey);
