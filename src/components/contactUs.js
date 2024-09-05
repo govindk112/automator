@@ -26,79 +26,86 @@ const ContactUs = () => {
     const userId = process.env.REACT_APP_USERID;
 
     const templateParams = {
-        user_name: formData.name,
-        from_email: formData.email,
-        phoneNumber: formData.phoneNumber,
-        userQuery: formData.userQuery,
-        // Optional: If needed, set the recipient email here
-        to_email: "admin@example.com"  
-      };
-      
-      emailjs
-        .send(serviceId, templateId, templateParams, userId)
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
-            toast.success("Your query has been sent successfully!");
-            setFormData({
-              name: "",
-              email: "",
-              phoneNumber: "",
-              userQuery: "",
-            });
-          },
-          (error) => {
-            console.error("FAILED...", error);
-            alert("There was an issue sending your query. Please try again later.");
-          }
-        );
-      
-  }
+      user_name: formData.name,
+      from_email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      userQuery: formData.userQuery,
+      to_email: "admin@example.com",
+    };
+
+    emailjs
+      .send(serviceId, templateId, templateParams, userId)
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          toast.success("Your query has been sent successfully!");
+          setFormData({
+            name: "",
+            email: "",
+            phoneNumber: "",
+            userQuery: "",
+          });
+        },
+        (error) => {
+          console.error("FAILED...", error);
+          alert("There was an issue sending your query. Please try again later.");
+        }
+      );
+  };
+
   return (
     <div>
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+      <main>
+        <div className="ellipse ellipse-1"></div>
+        <div className="ellipse ellipse-2"></div>
+
+        <h1>Contact</h1>
+        <div className="contact-container">
+          <div className="message-section">
+            <h2>Our Message</h2>
+            <p>If you're interested in collaboration, job openings, or product suggestions, we value your input.
+              Let's discuss potential partnerships, employment, or product enhancements. Feel free to share
+              your ideas, and let's explore exciting opportunities together.</p>
+          </div>
+          <div className="form-section">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"  // Add the name attribute
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="tel"
+                name="phoneNumber"  // Add the name attribute
+                placeholder="Mobile Number"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                required
+              />
+              <input
+                type="email"
+                name="email"  // Add the name attribute
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <textarea
+                name="userQuery"  // Add the name attribute
+                placeholder="Message"
+                value={formData.userQuery}
+                onChange={handleChange}
+                required
+              ></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
         </div>
-        <div>
-          <label>Email Address:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Mobile Number:</label>
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Your Query:</label>
-          <textarea
-            name="userQuery"
-            value={formData.userQuery}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      </main>
     </div>
   );
 };

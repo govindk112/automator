@@ -119,7 +119,7 @@ const Gemini = function () {
                                     Get Gemini key Here
                                 </a> */}
                             </div>
-                            <button type="submit" disabled={loading}>{loading?"Submitted..." : "Submitted"}</button>
+                            <button type="submit" disabled={loading}>{loading?"Submitted..." : "Submit"}</button>
                         </form>
                     </div>
                 </div>
