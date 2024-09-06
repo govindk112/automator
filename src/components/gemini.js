@@ -16,7 +16,7 @@ const Gemini = function () {
         e.preventDefault();
 
         setLoading(true);
-        
+
 
         const genAI = new GoogleGenerativeAI(gemini_key);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -80,7 +80,7 @@ const Gemini = function () {
             console.error(error);
             return;
         }
-        finally{
+        finally {
             setLoading(false);
         }
 
@@ -90,7 +90,6 @@ const Gemini = function () {
     return (
         <div>
             <main>
-
                 <div class="ellipse ellipse-1"></div>
                 <div class="ellipse ellipse-2"></div>
                 <h1>Enter Free Gemini Key</h1>
@@ -98,7 +97,7 @@ const Gemini = function () {
                     <div className="message-section">
                         <h2 id="h2gemini">Instructions:</h2>
                         <ol>
-                            <li>Click on "Get Gemini key Here" to open the Gemini website.</li>
+                            <li>Click on  <a id="api_key" href="https://aistudio.google.com/app/apikey" >"Get Gemini key Here"</a>  to open the Gemini website.</li>
                             <li>Create an API Key in your account settings.</li>
                             <li>Copy the API Key.</li>
                             <li>Paste the API Key into our website.</li>
@@ -119,7 +118,7 @@ const Gemini = function () {
                                     Get Gemini key Here
                                 </a> */}
                             </div>
-                            <button type="submit" disabled={loading}>{loading?"Submitted..." : "Submit"}</button>
+                            <button type="submit" disabled={loading}>{loading ? "Submitted..." : "Submit"}</button>
                         </form>
                     </div>
                 </div>

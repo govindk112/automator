@@ -5,6 +5,7 @@ import menu from './image/menu.svg';
 import './styles.css';
 
 const Header = () => {
+ 
   const [menuActive, setMenuActive] = useState(false);
 
   const toggleMenu = () => {
