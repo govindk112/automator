@@ -108,6 +108,7 @@ function Register() {
             <input type="text" placeholder="Last Name" onChange={(e) => setLname(e.target.value)} required />
             <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+            <br/>
 
             <button type="submit">Sign Up</button><br />
             Already registered <a href="/login" className="forgot-password">Login</a>
