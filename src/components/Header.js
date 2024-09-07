@@ -26,7 +26,7 @@ const Header = () => {
         <span id="closeMenu" onClick={closeMenu}>&times;</span>
         <Link to="/" onClick={closeMenu}>Home</Link>
         <Link to="/about" onClick={closeMenu}>About</Link>
-        {/* <Link to="/blog_list" onClick={closeMenu}>Blog</Link> */}
+        <Link to="/contactus" onClick={closeMenu}>ContactUs</Link>
         <Link to="/policy" onClick={closeMenu}>Policy</Link>
       </nav>
     </header>
