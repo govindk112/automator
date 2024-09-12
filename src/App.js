@@ -134,7 +134,7 @@ function App() {
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Protected Component = {Demo}/>} />
           <Route path="/blog_list" element={<Blog />} />
-          <Route path="/contactus" element={<Protected Component = {ContactUs}/>}/>
+          <Route path="/contact" element={<Protected Component = {ContactUs}/>}/>
         </Routes>
         <ToastContainer />
         <Footer />
