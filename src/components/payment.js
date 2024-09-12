@@ -126,6 +126,7 @@ const Payment = function () {
                     if (status.msg === "success") {
                         function notifyExtensionOnPayment(uid) {
                             // console.log("payment successfull")
+
                             const event = new CustomEvent('paymentSuccessfull', { detail: { uid } });
                             document.dispatchEvent(event);
                         }
@@ -167,6 +168,7 @@ const Payment = function () {
         const userRef = ref(db, "promo_codes/" + promocode);
         // console.log(country,)
         get(userRef).then(async (snapshot) => {
+            console.log(snapshot.val())
             if (snapshot.val() === null) {
                 toast.error("Invalid promocode!")
                 return;
@@ -211,7 +213,7 @@ const Payment = function () {
             <main>
                 <div className="ellipse ellipse-1"></div>
                 <div className="ellipse ellipse-2"></div>
-                <h1>Contact</h1>
+                <h1>Payment</h1>
                 <div className="contact-container">
                     <div className="message-section">
                         <h2>Why Choose Us?</h2>
