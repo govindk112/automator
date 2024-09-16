@@ -25,6 +25,7 @@ import UpdateResume from "./components/updateResume";
 import Blog from "./components/blog";
 import Protected from "./components/protected";
 import ContactUs from "./components/contactUs";
+import GetId from "./components/getI";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -51,12 +52,12 @@ function App() {
       setComponent(<Login />);
       return;
     }
-    else if (storedUid && storedApi==='null') {
+    else if (storedUid && storedApi === 'null') {
       setComponent(<Gemini />)
       return;
-      
+
     }
-    else if (storedUid && storedApi!=='null' && storedSubscriptionType === "GetResume") {
+    else if (storedUid && storedApi !== 'null' && storedSubscriptionType === "GetResume") {
       // UID and API key are present
       setComponent(<Resume />);
       return;
@@ -117,24 +118,24 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
-         
+          <Route path="/:id" element={<Index />} />
+          <Route path="/getid" element={<GetId />} />
           <Route path="/login" element={<Login />} />
           <Route path="/User" element={component} />
-          
-          <Route path="/PasswordReset" element={<Protected Component = {PasswordReset}/>} />
+          <Route path="/PasswordReset" element={<Protected Component={PasswordReset} />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Profile" element={<Protected Component = {Profile}/>} />
-          <Route path="/gemini" element={<Protected Component = {Gemini}/>} />
-          <Route path="/updategemini" element={<Protected Component = {UpdateGemini}/>} />
+          <Route path="/Profile" element={<Protected Component={Profile} />} />
+          <Route path="/gemini" element={<Protected Component={Gemini} />} />
+          <Route path="/updategemini" element={<Protected Component={UpdateGemini} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/payment" element={<Protected Component = {Payment}/>} />
-          <Route path="/resume" element={<Protected Component = {Resume}/>} />
-          <Route path="/updateresume" element={<Protected Component = {UpdateResume}/>} />
+          <Route path="/payment" element={<Protected Component={Payment} />} />
+          <Route path="/resume" element={<Protected Component={Resume} />} />
+          <Route path="/updateresume" element={<Protected Component={UpdateResume} />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/promocode" element={<Promocode />} />
-          <Route path="/demo" element={<Protected Component = {Demo}/>} />
+          <Route path="/demo" element={<Protected Component={Demo} />} />
           <Route path="/blog_list" element={<Blog />} />
-          <Route path="/contact" element={<Protected Component = {ContactUs}/>}/>
+          <Route path="/contact" element={<Protected Component={ContactUs} />} />
         </Routes>
         <ToastContainer />
         <Footer />

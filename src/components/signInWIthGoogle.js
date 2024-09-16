@@ -23,12 +23,14 @@ function SignInwithGoogle() {
           toast.success("User logged in Successfully", {
             position: "top-center",
           });
-         
+
 
           localStorage.setItem('UID', user?.uid);
           try {
 
             const user = auth.currentUser;
+            console.log(user, "user value");
+
 
 
             if (user) {
@@ -47,10 +49,40 @@ function SignInwithGoogle() {
 
               // website-login.js (on your website)
               function notifyExtensionOnLogin(uid) {
+                console.log("Even listner 2")
                 const event = new CustomEvent('userLoggedIn', { detail: { uid } });
                 document.dispatchEvent(event);
               }
+              console.log(auth.currentUser.uid, "uid")
               notifyExtensionOnLogin(auth?.currentUser?.uid)
+
+              //     const getReferralCodeFromCookie = () => {
+              //       const cookie = document.cookie.split('; ').find(row => row.startsWith('referral='));
+              //       return cookie ? cookie.split('=')[1] : null;
+              //     };
+              //     const referralCode = getReferralCodeFromCookie()
+              //     console.log(referralCode, "code",typeof(referralCode))
+
+              //     //** SAVE REFERAL CODE IN DATABASE  */
+              //     const currentDate = new Date();
+              //     const formattedDateTime = currentDate.toISOString().replace("T", " ").split(".")[0];
+              //     let currentUser = auth.currentUser.uid;
+
+              //     if(referralCode ){
+              //     const newDocRef = ref(db, `/referrals/${referralCode}/${currentUser}`);
+              //     console.log(newDocRef,typeof(newDocRef),"referrals");
+              //     if(!newDocRef){
+              //     set(newDocRef, {
+              //       signupDate: formattedDateTime,
+              //       amount: 0,
+              //     }
+
+
+              //     ).then(() => {
+
+              //     })
+              //   }
+              // }
 
 
               if (!subscriptionType) {
@@ -100,6 +132,7 @@ function SignInwithGoogle() {
 
               const user = auth.currentUser;
               // const user = auth.currentUser;
+              console.log(user, "user value")
 
               if (user) {
 
@@ -112,15 +145,52 @@ function SignInwithGoogle() {
 
 
                 const subscriptionType = subscriptionSnapshot.val();
+                //**Event listener */
+                function notifyExtensionOnLogin(uid) {
+                  console.log("Event listner")
+                  const event = new CustomEvent('userLoggedIn', { detail: { uid } });
+                  document.dispatchEvent(event);
+                }
+                console.log(auth.currentUser.uid, "uid")
+                notifyExtensionOnLogin(auth?.currentUser?.uid)
 
 
                 // console.log(subscriptionType + "Hello")
                 // console.log(formSnapshot.val(), "form")
+                const getReferralCodeFromCookie = () => {
+                  const cookie = document.cookie.split('; ').find(row => row.startsWith('referral='));
+                  return cookie ? cookie.split('=')[1] : null;
+                };
+                const referralCode = getReferralCodeFromCookie()
+                console.log(referralCode, "code", typeof (referralCode))
+
+                //** SAVE REFERAL CODE IN DATABASE  */
+                const currentDate = new Date();
+                const formattedDateTime = currentDate.toISOString().replace("T", " ").split(".")[0];
+                let currentUser = user.uid;
+
+
+                if (referralCode) {
+                  console.log("Save in database/firebase")
+                  const newDocRef = ref(db, `/referrals/${referralCode}/${currentUser}`);
+                  console.log(newDocRef, typeof (newDocRef), "referrals");
+                  get(newDocRef).then((snapshot) => {
+                    if (!snapshot.exists()) {
+                      // If the referral code doesn't exist, create a new entry
+                      set(newDocRef, {
+                        signupDate: formattedDateTime,
+                        amount: 0,
+                      }).then(() => {
+
+                      })
+                    }
+                  })
+                }
 
 
                 if (!subscriptionType) {
                   // If Subscriptiontype is undefined, redirect to Gemini page
-                  window.location.href = "/gemini";
+                  // window.location.href = "/gemini";
                 } else if (!formSnapshot.exists()) {
                   // Redirect to Resume page if resume is not uploaded
                   window.location.href = "/resume";
@@ -132,7 +202,7 @@ function SignInwithGoogle() {
                   window.location.href = "/demo";
                 } else {
                   // Fallback to Gemini if the subscription type is not recognized
-                  window.location.href = "/gemini";
+                  // window.location.href = "/gemini";
                 }
               }
 

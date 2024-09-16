@@ -6,28 +6,43 @@ import interview from "./image/interview.svg";
 import offer from "./image/offer.svg";
 import user from "./image/user.svg";
 import { logEvent } from 'firebase/analytics';
-import  { analytics } from './firebase';
+import { analytics } from './firebase';
+import { useParams } from "react-router-dom";
 
 
 
 logEvent(analytics, 'page_view', { page_title: 'Home Page' });
 
 const Index = function () {
+    const { id } = useParams();
+    console.log("id=", id);
+
+    const saveReferralCode = (referralCode) => {
+        // If referralCode is undefined or null, store the string 'null' or 'undefined' in the cookie
+        const valueToStore = referralCode != null ? referralCode : String(referralCode);
+
+        document.cookie = `referral=${valueToStore}; path=/; max-age=${30 * 24 * 60 * 60}`;  // 30-day expiration
+    };
+
+    saveReferralCode(id);
+
+
     const buttonSubmit = function () {
         logEvent(analytics, 'button_click', {
             button_name: 'Go_To_Extension', // Add custom parameters as needed
-          });
+        });
         window.location.href = "https://chromewebstore.google.com/detail/jobform-automator/lknamgjmcmbfhcjjeicdndokedcmpbaa?pli=1"
     }
 
-    const youtube = function(){
+    const youtube = function () {
         logEvent(analytics, 'button_click', {
             button_name: 'Youtube_Video', // Add custom parameters as needed
-          });
+        });
 
     }
     return (
         <div>
+
             <main>
                 <div class="background">
                     <div class="ellipse ellipse-1"></div>
@@ -40,13 +55,13 @@ const Index = function () {
 
                         <h1 class="heading">AI Powered Job Application Automation Tool</h1>
                         <p class="free-trial">Automate your job application on LinkedIn, Indeed, & Monster
-                             with our AI bot which applies to job application on behalf of you, with universal
-                              Auto-Fill technology, architecture based on advanced AI Compatible with 90% 
-                              company websites globally.</p>
+                            with our AI bot which applies to job application on behalf of you, with universal
+                            Auto-Fill technology, architecture based on advanced AI Compatible with 90%
+                            company websites globally.</p>
                         <div class="buttons">
                             <button class="add-to-chrome" onClick={buttonSubmit}>
-                                <img id="chrome" src={chrome} alt="Chrome Icon"/>
-                                    Add to Chrome
+                                <img id="chrome" src={chrome} alt="Chrome Icon" />
+                                Add to Chrome
                             </button>
                         </div>
                     </div>
@@ -76,24 +91,24 @@ const Index = function () {
                     <h1>Your Success, Simplified</h1>
                     <div class="benefits-grid">
                         <div class="benefit-item">
-                            <img src={time} alt="Be First Icon"/>
-                                <h3>SAVE TIME</h3>
-                                <p>Our service speeds up your job hunt process, automating form-filling.</p>
+                            <img src={time} alt="Be First Icon" />
+                            <h3>SAVE TIME</h3>
+                            <p>Our service speeds up your job hunt process, automating form-filling.</p>
                         </div>
                         <div class="benefit-item">
-                            <img src={more} alt="Save Time Icon"/>
-                                <h3>APPLY 10X</h3>
-                                <p>Without it, you miss out on hundreds of jobs on LinkedIn and Indeed.</p>
+                            <img src={more} alt="Save Time Icon" />
+                            <h3>APPLY 10X</h3>
+                            <p>Without it, you miss out on hundreds of jobs on LinkedIn and Indeed.</p>
                         </div>
                         <div class="benefit-item">
-                            <img src={interview} alt="Apply More Icon"/>
-                                <h3>MORE INTERVIEW</h3>
-                                <p>Being first to apply increases your chances of securing interviews.</p>
+                            <img src={interview} alt="Apply More Icon" />
+                            <h3>MORE INTERVIEW</h3>
+                            <p>Being first to apply increases your chances of securing interviews.</p>
                         </div>
                         <div class="benefit-item">
-                            <img src={offer} alt="Quality Applications Icon"/>
-                                <h3>MORE OFFERS</h3>
-                                <p>With more job applications and interviews, you'll naturally receive more job offers.</p>
+                            <img src={offer} alt="Quality Applications Icon" />
+                            <h3>MORE OFFERS</h3>
+                            <p>With more job applications and interviews, you'll naturally receive more job offers.</p>
                         </div>
                     </div>
                 </div>
@@ -157,21 +172,21 @@ const Index = function () {
                             <div class="testimonial">
                                 <p>"This extension has revolutionized the way I approach job hunting."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client"/>
-                                        <div>
-                                            <strong>Godchoice Bright</strong>
-                                            <span>Human Resources Manager</span>
-                                        </div>
+                                    <img src={user} alt="Client" />
+                                    <div>
+                                        <strong>Godchoice Bright</strong>
+                                        <span>Human Resources Manager</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="testimonial">
                                 <p>"Thanks to JobFrom Automator, I've seen a significant increase in my job application efficiency."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client"/>
-                                        <div>
-                                            <strong>Adão</strong>
-                                            <span>Job Seeker</span>
-                                        </div>
+                                    <img src={user} alt="Client" />
+                                    <div>
+                                        <strong>Adão</strong>
+                                        <span>Job Seeker</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,21 +194,21 @@ const Index = function () {
                             <div class="testimonial">
                                 <p>"JobForm Automator is an excellent tool for streamlining the job application process, offering significant time savings."</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client"/>
-                                        <div>
-                                            <strong>Aditya Verma</strong>
-                                            <span>Software Engineer</span>
-                                        </div>
+                                    <img src={user} alt="Client" />
+                                    <div>
+                                        <strong>Aditya Verma</strong>
+                                        <span>Software Engineer</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="testimonial">
                                 <p>"The Job From Automator is very useful extension tool for filling the job application , offering significant time savings in India Job Market"</p>
                                 <div class="client-info">
-                                    <img src={user} alt="Client"/>
-                                        <div>
-                                            <strong>Arun Kumar</strong>
-                                            <span>Software Testing Engineer</span>
-                                        </div>
+                                    <img src={user} alt="Client" />
+                                    <div>
+                                        <strong>Arun Kumar</strong>
+                                        <span>Software Testing Engineer</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
