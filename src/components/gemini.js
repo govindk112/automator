@@ -90,8 +90,8 @@ const Gemini = function () {
     return (
         <div>
             <main>
-                <div class="ellipse ellipse-1"></div>
-                <div class="ellipse ellipse-2"></div>
+                <div className="ellipse ellipse-1"></div>
+                <div className="ellipse ellipse-2"></div>
                 <h1>Enter Free Gemini Key</h1>
                 <div className="contact-container">
                     <div className="message-section">

@@ -24,9 +24,9 @@ function Login() {
 
 
     const subscriptionType = localStorage.getItem("Subscriptiontype");
-    // console.log(subscriptionType, 'type')
-    // console.log(typeof(apiKey),apiKey,null)
-    // console.log(apiKey !== 'null')
+    
+    console.log(uid,"user Id",typeof(uid))
+
 
     if (uid) {
       notifyExtensionOnLogin(uid);
@@ -73,7 +73,7 @@ function Login() {
 
       redirectUser();
     }
-  },);
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

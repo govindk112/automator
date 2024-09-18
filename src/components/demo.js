@@ -39,8 +39,8 @@ const Demo = function () {
 
 
 
-                <div class="ellipse ellipse-1"></div>
-                <div class="ellipse ellipse-2"></div>
+                <div className="ellipse ellipse-1"></div>
+                <div className="ellipse ellipse-2"></div>
                 <h1>Get Started </h1>
                 <div className="contact-container">
                     <div className="message-section">

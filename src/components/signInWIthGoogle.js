@@ -24,8 +24,9 @@ function SignInwithGoogle() {
             position: "top-center",
           });
          
-
+         
           localStorage.setItem('UID', user?.uid);
+          localStorage.setItem("IsLogin", true);
           try {
 
             const user = auth.currentUser;
@@ -50,10 +51,10 @@ function SignInwithGoogle() {
               // website-login.js (on your website)
               function notifyExtensionOnLogin(uid) {
                 const event = new CustomEvent('userLoggedIn', { detail: { uid } });
+                console.log("event1")
                 document.dispatchEvent(event);
               }
-              console.log(auth.currentUser.uid,"uid")
-              notifyExtensionOnLogin(auth?.currentUser?.uid)
+              notifyExtensionOnLogin(user.uid)
 
           //     const getReferralCodeFromCookie = () => {
           //       const cookie = document.cookie.split('; ').find(row => row.startsWith('referral='));
@@ -127,6 +128,7 @@ function SignInwithGoogle() {
             const user = result.user;
 
             localStorage.setItem('UID', user?.uid);
+            localStorage.setItem("IsLogin", true);
             try {
 
               const user = auth.currentUser;
@@ -151,7 +153,7 @@ function SignInwithGoogle() {
                   document.dispatchEvent(event);
                 }
                 console.log(auth.currentUser.uid,"uid")
-                notifyExtensionOnLogin(auth?.currentUser?.uid)
+                notifyExtensionOnLogin(user.uid)
 
 
                 // console.log(subscriptionType + "Hello")
