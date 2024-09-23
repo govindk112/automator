@@ -97,7 +97,7 @@ const Gemini = function () {
                     <div className="message-section">
                         <h2 id="h2gemini">Instructions:</h2>
                         <ol>
-                            <li>Click on  <a id="api_key" href="https://aistudio.google.com/app/apikey" >"Get Gemini key Here"</a>  to open the Gemini website.</li>
+                            <li>Click on  <a id="api_key" target="_blank" href="https://aistudio.google.com/app/apikey" >"Get Gemini key Here"</a>  to open the Gemini website.</li>
                             <li>Create an API Key in your account settings.</li>
                             <li>Copy the API Key.</li>
                             <li>Paste the API Key into our website.</li>
