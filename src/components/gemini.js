@@ -95,14 +95,17 @@ const Gemini = function () {
                 <h1>Enter Free Gemini Key</h1>
                 <div className="contact-container">
                     <div className="message-section">
-                        <h2 id="h2gemini">Instructions:</h2>
-                        <ol>
-                            <li>Click on  <a id="api_key" target="_blank" href="https://aistudio.google.com/app/apikey" >"Get Gemini key Here"</a>  to open the Gemini website.</li>
-                            <li>Create an API Key in your account settings.</li>
-                            <li>Copy the API Key.</li>
-                            <li>Paste the API Key into our website.</li>
-                            <li>Click Submit.</li>
-                        </ol>
+                        {/* <h2 id="h2gemini">Demo:How To Get API Key</h2> */}
+
+
+                        <div className="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/f8MXg2ML6sQ?si=CelXj6CG_XysvMJO"
+                                title="YouTube video player" frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        </div>
+
+
                     </div>
                     <div className="form-section">
                         <form onSubmit={sumbitHandler}>
@@ -118,8 +121,14 @@ const Gemini = function () {
                                     Get Gemini key Here
                                 </a> */}
                             </div>
+                            
+                            <a id="api_key" target="_blank"  href="https://aistudio.google.com/app/apikey" >Get Gemini key</a> <br></br><br></br>
+                            
                             <button type="submit" disabled={loading}>{loading ? "Submitted..." : "Submit"}</button>
                         </form>
+                        {/* <ul>
+                            <li>Click on  <a id="api_key" target="_blank" href="https://aistudio.google.com/app/apikey" >"Get Gemini key Here"</a>to open the Gemini website.</li>
+                        </ul> */}
                     </div>
                 </div>
             </main>
