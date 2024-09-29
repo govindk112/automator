@@ -1933,3 +1933,51 @@ footer {
     color:#bfbaff;
     
 }
+/* Referral.css */
+.referral-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0513d7;
+  }
+  
+  .referral-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .referral-url {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+  }
+  
+  .copy-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .copy-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .copy-message {
+    display: block;
+    margin-top: 10px;
+    color: #28a745;
+    font-weight: bold;
+  }
+  

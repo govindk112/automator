@@ -27,6 +27,7 @@ function SignInwithGoogle() {
          
           localStorage.setItem('UID', user?.uid);
           localStorage.setItem("IsLogin", true);
+          localStorage.setItem("UserName", user.displayName);
           try {
 
             const user = auth.currentUser;
@@ -129,6 +130,7 @@ function SignInwithGoogle() {
 
             localStorage.setItem('UID', user?.uid);
             localStorage.setItem("IsLogin", true);
+            localStorage.setItem("UserName", user.displayName);
             try {
 
               const user = auth.currentUser;

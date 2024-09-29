@@ -92,6 +92,7 @@ function Login() {
       if (user && user.emailVerified) {
         localStorage.setItem("UID", user.uid);
         localStorage.setItem("IsLogin", true);
+        localStorage.setItem("UserName", user.displayName);
         //**CALL EVENT LISTNER */
         notifyExtensionOnLogin(user.uid);
         //** STORE REFERAL ID  IN LOCAL STORAGE **//
