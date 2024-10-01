@@ -33,7 +33,7 @@ const Payment = function () {
 
                 if (data.country === "IN") {
                     setCurrency('INR');
-                    setAmount(1);
+                    setAmount(499);
                 } else {
                     setCurrency('USD');
                     setAmount(20);
