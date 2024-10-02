@@ -27,6 +27,7 @@ import Protected from "./components/protected";
 import ContactUs from "./components/contactUs";
 import GetId from "./components/getI";
 import Referral from "./components/referral";
+import NotFound  from "./components/Notfound";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -138,6 +139,8 @@ function App() {
           <Route path="/blog_list" element={<Blog />} />
           <Route path="/contact" element={<Protected Component={ContactUs} />} />
           <Route path="/referral" element={<Referral/>}/>
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
         <ToastContainer />
         <Footer />
