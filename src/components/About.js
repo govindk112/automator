@@ -73,7 +73,7 @@ const About = function () {
                         <div class="member-card">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <img src={people} alt="John Smith" />
+                                    <img src={people} alt="Suman Bera" />
                                     <h3>Suman Bera</h3>
                                     <p>Lead Product Engineer</p>
                                 </div>
@@ -81,7 +81,7 @@ const About = function () {
                                     <h3>Suman Bera</h3>
                                     <p>Innovative engineer dedicated to building scalable solutions.</p>
                                     <ul class="skills">
-                                        <li>React</li>
+                                        <li>MERN Stack</li>
                                         <li>Cloud Architecture</li>
                                         <li>Chrome Extension</li>
                                     </ul>
