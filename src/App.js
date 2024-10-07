@@ -5,7 +5,6 @@ import Login from "./components/login";
 import Register from "./components/register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Profile from "./components/profile";
 import { auth } from "./components/firebase";
 import PasswordReset from "./components/passwordReset";
 import Header from "./components/Header";
@@ -126,7 +125,6 @@ function App() {
           <Route path="/User" element={component} />
           <Route path="/PasswordReset" element={<Protected Component={PasswordReset} />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Profile" element={<Protected Component={Profile} />} />
           <Route path="/gemini" element={<Protected Component={Gemini} />} />
           <Route path="/updategemini" element={<Protected Component={UpdateGemini} />} />
           <Route path="/about" element={<About />} />

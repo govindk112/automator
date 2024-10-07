@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './image/logo.svg';
-import telegram from './image/telegram.svg';
+// import telegram from './image/telegram.svg';
 import instagram from './image/instagram.svg';
 import linkedin from './image/linkedin.svg';
 import youtube from './image/youtube.svg';
@@ -22,7 +22,7 @@ const Footer = () => {
           <p>&copy; 2022 Aiking Software Solutions Pvt Ltd</p>
         </div>
         <div className="social-icons">
-          <a href="https://t.me/JobformAutomator"  target="_blank" rel="noreferrer"><img src={telegram} alt="Telegram"   /></a>
+          {/* <a href="https://t.me/JobformAutomator"  target="_blank" rel="noreferrer"><img src={telegram} alt="Telegram"   /></a> */}
           <a href="https://www.instagram.com/jobtipsofficial?igsh=MWk4MDdsNjFreDE4dg=="  target="_blank" rel="noreferrer"><img src={instagram} alt="Instagram" /></a>
           <a href="https://www.facebook.com/profile.php?id=61556365446390" target="_blank" rel="noreferrer"><img src={facebook} alt="Facebook"/></a>
           <a href="https://www.linkedin.com/showcase/jobform-automator/?viewAsMember=true"  target="_blank" rel="noreferrer"><img src={linkedin} alt="LinkedIn" /></a>

@@ -1,18 +1,20 @@
 User-agent: *
-Disallow: /User
-Disallow: /PasswordReset
-Disallow: /Register
-Disallow: /Profile
-Disallow: /gemini
-Disallow: /updategemini
-Disallow: /payment
-Disallow: /resume
-Disallow: /updateresume
-Disallow: /promocode
-Disallow: /demo
-Disallow: /contact
-Disallow: /referral
+Disallow: /
 
-Allow: /
+Allow: /User
+Allow: /PasswordReset
+Allow: /Register
+Allow: /Profile
+Allow: /gemini
+Allow: /updategemini
+Allow: /payment
+Allow: /resume
+Allow: /updateresume
+Allow: /promocode
+Allow: /demo
+Allow: /contact
+Allow: /referral
+
+
 
 Sitemap: https://jobformautomator.com/sitemap.xml
