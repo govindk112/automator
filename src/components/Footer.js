@@ -17,6 +17,9 @@ const Footer = () => {
           <p>contact@jobformautoator.com</p>
           <h3>Whatsapp</h3>
           <p>+91 9766116839</p>
+          <h3>Address</h3>
+          <p>Flat No.116, Sairpark Building, AP Alephata, Maharashtra 412411</p>
+        
         </div>
         <div className="footer-links">
           <p>&copy; 2022 Aiking Software Solutions Pvt Ltd</p>
