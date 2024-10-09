@@ -122,7 +122,7 @@ const Index = function () {
                         <div class="pricing-card starter">
                             <h3>Starter</h3>
                             <p class="description">Perfect To Get Started</p>
-                            <p class="price">$0</p>
+                            <p class="price">₹ 0</p>
                             <ul>
                                 <li>Limited offer: Free access</li>
                                 <li>Auto-Apply 10 jobs Daily</li>
@@ -136,7 +136,7 @@ const Index = function () {
                             <h3>Premium</h3>
                             <span class="popular">Popular</span>
                             <p class="description">Perfect To Apply more Jobs</p>
-                            <p class="price">$10 <span class="price-subtitle">for limited time</span></p>
+                            <p class="price">₹ 1499 <span class="price-subtitle">for limited time</span></p>
                             <ul>
                                 <li>All in Beginner plan</li>
                                 <li>Call & Mail Support</li>
@@ -149,7 +149,7 @@ const Index = function () {
                         <div class="pricing-card diamond">
                             <h3>Diamond</h3>
                             <p class="description">Perfect To Get Personalized Assistance</p>
-                            <p class="price">$30</p>
+                            <p class="price">$ 2999</p>
                             <ul>
                                 <li>All in Premium Plan</li>
                                 <li>Advanced AI model</li>
