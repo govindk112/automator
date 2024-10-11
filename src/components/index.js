@@ -149,7 +149,7 @@ const Index = function () {
                         <div class="pricing-card diamond">
                             <h3>Diamond</h3>
                             <p class="description">Perfect To Get Personalized Assistance</p>
-                            <p class="price">$ 2999</p>
+                            <p class="price">₹ 2999</p>
                             <ul>
                                 <li>All in Premium Plan</li>
                                 <li>Advanced AI model</li>
