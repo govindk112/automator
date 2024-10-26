@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import chrome from "./image/chrome.svg";
 import time from "./image/time.svg";
 import more from "./image/more.svg";
@@ -16,6 +16,9 @@ logEvent(analytics, 'page_view', { page_title: 'Home Page' });
 const Index = function () {
     const { id } = useParams();
     console.log("id=", id);
+    const [stater,setStater] = useState("₹0");
+    const[premium,setPremium] = useState("₹499");
+    const [diamond,setDiamond] = useState("₹999")
 
     const saveReferralCode = (referralCode) => {
         // If referralCode is undefined or null, store the string 'null' or 'undefined' in the cookie
@@ -25,6 +28,20 @@ const Index = function () {
     };
 
     saveReferralCode(id);
+    useEffect(() => {
+        // Detect user's country and set currency
+        fetch("https://ipapi.co/json/")
+            .then((response) => response.json())
+            .then((data) => {
+
+                if (data.country !== "IN") {
+                    setStater("$0");
+                    setPremium("$20");
+                    setDiamond("$50")
+                    
+                } 
+            });
+    }, []);
 
 
     const buttonSubmit = function () {
@@ -122,7 +139,7 @@ const Index = function () {
                         <div class="pricing-card starter">
                             <h3>Starter</h3>
                             <p class="description">Perfect To Get Started</p>
-                            <p class="price">₹ 0</p>
+                            <p class="price">{stater}</p>
                             <ul>
                                 <li>Limited offer: Free access</li>
                                 <li>Auto-Apply 10 jobs Daily</li>
@@ -136,7 +153,7 @@ const Index = function () {
                             <h3>Premium</h3>
                             <span class="popular">Popular</span>
                             <p class="description">Perfect To Apply more Jobs</p>
-                            <p class="price">₹ 1499 <span class="price-subtitle">for limited time</span></p>
+                            <p class="price">{premium} <span class="price-subtitle">for limited time</span></p>
                             <ul>
                                 <li>All in Beginner plan</li>
                                 <li>Call & Mail Support</li>
@@ -149,7 +166,7 @@ const Index = function () {
                         <div class="pricing-card diamond">
                             <h3>Diamond</h3>
                             <p class="description">Perfect To Get Personalized Assistance</p>
-                            <p class="price">₹ 2999</p>
+                            <p class="price">{diamond}</p>
                             <ul>
                                 <li>All in Premium Plan</li>
                                 <li>Advanced AI model</li>
