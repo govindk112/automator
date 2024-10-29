@@ -96,10 +96,11 @@ const Gemini = function () {
                 <div className="contact-container">
                     <div className="message-section">
                         {/* <h2 id="h2gemini">Demo:How To Get API Key</h2> */}
+                      
 
 
                         <div className="video-container">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/f8MXg2ML6sQ?si=CelXj6CG_XysvMJO"
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/5VbhMJKTbak?si=7N-YplG58Z6EXs4R"
                                 title="YouTube video player" frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
