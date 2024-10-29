@@ -69,14 +69,17 @@ const Resume = () => {
       } catch (error) {
         console.error("Error uploading file:", error);
         setError("Failed to upload the file. Please try again.");
+        return;
       }
     } else {
-      setError("Please upload a valid PDF file."); // Error for invalid file type
+      setError("Please upload a valid PDF file."); 
+      return;// Error for invalid file type
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
 
     if (!pdfName) {
       setError("Please upload your resume before submitting.");
@@ -88,6 +91,15 @@ const Resume = () => {
     if (!uid) {
       setError("User not logged in.");
       return;
+    }
+    function notifyExtensionOnResumeSubmit(urdData) {
+      const event = new CustomEvent('resumeSubmitted', {
+        detail: {
+          urdData: urdData,
+          subscriptionType: "FreeTrialStarted"
+        }
+      });
+      document.dispatchEvent(event);
     }
 
     const userRef = ref(db, "user/" + uid);
@@ -106,6 +118,7 @@ const Resume = () => {
 
       toast.success("Document uploaded successfully!");
       localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
+      notifyExtensionOnResumeSubmit(urdData);
 
       // Update subscription status in database
       const subscriptionRef = ref(db, "user/" + uid + "/Payment");
