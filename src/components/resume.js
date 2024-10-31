@@ -8,7 +8,8 @@ import { storage} from "./firebase"; // Ensure storage and app are correctly ini
 import app from "./firebase";
 pdfjs.GlobalWorkerOptions.workerSrc = `${process.env.PUBLIC_URL}/pdfjs/pdf.worker.min.js`;
 
-const Resume = () => {
+
+const Resume = function () {
   const [pdf, setPdf] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState("");
   const [Currentctc, setCurrentctc] = useState("");
@@ -19,79 +20,83 @@ const Resume = () => {
   const [Location, setLocation] = useState("");
   const [user, setUser] = useState(null);
   const [pdfName, setPdfName] = useState("");
-  const [error, setError] = useState(""); // Error state for upload validation
   const auth = getAuth();
 
+  const db = getDatabase(app)
+
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    auth.onAuthStateChanged((user) => {
       setUser(user);
     });
-    return () => unsubscribe();
-  }, [auth]);
+
+
+  })
+
+
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (file && file.type === "application/pdf") {
-      setPdfName(file.name);
-      setPdf(file);
-
-      // Firebase Storage reference for the PDF
-      const pdfStorageRef = storageRef(storage, `Resume/${file.name}`);
-      
-      try {
-        // Upload the file to Firebase Storage
-        await uploadBytes(pdfStorageRef, file);
-        console.log("File uploaded successfully!");
-
-        // Get the download URL
-        const url = await getDownloadURL(pdfStorageRef);
-        setDownloadUrl(url);
-        console.log("Download URL:", url);
-
-        // Reading the PDF file text
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-          const typedarray = new Uint8Array(e.target.result);
-          const pdfDocument = await pdfjs.getDocument(typedarray).promise;
-          let fullText = "";
-
-          for (let i = 1; i <= pdfDocument.numPages; i++) {
-            const page = await pdfDocument.getPage(i);
-            const textContent = await page.getTextContent();
-            const pageText = textContent.items.map((item) => item.str).join(" ");
-            fullText += pageText + "\n";
+        if (file && file.type === "application/pdf") {
+          setPdfName(file.name);
+          setPdf(file);
+    
+          // Firebase Storage reference for the PDF
+          const pdfStorageRef = storageRef(storage, `Resume/${file.name}`);
+          
+          try {
+            // Upload the file to Firebase Storage
+            await uploadBytes(pdfStorageRef, file);
+            console.log("File uploaded successfully!");
+    
+            // Get the download URL
+            const url = await getDownloadURL(pdfStorageRef);
+            setDownloadUrl(url);
+            console.log("Download URL:", url);
+    
+            // Reading the PDF file text
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+              const typedarray = new Uint8Array(e.target.result);
+              const pdfDocument = await pdfjs.getDocument(typedarray).promise;
+              let fullText = "";
+    
+              for (let i = 1; i <= pdfDocument.numPages; i++) {
+                const page = await pdfDocument.getPage(i);
+                const textContent = await page.getTextContent();
+                const pageText = textContent.items.map((item) => item.str).join(" ");
+                fullText += pageText + "\n";
+              }
+              setPdfText(fullText);
+              setResume(file.name); // Set the file name in the Resume state
+            };
+            reader.readAsArrayBuffer(file);
+          } catch (error) {
+            console.error("Error uploading file:", error);
+            toast.error("Failed to upload the file. Please try again.");
+            return;
           }
-          setPdfText(fullText);
-          setResume(file.name); // Set the file name in the Resume state
-          setError(""); // Clear any previous error
-        };
-        reader.readAsArrayBuffer(file);
-      } catch (error) {
-        console.error("Error uploading file:", error);
-        setError("Failed to upload the file. Please try again.");
-        return;
-      }
-    } else {
-      setError("Please upload a valid PDF file."); 
-      return;// Error for invalid file type
-    }
+        } else {
+          toast.error("Please upload a valid PDF file."); 
+          return;// Error for invalid file type
+        }
   };
 
+
   const handleSubmit = async (e) => {
+    const db = getDatabase(app)
     e.preventDefault();
-  
-
+    // console.log(Currentctc, Expectedctc, NoticePeriod, Resume, Location)
     if (!pdfName) {
-      setError("Please upload your resume before submitting.");
+      toast.error("Please Provide Your Resume Before Submitting!")
+      return;
+    }
+    if(!downloadUrl){
+      toast.warning("Your Resume Under Process Please wait a moment ,then submit again");
       return;
     }
 
-    const db = getDatabase(app);
-    const uid = user?.uid;
-    if (!uid) {
-      setError("User not logged in.");
-      return;
-    }
+    //Event Listner
     function notifyExtensionOnResumeSubmit(urdData) {
       const event = new CustomEvent('resumeSubmitted', {
         detail: {
@@ -102,95 +107,78 @@ const Resume = () => {
       document.dispatchEvent(event);
     }
 
-    const userRef = ref(db, "user/" + uid);
+    // Call this function after successful login
 
-    const urdData = `${pdfText} CurrentCTC: ${Currentctc}, ExpectedCTC: ${Expectedctc}, NoticePeriod: ${NoticePeriod}, Location: ${Location}`;
+    const uid = auth.currentUser.uid;
+    const userRef = ref(db, 'user/' + uid);
+    await update(userRef, {
+      "forms": {
+        "keyvalues": {
 
-    try {
-      await update(userRef, {
-        forms: {
-          keyvalues: {
-            RD: downloadUrl,
-            URD: urdData,
-          },
-        },
-      });
+          "RD": downloadUrl,
+          "URD": pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location} `
+        }
+      }
 
-      toast.success("Document uploaded successfully!");
-      localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
+    }).then(async () => {
+      toast.success("Document Upload Successfully!");
+      const urdData = pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location}`;
+
+      // Notify the extension
       notifyExtensionOnResumeSubmit(urdData);
-
-      // Update subscription status in database
-      const subscriptionRef = ref(db, "user/" + uid + "/Payment");
-      await update(subscriptionRef, {
+      localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
+      const getSubscription = ref(db, "user/" + user?.uid + "/Payment");
+      await update(getSubscription, {
         Subscriptiontype: "FreeTrialStarted",
-      });
 
-      // Optionally, navigate to demo page after successful submission
-      window.location.href = "/demo";
-    } catch (err) {
-      console.error("Error submitting form data:", err);
-      toast.error("Failed to submit form data.");
-    }
-  };
+      })
+      // console.log("Resume")
+      // window.location.href = "/demo"
+
+
+
+    }).catch((err) => {
+      toast.error(err)
+    })
+  }
 
   return (
     <div>
       <main>
+
+
+
         <h1>Last Step</h1>
         <div className="contact-container">
           <div className="message-section">
             <h2>Start Auto-applying now!</h2>
-            <p>Achieve career success with Job Form Automator! Start Auto-applying now!</p>
+            <p>
+              Achieve career success with Job Form Automator! Start Auto-applying now!</p>
           </div>
           <div className="form-section">
             <form onSubmit={handleSubmit}>
               <p>Current CTC in your local currency?</p>
-              <input
-                type="text"
-                placeholder="Current CTC"
-                required
-                onChange={(e) => setCurrentctc(e.target.value)}
-              />
+              <input type="text" placeholder="Current CTC" required onChange={(e) => setCurrentctc(e.target.value)} />
               <p>Expected CTC in your local currency?</p>
-              <input
-                type="text"
-                placeholder="Expected CTC"
-                required
-                onChange={(e) => setExpectedctc(e.target.value)}
-              />
+              <input type="text" placeholder="Expected CTC" required onChange={(e) => setExpectedctc(e.target.value)} />
               <p>What is your notice period in days?</p>
-              <input
-                type="text"
-                placeholder="Notice Period"
-                required
-                onChange={(e) => setNoticePeriod(e.target.value)}
-              />
-              <p>Your preferred locations for jobs?</p>
-              <input
-                type="text"
-                placeholder="Preferred Locations"
-                required
-                onChange={(e) => setLocation(e.target.value)}
-              />
+              <input type="text" placeholder="Notice Period" required onChange={(e) => setNoticePeriod(e.target.value)} />
+              <p>your All preferred locations for jobs?</p>
+              <input type="text" placeholder="Preferred Locations" required onChange={(e) => setLocation(e.target.value)} />
               <label htmlFor="file-upload" className="custom-file-upload">
                 Upload Resume
               </label>
-              <input
-                id="file-upload"
-                type="file"
-                accept="application/pdf"
-                onChange={handleFileUpload}
-              />
-              <p>{pdfName ? pdfName : ""}</p>
-              {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error message */}
+              <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
+              <span className="file-name"></span>
+              <p>{pdfName?pdfName:""}</p>
               <button type="submit">Submit</button>
+
             </form>
           </div>
         </div>
       </main>
-    </div>
-  );
-};
 
+    </div>
+  )
+}
 export default Resume;
