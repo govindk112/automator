@@ -133,7 +133,7 @@ const Resume = function () {
 
       })
       // console.log("Resume")
-      // window.location.href = "/demo"
+      window.location.href = "/demo"
 
 
 
