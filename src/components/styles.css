@@ -2027,3 +2027,160 @@ footer {
   }
   
   
+
+
+
+.referal-img {
+    width: auto !important; /* Overrides any inherited percentage widths */
+    max-width: none; /* Prevents scaling based on container */
+    height: auto; /* Maintains aspect ratio */
+    padding-left: 100px;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 600px) {
+    .referal-img {
+      padding-left: 20px;
+    }
+  }
+
+
+  /* General reset */
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+}
+
+/* Main container styling for content area */
+.content-container {
+    width: 70%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+/* Features Section */
+.features-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+/* Individual Feature Item */
+.feature-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    backdrop-filter: blur(100px); /* Optional: browser support is limited */
+}
+
+/* Icon styling */
+.icon-background {
+    width: 80px;
+    height: 80px;
+    background-color: #2C223B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* Feature Content */
+.feature-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-title {
+    font-weight: 600;
+    font-size: 20px;
+    color: #ECF1F0;
+}
+
+.feature-description {
+    font-weight: 400;
+    font-size: 16px;
+    color: #B6B6B6;
+    line-height: 1.5;
+}
+
+/* Decorative Background Elements */
+.decorative-background .vector-element,
+.decorative-background .ellipse-element {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Example positioning of decorative elements */
+.vector-element {
+    top: 20%;
+    left: 10%;
+}
+
+.ellipse-element {
+    bottom: 20%;
+    right: 15%;
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+    .content-container {
+        padding: 20px;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 10px;
+    }
+
+    .icon-background {
+        margin: 0 auto 16px;
+    }
+
+    .feature-title {
+        font-size: 18px;
+    }
+
+    .feature-description {
+        font-size: 14px;
+    }
+
+    /* Adjust decorative elements for mobile */
+    .vector-element {
+        width: 80px;
+        height: 80px;
+        top: 5%;
+        left: 5%;
+    }
+
+    .ellipse-element {
+        width: 80px;
+        height: 80px;
+        bottom: 10%;
+        right: 5%;
+    }
+}
