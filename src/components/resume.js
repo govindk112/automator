@@ -116,13 +116,13 @@ const Resume = function () {
         "keyvalues": {
 
           "RD": downloadUrl,
-          "URD": pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location} `
+          "URD": pdfText + `currentCtc ${Currentctc}; ExpectedCtc ${Expectedctc}; NoticePeriod-${NoticePeriod}; Location ${Location} `
         }
       }
 
     }).then(async () => {
       toast.success("Document Upload Successfully!");
-      const urdData = pdfText + `currentCtc -${Currentctc}; ExpectedCtc -${Expectedctc}; NoticePeriod-${NoticePeriod}; Location-${Location}`;
+      const urdData = pdfText + `currentCtc ${Currentctc}; ExpectedCtc ${Expectedctc}; NoticePeriod ${NoticePeriod}; Location ${Location}`;
 
       // Notify the extension
       notifyExtensionOnResumeSubmit(urdData);
