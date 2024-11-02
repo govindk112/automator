@@ -79,7 +79,7 @@ const Referral = () => {
                                 search!</p>
                              {isLogin !== null && isLogin !== "null" ? (
                                 <div>
-                                    <div style={{"color":"green"}}>
+                                    <div>
                                         {`https://jobformautomator.com/${fullName}`}
                                     </div><br></br>
                                     <button className="copy-btn" onClick={copyToClipboard}>
