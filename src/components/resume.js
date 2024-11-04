@@ -91,7 +91,8 @@ const Resume = function () {
       toast.error("Please Provide Your Resume Before Submitting!")
       return;
     }
-    if(!downloadUrl){
+   
+    if(!downloadUrl && !pdfText){
       toast.warning("Your Resume Under Process Please wait a moment ,then submit again");
       return;
     }
@@ -116,7 +117,7 @@ const Resume = function () {
         "keyvalues": {
 
           "RD": downloadUrl,
-          "URD": pdfText + `currentCtc ${Currentctc}; ExpectedCtc ${Expectedctc}; NoticePeriod-${NoticePeriod}; Location ${Location} `
+          "URD": pdfText + `currentCtc ${Currentctc}; ExpectedCtc ${Expectedctc}; NoticePeriod ${NoticePeriod}; Location ${Location} `
         }
       }
 
@@ -169,6 +170,7 @@ const Resume = function () {
                 Upload Resume
               </label>
               <input id="file-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
+              <p style={{}}>**please upload ATS(Application Tracking System) friendly resume for better resul.t</p>
               <span className="file-name"></span>
               <p>{pdfName?pdfName:""}</p>
               <button type="submit">Submit</button>
