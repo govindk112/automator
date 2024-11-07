@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/login";
 import Register from "./components/register";
@@ -27,6 +27,7 @@ import ContactUs from "./components/contactUs";
 import GetId from "./components/getI";
 import Referral from "./components/referral";
 import NotFound  from "./components/Notfound";
+import QuestionAns from "./components/Question-Ans";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -137,6 +138,7 @@ function App() {
           <Route path="/blog_list" element={<Blog />} />
           <Route path="/contact" element={<Protected Component={ContactUs} />} />
           <Route path="/referral" element={<Referral/>}/>
+          <Route path="/questionans" element={< Protected Component={QuestionAns}/>}/>
           <Route path="*" element={<NotFound />} />
 
         </Routes>

@@ -29,7 +29,6 @@ function Login() {
 
 
     if (uid) {
-      notifyExtensionOnLogin(uid);
       const redirectUser = async () => {
         try {
           const user = auth.currentUser;
@@ -37,6 +36,7 @@ function Login() {
 
           if (uid && IsLogin) {
             // console.log("hi")
+            notifyExtensionOnLogin(user.uid);
             if (user && !user.emailVerified) {
               toast.error("Email is not verified.Please Verify your email, then try to login again!", {
                 position: "bottom-center",
@@ -49,7 +49,7 @@ function Login() {
 
             if (apiKey !== 'null' && apiKey !== null) {
               if (subscriptionType && subscriptionType === "FreeTrialStarted") {
-                window.location.href = "/demo";
+                // window.location.href = "/demo";
               } else {
                 window.location.href = "/resume";
               }
