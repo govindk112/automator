@@ -36,7 +36,7 @@ function Login() {
 
           if (uid && IsLogin) {
             // console.log("hi")
-            notifyExtensionOnLogin(user.uid);
+            notifyExtensionOnLogin(uid);
             if (user && !user.emailVerified) {
               toast.error("Email is not verified.Please Verify your email, then try to login again!", {
                 position: "bottom-center",
