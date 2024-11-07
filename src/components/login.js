@@ -49,7 +49,7 @@ function Login() {
 
             if (apiKey !== 'null' && apiKey !== null) {
               if (subscriptionType && subscriptionType === "FreeTrialStarted") {
-                // window.location.href = "/demo";
+                window.location.href = "/demo";
               } else {
                 window.location.href = "/resume";
               }
