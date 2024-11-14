@@ -157,7 +157,7 @@ const QuestionAns = () => {
     };
 
     return (
-        <div>
+        <>
             <main>
                 <div className="ellipse ellipse-1"></div>
                 <div className="ellipse ellipse-2"></div>
@@ -187,7 +187,7 @@ const QuestionAns = () => {
                     </div>
                 </div>
             </main>
-        </div>
+        </>
     );
 };
 
