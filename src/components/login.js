@@ -11,15 +11,16 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const db = getDatabase(app);
+  //Call Event Listner
   function notifyExtensionOnLogin(uid) {
     const event = new CustomEvent('userLoggedIn', { detail: { uid } });
     document.dispatchEvent(event);
   }
 
   useEffect(() => {
-    const uid = localStorage.getItem("UID");
-    const apiKey = localStorage.getItem("api_key");
-    const IsLogin = localStorage.getItem("IsLogin")
+    const uid =  localStorage.getItem("UID");
+    const apiKey =  localStorage.getItem("api_key");
+    const IsLogin =  localStorage.getItem("IsLogin")
     console.log(IsLogin, "login", !IsLogin, "uid", uid)
 
 
