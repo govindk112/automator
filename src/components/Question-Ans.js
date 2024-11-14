@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./styles.css"
 const QuestionAns = () => {
     const [questions, setQuestions] = useState([]);
     const [formData, setFormData] = useState({});
