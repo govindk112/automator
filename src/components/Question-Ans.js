@@ -1,195 +1,194 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const QuestionAns = () => {
-  const [questions, setQuestions] = useState([]);
-  const [formData, setFormData] = useState({});
-  const [allFieldsFilled, setAllFieldsFilled] = useState(true);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);  // To control when form is submitted
+    const [questions, setQuestions] = useState([]);
+    const [formData, setFormData] = useState({});
+    const [allFieldsFilled, setAllFieldsFilled] = useState(true);
 
-  // Function to handle changes in input fields (to make them controlled components)
-  const handleChange = (e, question) => {
-    const { name, value, type, checked } = e.target;
-
-    // For radio buttons and checkboxes, we handle the value differently
-    let updatedValue = value;
-    if (type === "radio" || type === "checkbox") {
-      updatedValue = checked ? value : "";
-    }
-
-    setFormData({
-      ...formData,
-      [name]: updatedValue,
-    });
-  };
-
-  // Function to submit form data
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let isValid = true;
-    const updatedData = {};
-
-    questions.forEach((question) => {
-      const value = formData[question.question];
-      if (!value) {
-        isValid = false;
-      }
-      updatedData[question.question] = value;
-    });
-
-    setAllFieldsFilled(isValid);
-
-    if (isValid) {
-      console.log("All fields are filled. Data to be sent:", updatedData);
-      // Dispatch the custom event with the form data
-      document.dispatchEvent(new CustomEvent("sendFormData", { detail: { formData: updatedData } }));
-      setIsFormSubmitted(true);  // Mark the form as submitted
-    } else {
-      console.error("Not all fields are filled. Data will not be sent.");
-    }
-  };
-
-  // Use useEffect to handle the event after the component mounts
-  useEffect(() => {
-    const handleQuestionsData = (event) => {
-      const questionsData = event.detail;
-      setQuestions(questionsData);
+    // Handle form data change
+    const handleChange = (questionName, value) => {
+        setFormData(prevData => ({
+            ...prevData,
+            [questionName]: value
+        }));
     };
 
-    document.addEventListener("questionsData", handleQuestionsData);
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-    return () => {
-      document.removeEventListener("questionsData", handleQuestionsData);
+        let filled = true;
+        questions.forEach(question => {
+            const sanitizedQuestionName = question.question.replace(/[^a-zA-Z0-9]/g, "_");
+            if (!formData[sanitizedQuestionName]) {
+                filled = false;
+            }
+        });
+        setAllFieldsFilled(filled);
+
+        if (filled) {
+            console.log("All fields are filled. Data to be sent:", formData);
+            document.dispatchEvent(new CustomEvent("sendFormData", { 
+                detail: { formData }
+            }));
+            setFormData({});
+        } else {
+            console.error("Not all fields are filled. Data will not be sent.");
+        }
     };
-  }, []);
 
-  // Render questions and inputs dynamically based on the questions array
-  return (
-    <div>
-      <main>
-        <div className="ellipse ellipse-1"></div>
-        <div className="ellipse ellipse-2"></div>
+    useEffect(() => {
+        // Simulate receiving questions after a delay
+        const sendQuestionsEvent = new Event('sendQuestions');
+        setTimeout(() => {
+            console.log("sendQuestions website");
+            document.dispatchEvent(sendQuestionsEvent);
+        }, 1000);
 
-        <h1>Unanswered</h1>
-        <div className="contact-container">
-          <div className="message-section">
-            <h2>AI isn’t confident here.</h2>
-            <p>Review these sections carefully, as AI couldn't provide accurate answers. Please check and fill these answers to make sure everything is accurate.</p>
-          </div>
-          <div className="form-section">
-            <form onSubmit={handleSubmit}>
-              {isFormSubmitted ? (
-                <p>Form submitted successfully!</p>
-              ) : (
-                questions.map((question, index) => {
-                  const sanitizedQuestionName = question.question.replace(/[^a-zA-Z0-9]/g, "_");
-                  switch (question.type) {
-                    case "input":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          <input
-                            type="text"
-                            name={sanitizedQuestionName}
-                            value={formData[sanitizedQuestionName] || ""}
-                            onChange={(e) => handleChange(e, question)}
-                          />
-                        </div>
-                      );
-                    case "textarea":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          <textarea
-                            name={sanitizedQuestionName}
-                            value={formData[sanitizedQuestionName] || ""}
-                            onChange={(e) => handleChange(e, question)}
-                          />
-                        </div>
-                      );
-                    case "select":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          <select
-                            name={sanitizedQuestionName}
-                            value={formData[sanitizedQuestionName] || ""}
-                            onChange={(e) => handleChange(e, question)}
-                          >
-                            {question.text.map((optionValue, i) => (
-                              <option key={i} value={optionValue}>
+        document.addEventListener('questionsData', (event) => {
+            const receivedQuestions = event.detail;
+            console.log('Received questions in index.js:', receivedQuestions);
+            setQuestions(receivedQuestions);
+        });
+
+        return () => {
+            document.removeEventListener('questionsData', () => {});
+        };
+    }, []);
+
+    const renderQuestion = (question) => {
+        const sanitizedQuestionName = question.question.replace(/[^a-zA-Z0-9]/g, "_");
+
+        switch (question.type) {
+            case "input":
+                return (
+                    <input
+                        type="text"
+                        name={sanitizedQuestionName}
+                        value={formData[sanitizedQuestionName] || ""}
+                        onChange={(e) => handleChange(sanitizedQuestionName, e.target.value)}
+                    />
+                );
+
+            case "textarea":
+                return (
+                    <textarea
+                        name={sanitizedQuestionName}
+                        value={formData[sanitizedQuestionName] || ""}
+                        onChange={(e) => handleChange(sanitizedQuestionName, e.target.value)}
+                    />
+                );
+
+            case "select":
+                return (
+                    <select
+                        name={sanitizedQuestionName}
+                        value={formData[sanitizedQuestionName] || ""}
+                        onChange={(e) => handleChange(sanitizedQuestionName, e.target.value)}
+                    >
+                        {question.text.map((optionValue, index) => (
+                            <option key={index} value={optionValue}>
                                 {optionValue}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      );
-                    case "radio":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          {question.text.map((optionValue, i) => (
-                            <div key={i}>
-                              <input
-                                type="radio"
-                                name={sanitizedQuestionName}
-                                value={optionValue}
-                                checked={formData[sanitizedQuestionName] === optionValue}
-                                onChange={(e) => handleChange(e, question)}
-                              />
-                              <label>{optionValue}</label>
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    case "checkbox":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          {question.text.map((optionValue, i) => (
-                            <div key={i}>
-                              <input
-                                type="checkbox"
-                                name={sanitizedQuestionName}
-                                value={optionValue}
-                                checked={formData[sanitizedQuestionName]?.includes(optionValue)}
-                                onChange={(e) => handleChange(e, question)}
-                              />
-                              <label>{optionValue}</label>
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    case "number":
-                      return (
-                        <div key={index} className="question-container">
-                          <label>{question.question}</label>
-                          <input
-                            type="number"
-                            name={sanitizedQuestionName}
-                            value={formData[sanitizedQuestionName] || ""}
-                            onChange={(e) => handleChange(e, question)}
-                          />
-                        </div>
-                      );
-                    default:
-                      return null;
-                  }
-                })
-              )}
+                            </option>
+                        ))}
+                    </select>
+                );
 
-              {isFormSubmitted ? null : (
-                <div className="SubmitClass">
-                  <button type="submit" id="submit-button">
-                    Submit
-                  </button>
+            case "radio":
+                return (
+                    <>
+                        {question.text.map((optionValue, index) => (
+                            <div key={index}>
+                                <input
+                                    type="radio"
+                                    name={sanitizedQuestionName}
+                                    value={optionValue}
+                                    checked={formData[sanitizedQuestionName] === optionValue}
+                                    onChange={() => handleChange(sanitizedQuestionName, optionValue)}
+                                />
+                                <label>{optionValue}</label>
+                            </div>
+                        ))}
+                    </>
+                );
+
+            case "checkbox":
+                return (
+                    <>
+                        {question.text.map((optionValue, index) => (
+                            <div key={index}>
+                                <input
+                                    type="checkbox"
+                                    name={sanitizedQuestionName}
+                                    value={optionValue}
+                                    checked={formData[sanitizedQuestionName]?.includes(optionValue) || false}
+                                    onChange={(e) => {
+                                        const updatedValue = formData[sanitizedQuestionName] || [];
+                                        if (e.target.checked) {
+                                            updatedValue.push(optionValue);
+                                        } else {
+                                            const index = updatedValue.indexOf(optionValue);
+                                            if (index > -1) {
+                                                updatedValue.splice(index, 1);
+                                            }
+                                        }
+                                        handleChange(sanitizedQuestionName, updatedValue);
+                                    }}
+                                />
+                                <label>{optionValue}</label>
+                            </div>
+                        ))}
+                    </>
+                );
+
+            case "number":
+                return (
+                    <input
+                        type="number"
+                        name={sanitizedQuestionName}
+                        value={formData[sanitizedQuestionName] || ""}
+                        onChange={(e) => handleChange(sanitizedQuestionName, e.target.value)}
+                    />
+                );
+
+            default:
+                console.log("Unsupported question type:", question.type);
+                return null;
+        }
+    };
+
+    return (
+        <div>
+            <main>
+                <div className="ellipse ellipse-1"></div>
+                <div className="ellipse ellipse-2"></div>
+                <h1>Unanswered</h1>
+                <div className="contact-container">
+                    <div className="message-section">
+                        <h2>AI isn’t confident here.</h2>
+                        <p>Review these sections carefully, as AI couldn't provide accurate answers. Please check and fill these answers to make sure everything is accurate.</p>
+                    </div>
+                    <div className="form-section">
+                        <form onSubmit={handleSubmit}>
+                            {questions.map((question, index) => (
+                                <div key={index} className="question-container">
+                                    <label>{question.question}</label>
+                                    {renderQuestion(question)}
+                                </div>
+                            ))}
+                            {questions.length > 0 && (
+                                <div className="SubmitClass">
+                                    <button type="submit">Submit</button>
+                                </div>
+                            )}
+                            {!allFieldsFilled && (
+                                <p style={{ color: "red" }}>Please fill out all fields.</p>
+                            )}
+                        </form>
+                    </div>
                 </div>
-              )}
-            </form>
-          </div>
+            </main>
         </div>
-      </main>
-    </div>
-  );
+    );
 };
 
 export default QuestionAns;
