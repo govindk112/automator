@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
+import { type } from "@testing-library/user-event/dist/type";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -21,16 +22,17 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceId = process.env.REACT_APP_SERVICEID;
-    const templateId = process.env.REACT_APP_TEMPLATEID;
-    const userId = process.env.REACT_APP_USERID;
+    const serviceId ="service_yze7ky8";
+    const templateId ="template_oxfdv2q";
+    const userId ="F2CUah0cRJS6yCSzN";
+    console.log(serviceId,userId,templateId)
+    console.log(typeof(serviceId),typeof(templateId),typeof(userId))
 
     const templateParams = {
       user_name: formData.name,
       from_email: formData.email,
       phoneNumber: formData.phoneNumber,
       userQuery: formData.userQuery,
-      to_email: "admin@example.com",
     };
 
     emailjs
