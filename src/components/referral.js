@@ -75,8 +75,8 @@ const Referral = () => {
                     <div class="form-section">
                         <form>
                             <h2>Start Earning Now🎉</h2>
-                            <p>Refer a friend and earn $9 for every successful referral—no limits, just extra cash while you
-                                search!</p>
+                            <p>Refer a friend and earn $9* for every successful referral—no limits, no catch, just extra cash while you're on the path to your dream job.
+                            </p>
                              {isLogin !== null && isLogin !== "null" ? (
                                 <div>
                                     <div>
@@ -109,8 +109,8 @@ const Referral = () => {
                             </div>
                             <div class="feature-content">
                                 <h3 class="feature-title">Receive $9 per Paid user</h3>
-                                <p class="feature-description">Get $9 for each new paid user you refer who installs our Chrome
-                                    extension and automates their job form applications.</p>
+                                <p class="feature-description">For every new paid user you refer who installs our Chrome extension and automates their job applications, you'll receive $9 straight into your account. There's no cap on earnings—the sky's the limit!
+                                </p>
                             </div>
                         </div>
 
@@ -121,8 +121,8 @@ const Referral = () => {
                             <div class="feature-content">
                                 <h3 class="feature-title">50% off when you share on LinkedIn</h3>
                                 <p class="feature-description">
-                                    Unlock 50% off on Job Form Automator! 🎉
-                                    Share this post on LinkedIn and email us the link to claim your exclusive discount! </p>
+                                Want to save even more? Unlock 50% off on JobForm Automator! 🎉 Simply share our post on LinkedIn and email us the link to claim your exclusive discount. It's our way of saying thank you for spreading the word.
+                                </p>
                             </div>
                         </div>
 
@@ -131,9 +131,9 @@ const Referral = () => {
                                 <img src={news} alt="briefcase icon" class="icon" />
                             </div>
                             <div class="feature-content">
-                                <h3 class="feature-title">Newsletter & Exclusive Offers </h3>
-                                <p class="feature-description">Be the first to know about new features, updates, and special
-                                    offers you can share with your audience.</p>
+                                <h3 class="feature-title">Be Remarkable—Lead the Way</h3>
+                                <p class="feature-description">By sharing JobForm Automator, you're not just earning extra income—you're leading a movement. Help others discover a smarter way to job hunt and build your own community of forward-thinkers.
+                                </p>
                             </div>
 
                         </div>

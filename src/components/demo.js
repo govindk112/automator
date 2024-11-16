@@ -25,52 +25,50 @@ const Demo = function () {
             console.error("Error logging out:", error.message);
         }
     }
-    async function handleUpdateGemini() {
-        window.location.href = "/updategemini"
 
-    }
-    async function handleUpdateResume() {
-        window.location.href = "/updateresume"
-
+    const onApply = function () {
+            window.postMessage({
+                type: 'FROM_PAGE',
+                Itemtext: 'Auto-Apply Jobs'  // This matches the expected input in your background script
+            }, '*');
     }
     return (
         <div>
             <main>
+                <div class="background">
+                    <div className="ellipse ellipse-1"></div>
+                    <div className="ellipse ellipse-2"></div>
+                    <div className="ellipse ellipse-3"></div>
+                    <div className="ellipse ellipse-4"></div>
 
-
-
-                <div className="ellipse ellipse-1"></div>
-                <div className="ellipse ellipse-2"></div>
-                <h1>Get Started </h1>
-                <div className="contact-container">
-                    <div className="message-section">
-                
-
-                        <div className="video-container">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/XUybldvVcc4?si=u56j_1P2R1LQG1og"
-                                title="YouTube video player" frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    <div class="content">
+                        <h1 class="heading">Auto-Apply Instantly with LinkedIn</h1>
+                        <p class="free-trial">Ready to Apply? Just Click 'Auto-Apply'!</p>
+                        <div class="buttons">
+                            <button class="add-to-chrome" id="autoApplyButton" onClick={onApply}>
+                                Auto-Apply Now
+                            </button>
                         </div>
-                    </div>
-                    <div className="form-section">
-                        <form>
-                            <h2>Welcome! Let's Get Started 🎉</h2>
-                            <p>Auto-Apply jobs with our Chrome Extension</p>
-                            <button type="submit">Auto Apply</button>
-
-                        </form>
-
-                        
-                            <button onClick={handleUpdateGemini}>Update API Key</button>
-                            <p></p>
-                            <button onClick={handleUpdateResume}>Update Resume</button>
+                        <p class="free-trial">Auto-Apply up to 10 jobs Daily free forever</p>
                     </div>
 
                 </div>
-
-                <p></p>
-                <button onClick={handleLogout}>Logout</button>
+            </main>
+            <main>
+                <div class="background">
+                    <div class="container-demo">
+                        <div class="content">
+                            <h1>Watch and Learn!</h1>
+                            <div class="video-container">
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/XUybldvVcc4?si=VxhSLMzEGcgT3W94"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     )

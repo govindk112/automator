@@ -8,39 +8,32 @@ const About = function () {
             <main>
                 <section class="hero">
                     <h1>About Us</h1>
-                    <p>Job Form Automator is your AI-powered job application assistant.
-                        We automate job applications on major job sites and company websites
-                        globally. Our tool helps you apply to multiple jobs daily, saving time
-                        and maximizing your career opportunities.
-
-
-                    </p>
+                    <p>At JobForm Automator, we're transforming the job search landscape with our AI-powered automation tool. We understand that the job application process can be tedious and time-consuming. That's why we've created a remarkable solution that automates applications on major job sites and company websites globally. By leveraging advanced AI technology, we help you apply to multiple jobs daily, saving you time and maximizing your career opportunities.</p>
                 </section>
 
                 <section class="about-content">
                     <div class="mission">
                         <h2>Our Mission</h2>
-                        <p>"Job Form Automator is committed to revolutionizing the job application
-                            process with advanced AI-powered automation. Our mission is to empower
-                            job seekers by automating the tedious task of job applications, allowing
-                            them to apply to thousands of jobs across leading platforms like LinkedIn,
-                            Indeed, and Monster. With our AI job search assistant, users can efficiently
-                            manage their job applications, reduce errors, and save valuable time.
-                            We strive to provide a seamless experience that supports global job markets,
-                            making it easier for users to land their desired roles. Our tool integrates
-                            cutting-edge AI job application technology to auto-fill forms, streamline the
-                            job search process, and enhance job-seeking outcomes. We are dedicated to continuous
-                            innovation, ensuring that our job application automation platform meets the evolving
-                            needs of today's job seekers. By simplifying job applications and leveraging AI for job
-                            search automation, we aim to help users achieve their career goals faster and more effectively."</p>
+                        <p>To revolutionize the job application process by empowering job seekers with AI-driven automation, enabling them to focus on what truly matters.
+
+                            We believe in making change happen. Our mission is to eliminate the repetitive tasks in job hunting, allowing you to apply to thousands of jobs across leading platforms like LinkedIn, Indeed, and Monster. With our AI job search assistant, you can efficiently manage your applications, reduce errors, and save valuable time. We're dedicated to continuous innovation, ensuring our platform meets the evolving needs of today's job seekers.
+                        </p>
                     </div>
                     <div class="values">
                         <h2>Our Values</h2>
                         <ul>
-                            <li>Efficiency: We prioritize time-saving automation to help users apply for jobs quickly and effortlessly, allowing them to focus on what truly matters.</li>
-                            <li>Innovation: We constantly push the boundaries of AI technology to enhance our platform, ensuring it remains at the forefront of job application automation.</li>
-                            <li>User-Centricity: Our users are at the heart of everything we do. We design our tool to be intuitive, reliable, and tailored to meet the diverse needs of job seekers worldwide.</li>
-                            <li>Integrity: We are committed to maintaining transparency, trust, and ethical practices in all our operations, ensuring that our users can rely on us for a fair and honest service.</li>
+                            <li> ⁠🚀 Innovation
+                                We constantly push the boundaries of AI technology to offer a unique and remarkable tool that stands out in the crowded marketplace.
+                            </li>
+                            <li>⏱ Efficiency
+                                Your time is valuable. Our goal is to save you hours by automating tedious tasks, so you can focus on preparing for interviews and honing your skills.
+                            </li>
+                            <li>🤝 User-Centricity
+                                You're at the heart of everything we do. We build our tool with you in mind, ensuring it's intuitive, reliable, and tailored to meet your needs.
+                            </li>
+                            <li>🌐 Integrity
+                                Transparency and ethical practices are the cornerstones of our operations. You can trust us to provide a fair and honest service.
+                            </li>
                         </ul>
                     </div>
                 </section>
@@ -51,7 +44,7 @@ const About = function () {
                         <div class="member-card">
                             <div class="card-inner">
                                 <div class="card-front">
-                                    <img src={people}  alt="Jane Doe" />
+                                    <img src={people} alt="Jane Doe" />
                                     <h3>Saurabh Belote</h3>
                                     <p>CEO & Founder</p>
                                 </div>
@@ -64,7 +57,7 @@ const About = function () {
                                         <li>Product Development</li>
                                     </ul>
                                     <div class="social-links">
-                                        <a href="https://www.linkedin.com/in/saurabh-belote-76a32a152/"  target="_blank" rel="noreferrer" class="fab fa-linkedin"></a>
+                                        <a href="https://www.linkedin.com/in/saurabh-belote-76a32a152/" target="_blank" rel="noreferrer" class="fab fa-linkedin"></a>
                                         <a href="#" target="_blank" rel="noreferrer" class="fab fa-twitter"></a>
                                     </div>
                                 </div>
@@ -82,6 +75,7 @@ const About = function () {
                                     <p>Innovative engineer dedicated to building scalable solutions.</p>
                                     <ul class="skills">
                                         <li>MERN Stack</li>
+                                        <li>Data Structure</li>
                                         <li>Cloud Architecture</li>
                                         <li>Chrome Extension</li>
                                     </ul>

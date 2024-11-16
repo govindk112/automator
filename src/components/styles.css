@@ -2207,7 +2207,6 @@ footer {
     }
 }
 
-
 /* css question ans form */
 
 
@@ -2299,3 +2298,13 @@ div.SubmitClass {
     height: 100px;
     padding-left: 7%;
 }
+
+/* buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Adjust spacing (space-between, center, etc.) */
+    gap: 10px; /* Add space between buttons */
+  }
+  
+ 
+  
