@@ -29,6 +29,7 @@ import Referral from "./components/referral";
 import NotFound  from "./components/Notfound";
 import QuestionAns from "./components/Question-Ans";
 import DeleteAccount from "./components/deleteAccount";
+import Settings from "./components/settings";
 
 function App() {
   const [component, setComponent] = useState(<Login />);
@@ -141,6 +142,8 @@ function App() {
           <Route path="/referral" element={<Referral/>}/>
           <Route path="/questionans" element={< Protected Component={QuestionAns}/>}/>
           <Route path="/deleteaccount" element={< Protected Component={DeleteAccount}/>}/>
+          <Route path="/settings" element={< Protected Component={Settings}/>}/>
+          
 
           <Route path="*" element={<NotFound />} />
 
