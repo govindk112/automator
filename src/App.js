@@ -31,6 +31,8 @@ import QuestionAns from "./components/Question-Ans";
 import DeleteAccount from "./components/deleteAccount";
 import Settings from "./components/settings";
 
+
+
 function App() {
   const [component, setComponent] = useState(<Login />);
 
@@ -138,11 +140,15 @@ function App() {
           <Route path="/promocode" element={<Promocode />} />
           <Route path="/demo" element={<Protected Component={Demo} />} />
           <Route path="/blog_list" element={<Blog />} />
-          <Route path="/contact" element={<Protected Component={ContactUs} />} />
+          <Route path="/contact" element = {<ContactUs/>} />
           <Route path="/referral" element={<Referral/>}/>
           <Route path="/questionans" element={< Protected Component={QuestionAns}/>}/>
           <Route path="/deleteaccount" element={< Protected Component={DeleteAccount}/>}/>
           <Route path="/settings" element={< Protected Component={Settings}/>}/>
+          
+
+        
+
           
 
           <Route path="*" element={<NotFound />} />

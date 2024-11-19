@@ -1195,7 +1195,7 @@ li::before {
 }
 
 .forgot-password {
-    color: #bfbaff;
+    color: #f7f7fa;
 }
 
 .btn-google {
@@ -1941,10 +1941,7 @@ footer {
     }
 }
 
-#api_key {
-    color: #bfbaff;
 
-}
 
 /* Referral.css */
 .referral-container {
@@ -2329,6 +2326,4 @@ div.SubmitClass {
     transform: translateY(-5px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
-  
- 
-  
+
