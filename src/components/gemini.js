@@ -123,7 +123,7 @@ const Gemini = function () {
                                 </a> */}
                             </div>
                             
-                            <a id="api_key" target="_blank" className="forgot-password" href="https://aistudio.google.com/app/apikey" >Get Gemini key</a> <br></br><br></br>
+                            <a id="api_key" target="_blank" className="forgot-password" href="https://aistudio.google.com/app/apikey" >Get Gemini key</a> <br></br>
                             
                             <button type="submit" disabled={loading}>{loading ? "Submitted..." : "Submit"}</button>
                         </form>
