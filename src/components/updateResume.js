@@ -86,7 +86,7 @@ const UpdateResume = function () {
   const handleSubmit = async (e) => {
     e.preventDefault();
     function notifyExtensionOnResumeSubmit(urdData) {
-      const event = new CustomEvent('resumeSubmitted', {
+      const event = new CustomEvent('resumeUpdated', {
         detail: {
           urdData: urdData,
           subscriptionType: "FreeTrialStarted"
