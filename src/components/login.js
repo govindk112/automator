@@ -24,7 +24,7 @@ function Login() {
     console.log(IsLogin, "login", !IsLogin, "uid", uid)
 
 
-    const subscriptionType = localStorage.getItem("Subscriptiontype");
+    const subscriptionType = localStorage.getItem("SubscriptionType");
     
     console.log(uid,"user Id",typeof(uid))
 
@@ -128,10 +128,10 @@ function Login() {
 
         toast.success("User logged in Successfully", { position: "top-center" });
 
-        const subscriptionRef = ref(db, `user/${user.uid}/Payment/Subscriptiontype`);
+        const subscriptionRef = ref(db, `user/${user.uid}/Payment/SubscriptionType`);
         const subscriptionSnapshot = await get(subscriptionRef);
         const subscriptionType = subscriptionSnapshot.val();
-        localStorage.setItem("Subscriptiontype", subscriptionType);
+        localStorage.setItem("SubscriptionType", subscriptionType);
 
         const apiRef = ref(db, `user/${user.uid}/API/apikey`);
         const apiSnapshot = await get(apiRef);

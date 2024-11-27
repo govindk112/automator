@@ -60,7 +60,7 @@ const Gemini = function () {
                         Payment: {
                             Status: "Free",
                             Start_Date: formattedDateTime,
-                            Subscriptiontype: "GetResume",
+                            SubscriptionType: "GetResume",
                         },
                     });
                     // console.log("Payment details updated successfully");
@@ -117,13 +117,9 @@ const Gemini = function () {
                                 onChange={(e) => setGeminikey(e.target.value)}
                                 disabled={loading}
                             />
-                            <div className="form-options">
-                                {/* <a href="#" className="forgot-password">
-                                    Get Gemini key Here
-                                </a> */}
-                            </div>
+                           <br></br>
                             
-                            <a id="api_key" target="_blank" className="forgot-password" href="https://aistudio.google.com/app/apikey" >Get Gemini key</a> <br></br>
+                            <a id="api_key" target="_blank" className="forgot-password" href="https://aistudio.google.com/app/apikey" >Get Gemini key</a> <br></br><br></br>
                             
                             <button type="submit" disabled={loading}>{loading ? "Submitted..." : "Submit"}</button>
                         </form>

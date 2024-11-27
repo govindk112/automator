@@ -39,7 +39,7 @@ function SignInwithGoogle() {
 
 
               // Reference for Subscription status and Form status
-              const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+              const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/SubscriptionType`);
               const subscriptionSnapshot = await get(getSubscription)
               const getForm = ref(db, `user/${auth?.currentUser?.uid}/forms`);
               const formSnapshot = await get(getForm)
@@ -141,7 +141,7 @@ function SignInwithGoogle() {
 
 
                 // Reference for Subscription status and Form status
-                const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/Subscriptiontype`);
+                const getSubscription = ref(db, `user/${auth?.currentUser?.uid}/Payment/SubscriptionType`);
                 const subscriptionSnapshot = await get(getSubscription)
                 const getForm = ref(db, `user/${auth?.currentUser?.uid}/forms`);
                 const formSnapshot = await get(getForm)

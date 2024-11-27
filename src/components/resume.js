@@ -126,10 +126,10 @@ const Resume = function () {
       notifyExtensionOnResumeSubmit(urdData)
  
 
-      localStorage.setItem("Subscriptiontype", "FreeTrialStarted");
+      localStorage.setItem("SubscriptionType", "FreeTrialStarted");
       const getSubscription = ref(db, "user/" + user?.uid + "/Payment");
       await update(getSubscription, {
-        Subscriptiontype: "FreeTrialStarted",
+        SubscriptionType: "FreeTrialStarted",
       });
 
       window.location.href = "/demo";

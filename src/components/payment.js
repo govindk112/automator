@@ -128,11 +128,12 @@ const Payment = function () {
                 await validateRes.json().then((status) => {
                     if (status.msg === "success") {
                         function notifyExtensionOnPayment(uid) {
-                            // console.log("payment successfull")
+                            console.log("payment successfull","even listner call")
 
                             const event = new CustomEvent('paymentSuccessfull', { detail: { uid } });
                             document.dispatchEvent(event);
                         }
+                        console.log(auth?.currentUser?.uid,"uid")
                         notifyExtensionOnPayment(auth?.currentUser?.uid)
                        //**REFERRAL CODE UPDATE */
                        const currentDate = new Date();
@@ -142,7 +143,8 @@ const Payment = function () {
                         return cookie ? cookie.split('=')[1] : null;
                       };
                       const referralCode = getReferralCodeFromCookie();
-                      const currentUser = auth.currentUser.uid
+                      console.log(auth.currentUser,"user");
+                      const currentUser = auth?.currentUser?.uid
                      
                        // Path: /referrals/<referralCode>/<currentUser>
                        const userRef = ref(db, `/referrals/${referralCode}/${currentUser}`);
