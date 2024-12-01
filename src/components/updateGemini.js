@@ -51,27 +51,9 @@ const UpdateGemini = function () {
                         apikey: gemini_key,
                     },
                 });
-                // Update payment details
-                const currentDate = new Date();
-                const formattedDateTime = currentDate.toISOString().replace("T", " ").split(".")[0];
-
-                try {
-                    const newPaymentRef = ref(db, "user/" + auth.currentUser.uid);
-                    await update(newPaymentRef, {
-                        Payment: {
-                            Status: "Free",
-                            Start_Date: formattedDateTime,
-                            SubscriptionType: "GetResume",
-                        },
-                    });
-                    // console.log("Payment details updated successfully");
-                } catch (err) {
-                    console.error(err);
-                }
 
 
-
-                window.location.href = `/resume`;
+                window.location.href = `/demo`;
             }
             else {
                 toast.error("Invalid API key")
