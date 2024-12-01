@@ -61,7 +61,7 @@ const UpdateGemini = function () {
                         Payment: {
                             Status: "Free",
                             Start_Date: formattedDateTime,
-                            Subscriptiontype: "GetResume",
+                            SubscriptionType: "GetResume",
                         },
                     });
                     // console.log("Payment details updated successfully");
